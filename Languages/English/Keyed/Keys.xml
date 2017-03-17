@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+	<IncapFeedMode>Incapacitated colonists feed mode</IncapFeedMode>
+	<enumSetting_Offline>Vanilla like</enumSetting_Offline>
+	<enumSetting_PrisonersLike>Prisoners like</enumSetting_PrisonersLike>
+	<enumSetting_AnimalsLike>Animals like</enumSetting_AnimalsLike>
+	<enumSetting_AnimalsLikeExcludeCorpses>Animals like (no corpses)</enumSetting_AnimalsLikeExcludeCorpses>
+
+	<PrivilegedPrisoners>Privileged prisoners</PrivilegedPrisoners>
+	<PrivilegedPrisoners_desc>Prisoners set to "chat and recruit" interaction will get the same meals as colonists, booster their mood and therefore making them easier to recruit. (This is ignored if they are in a room with a dispenser).</PrivilegedPrisoners_desc>
+
+	<PrefNutrientPasteOverTasty>Prefer nutrient paste over raw tasty food</PrefNutrientPasteOverTasty>
+	<PrefNutrientPasteOverTasty_desc>If enabled, your colonists will prefer eating nutrient paste over raw tasty food (berries, milk).\nUseful if you want to save your raw food to make more cost efficient paste meals.</PrefNutrientPasteOverTasty_desc>
+	
+	<PetsPreferHunt>Colony's pets prefer hunt</PetsPreferHunt>
+	<PetsPreferHunt_desc>When not injured, pets will always try to find a prey within their allowed area before fetching any food from your storage.</PetsPreferHunt_desc>
+
+	<ShowAdvancedOptions>Show advanced options</ShowAdvancedOptions>
+	<ShowAdvancedOptions_desc>Shows advanced options.</ShowAdvancedOptions_desc>
+
+	<ControlPets>Enable control over pets</ControlPets>
+	<ControlPets_desc>If disabled, tame animals belonging to any faction will fetch their food vanilla like.</ControlPets_desc>
+	<ControlPrisoners>Enable control over prisoners</ControlPrisoners>
+	<ControlPrisoners_desc>If disabled, colonists will feed your prisoners normaly.</ControlPrisoners_desc>
+	<ControlColonists>Enable control over colonists</ControlColonists>
+	<ControlColonists_desc>Enable control over colonists</ControlColonists_desc>
+
+	<PetsSafeHuntMaxStrenghtRatio>Pets hunt max strength ratio</PetsSafeHuntMaxStrenghtRatio>
+	<PetsSafeHuntMaxStrenghtRatio_desc>Your pets will not hunt preys that have a highter strength ratio than this.\nUseful to avoid them to be injured. Ignored if they don't have alternative food source.\nVanilla default ratio is 0.5</PetsSafeHuntMaxStrenghtRatio_desc>
+	
+	<UseCorpsesForTaming>Use corpses for animal job</UseCorpsesForTaming>
+	<UseCorpsesForTaming_desc>!! EXPERIMENTAL !! Colonists will use corpses when taming or training animals</UseCorpsesForTaming_desc>
+	
+	<UseHumanlikeCorpsesForTaming>Use humanlike corpses for animal job</UseHumanlikeCorpsesForTaming>
+	<UseHumanlikeCorpsesForTaming_desc>!! EXPERIMENTAL !! Colonists will use humanlike corpses when taming or training animals</UseHumanlikeCorpsesForTaming_desc>
+	
+	<ExtendedFoodOptimality>Extended food score</ExtendedFoodOptimality>
+	<ExtendedFoodOptimality_desc>Smarter, more efficient way to determine food priority for your pawns. May cause short, repeated fps drops.</ExtendedFoodOptimality_desc>
+
+	<PrintPrefsStart>Compatibility report on start</PrintPrefsStart>
+	<PrintPrefsStart_desc>Prints all food preferences and all races diet on startup. Useful if you want to check the mod behaves well with other food mods.\nChanging this will immediately print the report.</PrintPrefsStart_desc>
+	<ReportMode_desc>Prints all food preferences and all races diet on startup. Useful if you want to check the mod behaves well with other food mods.\nChanging this will immediately print the report.</ReportMode_desc>
+
+	<enumSetting_ReportMode_Offline>Disabled</enumSetting_ReportMode_Offline>
+	<enumSetting_ReportMode_DefName>Show def names</enumSetting_ReportMode_DefName>
+	<enumSetting_ReportMode_Label>Show labels</enumSetting_ReportMode_Label>
+
+	<CostFactor>Cost factor</CostFactor>
+	<CostFactor_desc>Food selection score malus for every point of nutrition wasted by the eater pawn.</CostFactor_desc>
+
+	<FoodSearchMaxItemsCount>Max. food search items</FoodSearchMaxItemsCount>
+	<FoodSearchMaxItemsCount_desc>Maximum number of food items searched by a pawn.\nLower values improve performances by reduces the food search radius of pawns.</FoodSearchMaxItemsCount_desc>
+
+	<ShowPolicies>Show policies</ShowPolicies>
+	<ShowPolicies_desc>Shows custom food policies.</ShowPolicies_desc>
+	
+	<SeparatedNutrientPaste>Dispensers makes specific cannibal meals.</SeparatedNutrientPaste>
+	<SeparatedNutrientPaste_desc>Nutrient paste dispensers will produce an alternative nutrient paste meal item if it contains human meat.\nUseful to avoid cannibal meals stack with non cannibal meals and mix their ingredients. But makes your savegame dependent of the mod.</SeparatedNutrientPaste_desc>
+	
+	<DispenseXcount>Dispense x{0}</DispenseXcount>
+	<DispenseXcount_desc>Forces the dispenser to make {0} meals.</DispenseXcount_desc>
+
+	<StandardMode>Standard mode</StandardMode>
+	<StandardMode_desc>Anything. Normal food, then insect meat and human meat at last.</StandardMode_desc>
+	
+	<CannibalMode>Cannibal mode</CannibalMode>
+	<CannibalMode_desc>Prefer human meat.</CannibalMode_desc>
+
+	<CannibalCleanMode>Cannibal clean mode</CannibalCleanMode>
+	<CannibalCleanMode_desc>Human meat then others raw food (no insect meat).</CannibalCleanMode_desc>
+	
+	<AnimalMode>Animal mode</AnimalMode>
+	<AnimalMode_desc>Human meat then insect meat then others raw food.</AnimalMode_desc>
+	
+	<CleanMode>Clean mode</CleanMode>
+	<CleanMode_desc>No human nor insect meat.</CleanMode_desc>
+
+	<DispenserModeWarning>Only affects manual dispensing</DispenserModeWarning>
+	<ManualDispenseCostWarning>Manual dispense will cost {0} x {1} = {2} Wd.</ManualDispenseCostWarning>
+
+	<CannibalMealLabel>{0} (cannibal)</CannibalMealLabel>
+
+	<Setting_PolicyFor>Policy for {0}</Setting_PolicyFor>
+	<Setting_PolicyForDesc>Food policy applied for pawns that fulfill at least one set of those conditions: {0}</Setting_PolicyForDesc>
+<!--	<Setting_PrisonersPolicy>Prisoners policy</Setting_PrisonersPolicy>
+	<Setting_PetsPolicy>Pets policy</Setting_ColonistsPolicy>
+	<Setting_ColonistsPolicy>Ascetic policy</Setting_ColonistsPolicy>
+	<Setting_ColonistsPolicy>Colonists policy</Setting_ColonistsPolicy>-->
+
+	<PrintReportCommand>Print compatibility report</PrintReportCommand>
+	<PrintReportCommand_desc>Prints a report with all diets for every policy and all food classification made by the mod.\nUseful to check if the mod is working fine with other mods that add new foods.</PrintReportCommand_desc>
+	<commandPrintReportButton>Select report mode</commandPrintReportButton>
+	<commandPrintReportOption_DefName>Report with Def names</commandPrintReportOption_DefName>
+	<commandPrintReportOption_Label>Report with in-game names</commandPrintReportOption_Label>
+	<ReportPrintedInLogMessage>Compatibility report available in log.</ReportPrintedInLogMessage>
+
+	<UnrestrictedPolicyLabel>* Unrestricted *</UnrestrictedPolicyLabel>
+
+	<!-- Pawn policy card -->
+	<PawnPolicyCard_AssignToAll>Assign to all {0}</PawnPolicyCard_AssignToAll>
+	<PawnPolicyCard_AssignToAllOnMap>Assign to all {0} on map</PawnPolicyCard_AssignToAllOnMap>
+	<PawnPolicyCard_SetDefaultFor>Set default for {0}</PawnPolicyCard_SetDefaultFor>
+	<PawnPolicyCard_CurrentBestFood>Current best food: {0}</PawnPolicyCard_CurrentBestFood>
+	<PawnPolicyCard_Inventory>(inventory)</PawnPolicyCard_Inventory>
+	<PawnPolicyCard_NoFoodFound>(no food found)</PawnPolicyCard_NoFoodFound>
+	<PawnPolicyCard_Policy>Policy</PawnPolicyCard_Policy>
+	
+</LanguageData>

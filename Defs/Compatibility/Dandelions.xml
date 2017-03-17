@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+    <WM.SmarterFoodSelection.CompabilityDef>
+<!--		<defname>SFS_YummyDandelions</defname>-->
+        <requiredMod>Core</requiredMod>
+        <foods>
+			<li>
+				<def>PlantDandelion</def>
+				<pref>Grass</pref>
+			</li>
+        </foods>
+    </WM.SmarterFoodSelection.CompabilityDef>    
+</Defs>

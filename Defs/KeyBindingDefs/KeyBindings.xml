@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<KeyBindingDefs>	
+	<KeyBindingDef>
+		<category>WM_KeyBindings</category>
+		<defName>WM_SFS_ToggleFoodScore</defName>
+		<label>Toggle food score</label>
+		<defaultKeyCodeA>H</defaultKeyCodeA>
+	</KeyBindingDef>
+</KeyBindingDefs>

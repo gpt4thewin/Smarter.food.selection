@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+	<WM.SmarterFoodSelection.Policy>
+		<defName>SFS_DefaultPetPolicy</defName>
+		<label>Animals</label>
+		<conditions>
+			<li>default:pet</li>
+		</conditions>
+		<diet>
+				SafeHunting /
+				Grass /
+				HumanlikeCorpse /
+				Hay /		
+				Kibble =
+				MealAwful /
+				MealSimple /
+				RawHuman /
+				RawInsect /
+				RawBad /
+				RawTasty /
+				InsectCorpse /
+				Corpse /
+				MealFine /
+				MealLavish /
+				RiskyHunting
+		</diet>
+	</WM.SmarterFoodSelection.Policy>
+	<WM.SmarterFoodSelection.Policy>
+		<defName>SFS_PetPolicy_NoHunt</defName>
+		<label>No hunt</label>
+		<conditions>
+			<li>pet</li>
+		</conditions>
+		<diet>
+				Grass /
+				HumanlikeCorpse /
+				Hay /		
+				Kibble =
+				MealAwful /
+				MealSimple /
+				RawHuman /
+				RawInsect /
+				RawBad /
+				InsectCorpse /
+				Corpse /
+				RawTasty /
+				MealFine /
+				MealLavish 
+		</diet>
+	</WM.SmarterFoodSelection.Policy>
+	<WM.SmarterFoodSelection.Policy>
+		<defName>SFS_PetPolicy_Limited</defName>
+		<label>Hunt-Grass-Hay-Kibble-Humans</label>
+		<conditions>
+			<li>pet</li>
+		</conditions>
+		<diet>
+				SafeHunting /
+				Grass /
+				HumanlikeCorpse /
+				Hay /		
+				Kibble =
+				MealAwful /
+				MealSimple /
+				RawHuman
+		</diet>
+	</WM.SmarterFoodSelection.Policy>
+</Defs>

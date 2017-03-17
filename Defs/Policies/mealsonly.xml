@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+	<WM.SmarterFoodSelection.Policy>
+		<defName>SFS_MealsOnly</defName>
+		<label>Meals only</label>
+		<moodEffectMatters>true</moodEffectMatters>
+		<conditions>
+			<li>human</li>
+		</conditions>
+		<diet>MealLavish=MealFine=MealSimple=MealAwful</diet>
+	</WM.SmarterFoodSelection.Policy>
+</Defs>

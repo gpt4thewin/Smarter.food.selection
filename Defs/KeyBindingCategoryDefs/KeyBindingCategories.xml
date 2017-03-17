@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<KeyBindingCategoryDefs>
+	<KeyBindingCategoryDef>
+		<defName>WM_KeyBindings</defName>
+		<label>WM Smarter Food Selection</label>
+		<description></description>
+		<checkForConflicts>
+			<li>GameMapCamera</li>
+			<li>Game</li>
+		</checkForConflicts>
+	</KeyBindingCategoryDef>
+	
+</KeyBindingCategoryDefs>

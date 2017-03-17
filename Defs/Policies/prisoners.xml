@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+	<WM.SmarterFoodSelection.Policy>
+		<defName>SFS_DefaultPrisonerPolicy</defName>
+		<label>Prisoner</label>
+		<moodEffectMatters>true</moodEffectMatters>
+		<moodEffectFactor>0.3</moodEffectFactor>
+		<costFactorMultiplier>2</costFactorMultiplier>
+		<conditions>
+			<li>default:prisoner</li>
+			<li>default:prisoner/appealedprisoner</li>
+		</conditions>
+		<diet>		
+				MealAwful /
+				MealSimple /
+				MealFine /
+				RawTasty /	
+				Kibble /
+				RawBad /
+				RawInsect /
+				MealLavish /
+				Corpse /
+				InsectCorpse /
+				HumanlikeCorpse
+		</diet>
+	</WM.SmarterFoodSelection.Policy>
+</Defs>

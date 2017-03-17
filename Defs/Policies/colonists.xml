@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+	<WM.SmarterFoodSelection.Policy>
+		<defName>SFS_DefaultColonistPolicy</defName>
+		<label>Default colonist policy</label>
+		<moodEffectMatters>true</moodEffectMatters>
+		<moodEffectFactor>2</moodEffectFactor>
+		<costFactorMultiplier>0.5</costFactorMultiplier>
+		<allowUnlisted>true</allowUnlisted>
+		<conditions>
+			<li>default:colonist</li>
+			<li>prisoner/appealedprisoner</li>
+		</conditions>
+		<diet>MealLavish=MealFine=MealSimple=MealAwful/RawTasty=200/Kibble/RawBad=RawInsect=RawHuman/Corpse=InsectCorpse/HumanlikeCorpse</diet>
+	</WM.SmarterFoodSelection.Policy>
+</Defs>

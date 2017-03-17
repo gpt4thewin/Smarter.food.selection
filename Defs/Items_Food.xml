@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ThingDefs>
+	
+	<ThingDef ParentName="MealRottable">
+		<defName>MealNutrientPasteCannibal</defName>
+		<label>nutrient paste meal (cannibal)</label>
+		<description>A synthetic mixture of protein, carbohydrates, and vitamins, amino acids and minerals. Everything the body needs, and absolutely disgusting.</description>
+		<graphicData>
+			<texPath>Things/MealNutrientPasteCannibal</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+		</graphicData>
+		<statBases>
+			<DeteriorationRate>20</DeteriorationRate>
+			<MarketValue>15</MarketValue>
+		</statBases>
+		<ingestible>
+			<preferability>MealAwful</preferability>
+			<tasteThought>AteAwfulMeal</tasteThought>
+			<nutrition>0.90</nutrition>
+			<ingestEffect>EatVegetarian</ingestEffect>
+			<ingestSound>Meal_Eat</ingestSound>
+		</ingestible>
+	</ThingDef>
+	
+</ThingDefs>

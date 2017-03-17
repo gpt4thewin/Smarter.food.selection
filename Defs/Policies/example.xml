@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+	Policies can individually assigned to pawns you have control on. (colonists, pets, prisoners but not visitors caravans or allies).
+	They will affect their food selection in various ways:
+	- Affects the food score to favor some foods on others. Example: favor simple meals over fine meals for prisoners.
+	- Forbids certain food.
+
+	I know customizing policies can be trick to understand !
+
+	Food categories:
+
+	Ignore			: Use this so restricted pawns (prisoners, pets, ascetic or incapacitated colonists) will never be fed with them).
+						normaly used for luxuries like chocolate or drugs.
+						
+	MealAwful		: Anything that gives the "ate awful meal" thought.
+	MealSimple		: ...
+	MealFine		: Anything that gives the "ate fine meal" thought.
+	MealLavish		: Anything that gives the "ate lavish meal" thought.
+	
+	Hay				: Favorite food of muffalos, after grass. Use if you want your grass eating pets to fetch it first.
+	Kibble			: Same as above for kibble.
+	
+	RawBad			: Raw food, giving bad thoughts.
+	RawTasty		: Raw food NOT givin bad thoughts.
+	
+	Plant			: All crops or trees. Your pets will never eat them.
+	Grass			: Favorite food of muffalos, they will always fetch it first. Use only if you have something similar.
+	Luxury			: Chocolate or typically "NeverForNutrition" food.
+	AnimalProduct	: ...
+
+	all those bellow should never be used.
+	
+	FertEggs	
+	RawInsect
+	RawHuman
+	HumanlikeCorpse
+	InsectCorpse
+	Corpse
+.-->
+
+<Defs>
+	<!--	
+		Example Policy #1.
+		ALL VALUES ARE ON DEFAULT; and thus will have no particular effect unless modified.
+		They can be removed if left on their default value.
+	-->
+	<WM.SmarterFoodSelection.Policy>
+		
+		<!-- Unique identifier for the policy. -->
+		<defName>SFS_ExamplePolicy01</defName>
+
+		<!-- Policy name show in-game. -->
+		<label>Example policy 1</label>
+		
+		<!-- If false, the policy will not take care of the mood impact. ("Ate raw food", "Ate awful meal", "Ate lavish meal"...) -->
+		<moodEffectMatters>true</moodEffectMatters>
+		
+		<!-- Multiplier for the mood effect factor when the food is ingested. -->
+		<moodEffectFactor>1</moodEffectFactor> 
+
+		<!-- Not implemented yet -->
+		<costFactorMultiplier>1</costFactorMultiplier>
+		
+		<!-- Allows categories of food not listed in the policy's diet bellow. Unlisted foods will then get the worst score malus. -->
+	 	<allowUnlisted>false</allowUnlisted> 
+
+		<!-- 
+			The diet is the list of all food categories allowed by the policy and their preference order, from the best to the worst. 
+			In this example MealLavish, MealFine, MealSimple and MealAwful are at the same level BUT non ascetic colonists will still prefer lavish meals because of the mood factor (see above).
+			For a complete list of categories, scroll upward.
+		-->
+		<diet>MealLavish=MealFine=MealSimple=MealAwful / RawTasty / Kibble / RawBad=RawInsect=RawHuman/Corpse=InsectCorpse/HumanlikeCorpse</diet>
+		
+		<!-- 
+			The most tricky part.
+			This defines to what pawns a policy can to be assigned.
+		-->
+		<conditions>
+			<li>default:colonist</li> 					<!-- This will allow to assign the policy to any colonists and make this policy the default one for them. -->
+			<li>prisoner/appealedprisoner</li> 			<!-- This will allow to assign the policy to prisoners you are trying to recruit. -->
+			<li>ascetic</li>							<!-- This will allow to assign the policy to ALL ascetic humans (prisoners or not). -->
+			<li>ascetic/cannibal/incapacitated</li> 	<!-- This will allow to assign the policy to ALL HUMANS who are all at once, ascetic, cannibal and incapacitated. Let's say there is a purpose in this ! -->
+		</conditions>
+
+		<!-- ================= Uncommon parameters. ================= -->
+		
+		<!-- If true, pawns assigned to this policy will have their vanilla behavior. Discards all other parameters. -->
+		<unrestricted>false</unrestricted>
+
+		<!-- Every point loss for every square between your pawn and a food source. Vanilla default is 1, mod default is 0.8 -->
+		<distanceFactor>0.8</distanceFactor>
+		
+		<!-- Food offset in the Def of a food. I see no particular reason to set this to false... -->
+		<optimalityOffsetMatters>true</optimalityOffsetMatters>
+
+		
+	</WM.SmarterFoodSelection.Policy>
+</Defs>

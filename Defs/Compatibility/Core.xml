@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+	The mod dynamically determines a food category for every food of every loaded mods.
+	Sometime with mods, SFS cannot determine the category or determines one that is not correct.
+	So you can force a def to bellow to a certain category.
+	
+	To know if the category binded with a food is correct, go to the mod settings and print a "Compatibility report".
+
+	def field:		Simply the target defname
+	pref field:		The category
+	
+	Ignore			: Use this so restricted pawns (prisoners, pets, ascetic or incapacitated colonists) will never be fed with them).
+						normaly used for luxuries like chocolate or drugs.
+						
+	MealAwful		: Anything that gives the "ate awful meal" thought.
+	MealSimple		: ...
+	MealFine		: Anything that gives the "ate fine meal" thought.
+	MealLavish		: Anything that gives the "ate lavish meal" thought.
+	
+	Hay				: Favorite food of muffalos, after grass. Use if you want your grass eating pets to fetch it first.
+	Kibble			: Same as above for kibble.
+	
+	RawBad			: Raw food, giving bad thoughts.
+	RawTasty		: Raw food NOT givin bad thoughts.
+	
+	Plant			: All crops or trees. Your pets will never eat them.
+	Grass			: Favorite food of muffalos, they will always fetch it first. Use only if you have something similar.
+	Luxury			: Chocolate or typically "NeverForNutrition" food.
+	AnimalProduct	: ...
+	
+	all those bellow should never be used.
+	
+	FertEggs	
+	RawInsect
+	RawHuman
+	HumanlikeCorpse
+	InsectCorpse
+	Corpse
+-->
+<Defs>
+    <WM.SmarterFoodSelection.CompabilityDef>
+<!--		<defname>SFS_Core</defname>-->
+        <requiredMod>Core</requiredMod>
+        <foods>
+			<li>
+				<def>NutrientPasteDispenser</def>
+				<pref>MealAwful</pref>
+			</li>
+			<li>
+				<def>PlantMoss</def>
+				<pref>Grass</pref>
+			</li>
+        </foods>
+    </WM.SmarterFoodSelection.CompabilityDef>    
+</Defs>

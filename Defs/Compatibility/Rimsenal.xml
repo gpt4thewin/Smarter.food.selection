@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+    <WM.SmarterFoodSelection.CompabilityDef>
+		<defname>SFS_Rimsenal_Feral</defname>
+        <requiredMod>Rimsenal - Feral</requiredMod>
+        <foods>
+			<li>
+				<def>Mutant_Ogre_Corpse</def>
+				<pref>Corpse</pref>
+			</li>
+			<li>
+				<def>Mutant_Razortooth_Corpse</def>
+				<pref>Corpse</pref>
+			</li>
+			<li>
+				<def>Mutant_Twisted_Corpse</def>
+				<pref>Corpse</pref>
+			</li>
+        </foods>
+    </WM.SmarterFoodSelection.CompabilityDef>  
+    <WM.SmarterFoodSelection.CompabilityDef>
+		<defname>SFS_Rimsenal_Federation</defname>
+        <requiredMod>Rimsenal - Federation</requiredMod>
+        <foods>
+			<li>
+				<def>Biodrone_Seeker_Corpse</def>
+				<pref>Corpse</pref>
+			</li>
+			<li>
+				<def>Bion_Grunt_Corpse</def>
+				<pref>Corpse</pref>
+			</li>
+			<li>
+				<def>Bion_Federator_Corpse</def>
+				<pref>Corpse</pref>
+			</li>
+			<li>
+				<def>Bion_Hulk_Corpse</def>
+				<pref>Corpse</pref>
+			</li>
+			<li>
+				<def>Bion_Stalker_Corpse</def>
+				<pref>Corpse</pref>
+			</li>
+        </foods>
+    </WM.SmarterFoodSelection.CompabilityDef>    
+</Defs>

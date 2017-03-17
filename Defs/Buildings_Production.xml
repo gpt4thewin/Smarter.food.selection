@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ThingDefs>
+
+  <!--======================== Nutrient dispenser ==============================-->
+
+  <ThingDef ParentName="BuildingBase">
+    <defName>NutrientPasteDispenser</defName>
+    <label>nutrient paste dispenser</label>
+    <description>Synthesizes nutrient paste from organic feedstocks. It consumes less ingredients and time than any other meal production method - but nobody likes eating nutrient paste. Accepts raw food, but not rough plant matter like hay.</description>
+    <thingClass>Building_NutrientPasteDispenser</thingClass>
+    <graphicData>
+      <texPath>Things/Building/Production/NutrientDispenser</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(3,4)</drawSize>
+      <damageData>
+        <rect>(0.02,0.25,2.96,2.85)</rect>
+        <cornerTL>Damage/Corner</cornerTL>
+        <cornerTR>Damage/Corner</cornerTR>
+      </damageData>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>Impassable</passability>
+    <blockWind>true</blockWind>
+    <fillPercent>1</fillPercent>
+    <statBases>
+      <WorkToBuild>2200</WorkToBuild>
+      <MaxHitPoints>350</MaxHitPoints>
+      <Flammability>1.0</Flammability>
+    </statBases>
+    <building>
+      <isMealSource>true</isMealSource>
+      <wantsHopperAdjacent>true</wantsHopperAdjacent>
+      <foodCostPerDispense>6</foodCostPerDispense>
+      <soundDispense>DispensePaste</soundDispense>
+    </building>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <startElectricalFires>true</startElectricalFires>
+        <basePowerConsumption>200</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="CompProperties_Breakdownable"/>
+      <li Class="WM.SmarterFoodSelection.Detours.CompProperties_ExtraNPD"/>
+    </comps>
+    <size>(3,4)</size>
+    <costList>
+      <Steel>90</Steel>
+      <Component>3</Component>
+    </costList>
+    <socialPropernessMatters>true</socialPropernessMatters>
+    <interactionCellOffset>(0,0,3)</interactionCellOffset>
+    <hasInteractionCell>true</hasInteractionCell>
+    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+    <designationCategory>Production</designationCategory>
+    <constructEffect>ConstructMetal</constructEffect>
+    <designationHotKey>Misc6</designationHotKey>
+    <researchPrerequisites>
+      <li>NutrientPaste</li>
+    </researchPrerequisites>
+  </ThingDef>
+  
+</ThingDefs>

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Defs>
+	<WM.SmarterFoodSelection.Policy>
+		<defName>SFS_AsceticPolicy</defName>
+		<label>Ascetic</label>
+		<conditions>
+			<li>default:ascetic</li>
+			<li>human/incapacitated</li>
+		</conditions>
+		<diet>MealAwful/MealSimple/Kibble/MealFine/RawTasty/RawBad/MealLavish/RawInsect/RawHuman/Corpse/InsectCorpse/HumanlikeCorpse</diet>
+	</WM.SmarterFoodSelection.Policy>
+</Defs>
