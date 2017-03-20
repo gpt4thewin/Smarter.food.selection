@@ -13,10 +13,15 @@ namespace WM.SmarterFoodSelection.Detours
 		[DetourMethod(typeof(RimWorld.FoodUtility), "TryFindBestFoodSourceFor")]
 		public static bool TryFindBestFoodSourceFor(Pawn getter, Pawn eater, bool desperate, out Thing foodSource, out ThingDef foodDef, bool canRefillDispenser = true, bool canUseInventory = true, bool allowForbidden = false, bool allowCorpse = true)
 		{
+			return TryFindBestFoodSourceFor_Internal(getter, eater, desperate, out foodSource, out foodDef, canRefillDispenser, canUseInventory, allowForbidden, allowCorpse);
+		}
+
+		internal static bool TryFindBestFoodSourceFor_Internal(Pawn getter, Pawn eater, bool desperate, out Thing foodSource, out ThingDef foodDef, bool canRefillDispenser = true, bool canUseInventory = true, bool allowForbidden = false, bool allowCorpse = true, Policy forcedPolicy = null)
+		{
 			try
 			{
 				bool result = false;
-				result = _TryFindBestFoodSourceFor(getter, eater, desperate, out foodSource, out foodDef, canRefillDispenser, canUseInventory, allowForbidden, allowCorpse);
+				result = _TryFindBestFoodSourceFor(getter, eater, desperate, out foodSource, out foodDef, canRefillDispenser, canUseInventory, allowForbidden, allowCorpse, forcedPolicy);
 				return result;
 			}
 			catch (Exception ex)
@@ -25,13 +30,17 @@ namespace WM.SmarterFoodSelection.Detours
 			}
 		}
 
+
 		// RimWorld.FoodUtility
-		private static bool _TryFindBestFoodSourceFor(Pawn getter, Pawn eater, bool desperate, out Thing foodSource, out ThingDef foodDef, bool canRefillDispenser = true, bool canUseInventory = true, bool allowForbidden = false, bool allowCorpse = true)
+		private static bool _TryFindBestFoodSourceFor(Pawn getter, Pawn eater, bool desperate, out Thing foodSource, out ThingDef foodDef, bool canRefillDispenser = true, bool canUseInventory = true, bool allowForbidden = false, bool allowCorpse = true, Policy forcedPolicy = null)
 		{
 			Policy policy;
 
 			//taming ? TODO: check for bug free
-			policy = eater.GetPolicyAssignedTo(getter);
+			if (forcedPolicy != null)
+				policy = forcedPolicy;
+			else
+				policy = eater.GetPolicyAssignedTo(getter);
 
 			if (getter.isWildAnimal() || policy.unrestricted || getter.InMentalState || Config.ControlDisabledForPawn(eater))
 			{

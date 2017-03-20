@@ -92,8 +92,8 @@ namespace WM.SmarterFoodSelection
 				new Diet.DietElement() {foodCategory = FoodCategory.RawHuman},
 				new Diet.DietElement() {foodCategory = FoodCategory.RawInsect},
 				new Diet.DietElement() {foodCategory = FoodCategory.RawBad},
-				new Diet.DietElement() {foodCategory = FoodCategory.MealAwful},
-				new Diet.DietElement() {foodCategory = FoodCategory.MealSimple},
+				//new Diet.DietElement() {foodCategory = FoodCategory.MealAwful},
+				//new Diet.DietElement() {foodCategory = FoodCategory.MealSimple},
 				new Diet.DietElement() {foodCategory = FoodCategory.InsectCorpse},
 				new Diet.DietElement() {foodCategory = FoodCategory.Corpse}
 			}

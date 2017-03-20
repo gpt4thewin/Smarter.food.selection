@@ -18,7 +18,7 @@ namespace WM.SmarterFoodSelection.Detours
 			Thing thing;
 			ThingDef def;
 
-			if (!FoodUtility.TryFindBestFoodSourceFor(pawn, tamee, false, out thing, out def, false, false, false, Config.useCorpsesForTaming))
+			if (!FoodUtility.TryFindBestFoodSourceFor_Internal(pawn, tamee, false, out thing, out def, false, false, false, Config.useCorpsesForTaming, Policies.Taming))
 			{
 				return null;
 			}
