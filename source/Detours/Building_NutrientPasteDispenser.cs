@@ -5,7 +5,6 @@ using HugsLib.Source.Detour;
 using RimWorld;
 using UnityEngine;
 using Verse;
-using Verse.AI;
 using Verse.Sound;
 
 namespace WM.SmarterFoodSelection.Detours
@@ -187,7 +186,7 @@ namespace WM.SmarterFoodSelection.Detours
 
 		static List<Thing> GetAllHoppersThings(this RimWorld.Building_NutrientPasteDispenser self)
 		{
-			List<Thing> list = new List<Thing>();
+			var list = new List<Thing>();
 
 			for (int i = 0; i < self.AdjCellsCardinalInBounds().Count; i++)
 			{

@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using Verse;
 using RimWorld;
+using Verse;
 using WM.SmarterFoodSelection.Detours;
 
 namespace WM.SmarterFoodSelection
@@ -50,13 +49,16 @@ namespace WM.SmarterFoodSelection
 			//	obj.AddComp(food.DetermineFoodCategory().ToString(), policy.GetFoodScoreOffset(eater, food));
 
 			// ------------- Prey score factor -------------
+
+			const float PREY_FACTOR_MULTIPLIER = 5f; //Because the vanilla prey factor is fairly weak.
+
 			{
 				if (food is Pawn)
 				{
-					var preyScore = RimWorld.FoodUtility.GetPreyScoreFor(eater, food as Pawn);
+					var preyScore = RimWorld.FoodUtility.GetPreyScoreFor(eater, food as Pawn) * PREY_FACTOR_MULTIPLIER;
 					//ducktape, negates the distance factor of the vanilla function as it is already calculated by the mod.
-					preyScore += (eater.Position - food.Position).LengthHorizontal;
-					obj.AddComp("Prey", preyScore);
+					preyScore += (eater.Position - food.Position).LengthHorizontal * PREY_FACTOR_MULTIPLIER;
+					obj.AddComp("Prey (ratio=" + Detours.FoodUtility.GetPreyRatio(eater, food as Pawn).ToString("F2") + ")", preyScore);
 					return obj;
 				}
 			}

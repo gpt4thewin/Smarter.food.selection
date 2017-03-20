@@ -3,6 +3,7 @@
 	<WM.SmarterFoodSelection.Policy>
 		<defName>SFS_DefaultPrisonerPolicy</defName>
 		<label>Prisoner</label>
+		<description>Default prisoner policy.\nWill prefer the worst meals first. Will also care about the thoughts given by meals but not very much.</description>
 		<moodEffectMatters>true</moodEffectMatters>
 		<moodEffectFactor>0.3</moodEffectFactor>
 		<costFactorMultiplier>2</costFactorMultiplier>

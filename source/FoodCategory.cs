@@ -1,8 +1,4 @@
-﻿using System;
-using Verse;
-using RimWorld;
-
-namespace WM.SmarterFoodSelection
+﻿namespace WM.SmarterFoodSelection
 {
 	public enum FoodCategory : byte
 	{
@@ -26,8 +22,8 @@ namespace WM.SmarterFoodSelection
 		Plant,
 		Grass,
 		Luxury,
-		SafeHunting,
-		RiskyHunting
+		Hunt,
+		Tree
 	}
 
 	//public class FoodCategory

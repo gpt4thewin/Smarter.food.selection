@@ -38,7 +38,7 @@ namespace WM.SmarterFoodSelection.Detours
 					killIncappedTarget = true
 				};
 			}
-			Building_NutrientPasteDispenser building_NutrientPasteDispenser = thing as Building_NutrientPasteDispenser;
+			var building_NutrientPasteDispenser = thing as Building_NutrientPasteDispenser;
 			if (building_NutrientPasteDispenser != null && !building_NutrientPasteDispenser.HasEnoughFeedstockInHoppers())
 			{
 				Building building = building_NutrientPasteDispenser.AdjacentReachableHopper(pawn);

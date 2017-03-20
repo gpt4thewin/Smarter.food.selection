@@ -3,8 +3,5 @@
 	<WM.SmarterFoodSelection.Policy>
 		<defName>SFS_NoFoodPolicy</defName>
 		<label>No food!</label>
-		<moodEffectMatters>true</moodEffectMatters>
-		<conditions>
-		</conditions>
 	</WM.SmarterFoodSelection.Policy>
 </Defs>

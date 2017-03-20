@@ -53,7 +53,7 @@ namespace WM.SmarterFoodSelection
 					text += string.Format("|\t[Mod : {0}]\n", mod.Key.Name);
 					foreach (var diet in mod)
 					{
-						List<string> detailledDiet = new List<string>();
+						var detailledDiet = new List<string>();
 
 						if (policy.unrestricted)
 						{

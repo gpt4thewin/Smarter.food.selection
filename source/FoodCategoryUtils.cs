@@ -31,7 +31,7 @@ namespace WM.SmarterFoodSelection
 		{
 			get
 			{
-				return FoodRecords.Where((arg) => arg.Value.category == FoodCategory.Ignore).Count();
+				return FoodRecords.Count((arg) => arg.Value.category == FoodCategory.Ignore);
 			}
 		}
 		internal static IEnumerable<ThingDef> NullPrefFoods
@@ -82,6 +82,21 @@ namespace WM.SmarterFoodSelection
 			FoodDefRecord result;
 			FoodRecords.TryGetValue(def, out result);
 			return result;
+		}
+
+
+		internal static FoodCategory GetFoodCategory(this Thing thing, bool silent = true)
+		{
+			FoodDefRecord record;
+
+			if (FoodRecords.TryGetValue(thing.def, out record))
+			{
+				return record.category;
+			}
+			else
+			{
+				return FoodCategory.Null;
+			}
 		}
 
 		internal static FoodCategory DetermineFoodCategory(this Thing thing, bool silent = false)
@@ -143,7 +158,7 @@ namespace WM.SmarterFoodSelection
 			}
 
 			if (def.race != null)
-				return FoodCategory.SafeHunting;
+				return FoodCategory.Hunt;
 
 			if (def.ingestible != null)
 			{
@@ -153,7 +168,7 @@ namespace WM.SmarterFoodSelection
 				FoodPreferability foodPref = def.ingestible.preferability;
 				FoodTypeFlags foodType = def.ingestible.foodType;
 
-				String defName = def.defName;
+				string defName = def.defName;
 
 				if (foodPref == FoodPreferability.MealFine)
 
@@ -190,7 +205,7 @@ namespace WM.SmarterFoodSelection
 
 				if ((foodType & FoodTypeFlags.Tree) != 0)
 
-					return FoodCategory.Plant;
+					return FoodCategory.Tree;
 
 				if ((foodType & FoodTypeFlags.Plant) != 0)
 				{

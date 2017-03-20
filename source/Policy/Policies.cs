@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using RimWorld;
 using Verse;
 
 namespace WM.SmarterFoodSelection
@@ -21,7 +22,9 @@ namespace WM.SmarterFoodSelection
 			defName = "WM_Unrestricted_Policy",
 			label = "UnrestrictedPolicyLabel".Translate(),
 			moodEffectMatters = true,
-			unrestricted = true
+			unrestricted = true,
+			conditionPredicate = (PawnPair arg) => true,
+			description = "Same behavior as vanilla."
 		};
 		// should never be used by user
 		public static readonly Policy Wild = new Policy
@@ -47,7 +50,7 @@ namespace WM.SmarterFoodSelection
 			baseDiet =
 			{
 				new Diet.DietElement() {foodCategory = FoodCategory.Grass},
-				new Diet.DietElement(){foodCategory= FoodCategory.HumanlikeCorpse}, //TODO: TBD
+				new Diet.DietElement() {foodCategory = FoodCategory.HumanlikeCorpse}, 
 				new Diet.DietElement() {foodCategory = FoodCategory.Hay},
 				new Diet.DietElement() {foodCategory = FoodCategory.Kibble},
 				new Diet.DietElement() {foodCategory = FoodCategory.MealAwful},
@@ -63,24 +66,36 @@ namespace WM.SmarterFoodSelection
 			}
 		};
 
-		//TODO: make setting
 		internal static readonly Policy Taming = new Policy
 		{
 			defName = "hidden_taming_policy",
-			label = "Taming", //TODO: fix automatic name displayed
+			label = "Taming", 
 			Visible = false,
+			conditionPredicate = ((PawnPair arg) => arg.eater.isWildAnimal() && arg.getter.IsColonist),
+			allowFoodPredicate = delegate (Thing food)
+			{
+				var category = food.DetermineFoodCategory();
+				if (!Config.useHumanlikeCorpsesForTaming && category == FoodCategory.HumanlikeCorpse)
+					return false;
+				if (!Config.useCorpsesForTaming && category == FoodCategory.Corpse)
+					return false;
+				if (!Config.useMealsForTaming && (food.def.ingestible.foodType & FoodTypeFlags.Meal) == FoodTypeFlags.Meal)
+					return false;
+
+				return true;
+			},
 			baseDiet =
 			{
-				//new Diet.DietElement(){foodCategory= FoodCategory.HumanlikeCorpse}, //TODO: TBD
+				new Diet.DietElement() {foodCategory = FoodCategory.HumanlikeCorpse},
 				new Diet.DietElement() {foodCategory = FoodCategory.Hay},
 				new Diet.DietElement() {foodCategory = FoodCategory.Kibble},
-				new Diet.DietElement() {foodCategory = FoodCategory.MealAwful},
-				new Diet.DietElement() {foodCategory = FoodCategory.MealSimple},
 				new Diet.DietElement() {foodCategory = FoodCategory.RawHuman},
 				new Diet.DietElement() {foodCategory = FoodCategory.RawInsect},
 				new Diet.DietElement() {foodCategory = FoodCategory.RawBad},
-				//new Diet.DietElement() {foodCategory = FoodCategory.InsectCorpse},
-				//new Diet.DietElement() {foodCategory = FoodCategory.Corpse}
+				new Diet.DietElement() {foodCategory = FoodCategory.MealAwful},
+				new Diet.DietElement() {foodCategory = FoodCategory.MealSimple},
+				new Diet.DietElement() {foodCategory = FoodCategory.InsectCorpse},
+				new Diet.DietElement() {foodCategory = FoodCategory.Corpse}
 			}
 		};
 

@@ -35,11 +35,11 @@ namespace WM.SmarterFoodSelection
 		// ducktapestan
 		private static ModCore running;
 
-		public readonly static String modname = "Smarter_Food_Selection";
+		public readonly static string modname = "Smarter_Food_Selection";
 
 		internal static List<CompabilityDef> patches = new List<CompabilityDef>();
 
-		public override String ModIdentifier
+		public override string ModIdentifier
 		{
 			get
 			{
@@ -74,7 +74,10 @@ namespace WM.SmarterFoodSelection
 			FoodSearchCache.ClearAll();
 
 			var obj = UtilityWorldObjectManager.GetUtilityWorldObject<WorldDataStore_PawnPolicies>();
+
+#if DEBUG
 			Log.Message("World loaded. assigned policies: " + WorldDataStore_PawnPolicies.AssignedPoliciesCount);
+#endif
 
 			//if (!SeparatedNutrientPaste)
 			//	Utils.ShowRevertAllWorldNonVanillaThingsDialog();
@@ -83,24 +86,40 @@ namespace WM.SmarterFoodSelection
 		internal enum DrawFoodSearchMode
 		{
 			Off = 0,
-			Simple,
-			Advanced
+			Simple = 1,
+			AdvancedForBest = 2,
+			Advanced = 3
 		}
 
-		internal static DrawFoodSearchMode drawFoodSearchMode { get; private set; }
+		static DrawFoodSearchMode drawFoodSearchMode_int = DrawFoodSearchMode.Off;
+		internal static DrawFoodSearchMode drawFoodSearchMode
+		{
+			get
+			{
+				return drawFoodSearchMode_int;
+			}
+			set
+			{
+				if (value == DrawFoodSearchMode.Off)
+					DebugViewSettings.drawFoodSearchFromMouse = false;
+				else
+					DebugViewSettings.drawFoodSearchFromMouse = true;
+
+				drawFoodSearchMode_int = value;
+			}
+		}
 
 		public override void OnGUI()
 		{
 			if (KeysBinding.ToggleFoodScore.KeyDownEvent)
 			{
-				drawFoodSearchMode += 1;
-				if (Convert.ToInt32(drawFoodSearchMode) > Enum.GetValues(drawFoodSearchMode.GetType()).Length)
+				drawFoodSearchMode++;
+				if (Convert.ToInt32(drawFoodSearchMode) >= Enum.GetValues(typeof(DrawFoodSearchMode)).Length)
 					drawFoodSearchMode = 0;
 
-				if (drawFoodSearchMode != DrawFoodSearchMode.Off)
-					DebugViewSettings.drawFoodSearchFromMouse = true;
-				else
-					DebugViewSettings.drawFoodSearchFromMouse = false;
+#if DEBUG
+				Log.Message("Display mode = " + Convert.ToInt32(drawFoodSearchMode));
+#endif
 			}
 		}
 
@@ -114,6 +133,8 @@ namespace WM.SmarterFoodSelection
 			//Config.IncapColonistsFeedMode = Settings.GetHandle("incapColonistsFeedMode", "IncapFeedMode".Translate(), "", IncapFeedMode.AnimalsLikeExcludeCorpses, null, "enumSetting_");
 
 			//Config.petsPreferHunt = Settings.GetHandle<bool>("petsPreferHunt", "PetsPreferHunt".Translate(), "PetsPreferHunt_desc".Translate(), true);
+
+			Config.SeparatedNutrientPaste = Settings.GetHandle<bool>("separatedNutrientPaste", "SeparatedNutrientPaste".Translate(), "SeparatedNutrientPaste_desc".Translate(), true);
 
 			Config.PrintPreferencesCommand = Settings.GetHandle<bool>("commandPrintReport", "PrintReportCommand".Translate(), "PrintReportCommand_desc".Translate());
 			Config.PrintPreferencesCommand.CustomDrawer = delegate (Rect rect)
@@ -132,6 +153,10 @@ namespace WM.SmarterFoodSelection
 				}
 				return true;
 			};
+
+			Config.controlPets = Settings.GetHandle<bool>("controlPets", "ControlPets".Translate(), "ControlPets_desc".Translate(), true);
+			Config.controlPrisoners = Settings.GetHandle<bool>("controlPrisoners", "ControlPrisoners".Translate(), "ControlPrisoners_desc".Translate(), true);
+			Config.controlColonists = Settings.GetHandle<bool>("controlColonists", "ControlColonists".Translate(), "ControlColonists_desc".Translate(), true);
 
 			Config.ShowAdvancedOptions = Settings.GetHandle<bool>("showAdvancedOptions", "ShowAdvancedOptions".Translate(), "ShowAdvancedOptions_desc".Translate(), false);
 
@@ -153,21 +178,6 @@ namespace WM.SmarterFoodSelection
 					return false;
 				};
 
-				Config.SeparatedNutrientPaste = Settings.GetHandle<bool>("separatedNutrientPaste", "SeparatedNutrientPaste".Translate(), "SeparatedNutrientPaste_desc".Translate(), true);
-				Config.SeparatedNutrientPaste.VisibilityPredicate = VisibilityPredicate;
-				//separatedNutrientPaste_int.OnValueChanged = delegate (bool value)
-				//{
-				//	if (!value)
-				//		Utils.ShowRevertAllWorldNonVanillaThingsDialog();
-				//};
-
-				Config.controlPets = Settings.GetHandle<bool>("controlPets", "ControlPets".Translate(), "ControlPets_desc".Translate(), true);
-				Config.controlPets.VisibilityPredicate = VisibilityPredicate;
-				Config.controlPrisoners = Settings.GetHandle<bool>("controlPrisoners", "ControlPrisoners".Translate(), "ControlPrisoners_desc".Translate(), true);
-				Config.controlPrisoners.VisibilityPredicate = VisibilityPredicate;
-				Config.controlColonists = Settings.GetHandle<bool>("controlColonists", "ControlColonists".Translate(), "ControlColonists_desc".Translate(), true);
-				Config.controlColonists.VisibilityPredicate = VisibilityPredicate;
-
 				Config.useCorpsesForTaming = Settings.GetHandle<bool>("useCorpsesForTaming", "UseCorpsesForTaming".Translate(), "UseCorpsesForTaming_desc".Translate(), false);
 				Config.useCorpsesForTaming.VisibilityPredicate = VisibilityPredicate;
 
@@ -182,6 +192,9 @@ namespace WM.SmarterFoodSelection
 
 				Config.FoodSearchMaxItemsCount = Settings.GetHandle<int>("FoodSearchMaxItemsCount", "FoodSearchMaxItemsCount".Translate(), "FoodSearchMaxItemsCount_desc".Translate(), 2000);
 				Config.FoodSearchMaxItemsCount.VisibilityPredicate = VisibilityPredicate;
+
+				Config.useMealsForTaming = Settings.GetHandle<bool>("useMealsForTaming", "UseMealsForTaming".Translate(), "UseMealsForTaming_desc".Translate(), false);
+				Config.useMealsForTaming.VisibilityPredicate = VisibilityPredicate;
 
 #if DEBUG
 				Config.debugNoPawnsRestricted = Settings.GetHandle<bool>("debugNoPawnsRestricted", "debugNoPawnsRestricted", "", false);
@@ -218,7 +231,7 @@ namespace WM.SmarterFoodSelection
 
 		private void processDefs()
 		{
-			List<ModContentPack> modsList = new List<ModContentPack>();
+			var modsList = new List<ModContentPack>();
 
 			// ----------- Injecting tabs -----------
 
@@ -259,7 +272,9 @@ namespace WM.SmarterFoodSelection
 				def.TryApplyPatch();
 			}
 
-			// Hardcoded hidden policies
+			// Hardcoded policies
+			DefDatabase<Policy>.Add(Policies.Unrestricted);
+			DefDatabase<Policy>.Add(Policies.Taming);
 			DefDatabase<Policy>.Add(Policies.FriendlyPets);
 			DefDatabase<Policy>.Add(Policies.Friendly);
 			//Policies.FriendlyPets.DefsLoaded();
@@ -366,7 +381,7 @@ namespace WM.SmarterFoodSelection
 
 			if (FoodCategoryUtils.NullPrefFoodsCount > 0)
 			{
-				Logger.Warning(string.Format("Could not determine food category for {0} Defs. Restricted pawns will ignore them. Are you using unsupported food mods ? ({1})", FoodCategoryUtils.NullPrefFoodsCount, String.Join(" ; ", FoodCategoryUtils.NullPrefFoods.Select((ThingDef arg) => arg.defName + " (" + arg.label + ")").ToArray())));
+				Logger.Warning(string.Format("Could not determine food category for {0} Defs. Restricted pawns will ignore them. Are you using unsupported food mods ? ({1})", FoodCategoryUtils.NullPrefFoodsCount, string.Join(" ; ", FoodCategoryUtils.NullPrefFoods.Select((ThingDef arg) => arg.defName + " (" + arg.label + ")").ToArray())));
 			}
 		}
 	}

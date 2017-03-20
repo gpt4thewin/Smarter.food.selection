@@ -18,7 +18,7 @@ namespace WM.SmarterFoodSelection
 
 	public abstract class CacheEntry
 	{
-		int tick = Find.TickManager.TicksGame;
+		readonly int tick = Find.TickManager.TicksGame;
 		public int LifeTime { get; protected set; }
 
 		public bool NeverExpires { get; protected set; }
@@ -46,6 +46,11 @@ namespace WM.SmarterFoodSelection
 		{
 			this.eater = eater;
 			this.getter = getter;
+		}
+
+		public override string ToString()
+		{
+			return eater + " / " + getter;
 		}
 
 		public override bool Equals(object obj)
@@ -79,12 +84,12 @@ namespace WM.SmarterFoodSelection
 		{
 			internal List<FoodSourceRating> AllRankedFoods { get; set; }
 
-			internal Thing GetBestFood(bool allowPlant, bool allowCorpse, bool allowPrey)
+			internal FoodSourceRating GetBestFoodEntry(bool allowPlant, bool allowCorpse, bool allowPrey)
 			{
 				if (!AllRankedFoods.Any())
 					return null;
-				
-				List<FoodCategory> disallowedCategories = new List<FoodCategory>(3);
+
+				var disallowedCategories = new List<FoodCategory>(3);
 
 				if (!allowPlant)
 					disallowedCategories.Add(FoodCategory.Plant);
@@ -93,33 +98,43 @@ namespace WM.SmarterFoodSelection
 					disallowedCategories.Add(FoodCategory.Corpse);
 
 				if (!allowPrey)
-					disallowedCategories.Add(FoodCategory.SafeHunting);
+					disallowedCategories.Add(FoodCategory.Hunt);
 
-				var entry = AllRankedFoods.FirstOrDefault((arg) => !disallowedCategories.Contains(arg.DefRecord.category));
+				var entry = AllRankedFoods.FirstOrDefault((arg) => arg.DefRecord != null && !disallowedCategories.Contains(arg.DefRecord.category));
 				if (entry != null)
-					return entry.FoodSource;
+					return entry;
 
 				return null;
+			}
+			internal FoodSourceRating BestFoodEntry
+			{
+				get
+				{
+					return GetBestFoodEntry(true, true, true);
+				}
 			}
 			internal Thing BestFood
 			{
 				get
 				{
-					return GetBestFood(true, true, true);
+					var foodSourceRating = GetBestFoodEntry(true, true, true);
+					return foodSourceRating != null ? foodSourceRating.FoodSource : null;
 				}
 			}
 			internal Thing BestFoodNoCorpse
 			{
 				get
 				{
-					return GetBestFood(true, false, false);
+					var foodSourceRating = GetBestFoodEntry(true, false, false);
+					return foodSourceRating != null ? foodSourceRating.FoodSource : null;
 				}
 			}
 			internal Thing BestFoodNoPrey
 			{
 				get
 				{
-					return GetBestFood(true, true, false);
+					var foodSourceRating = GetBestFoodEntry(true, true, false);
+					return foodSourceRating != null ? foodSourceRating.FoodSource : null;
 				}
 			}
 		}
@@ -137,18 +152,17 @@ namespace WM.SmarterFoodSelection
 
 		internal static PawnEntry AddPawnEntry(Pawn getter, Pawn eater, List<FoodSourceRating> rankedFoodSources)
 		{
+			var pair = new PawnPair(eater, getter);
 #if DEBUG
-			var policy = eater.GetPolicyAssignedTo();
-
 			string textlist = "";
 
-			textlist += "Added food entry for " + eater + ". Food sources count:" + (rankedFoodSources.Count);
+			textlist += "Added food entry for " + pair + ". Food sources count:" + (rankedFoodSources.Count);
 
 			Log.Message(textlist);
 #endif
 			//mapentry.ByRace[PawnGroupEntryKey.ForPawn(eater)].ByPawn.Add(eater, new PawnEntry() { BestFood = foodSource });
 			var pawnEntry = new PawnEntry() { AllRankedFoods = rankedFoodSources };
-			AllByPawnPair.Add(new PawnPair(eater, getter), pawnEntry);
+			AllByPawnPair.Add(pair, pawnEntry);
 
 			return pawnEntry;
 		}
@@ -169,14 +183,14 @@ namespace WM.SmarterFoodSelection
 				else
 				{
 #if DEBUG
-					Log.Message(string.Format("Deleted expired food entry for {0}/{1} = {2}", eater, getter, foodSourceEntry.BestFood));
+					Log.Message(string.Format("Deleted expired food entry for {0} = {1}", pawnPair, foodSourceEntry.BestFood));
 #endif
 					AllByPawnPair.Remove(pawnPair);
 				}
 			else
 			{
 #if DEBUG
-				Log.Message(string.Format("No food entry found for {0}", eater));
+				Log.Message(string.Format("No food entry found for {0}", pawnPair));
 #endif
 			}
 

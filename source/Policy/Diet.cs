@@ -31,16 +31,14 @@ namespace WM.SmarterFoodSelection
 				RemoveCategory(FoodCategory.Corpse);
 				RemoveCategory(FoodCategory.InsectCorpse);
 				RemoveCategory(FoodCategory.HumanlikeCorpse);
-				RemoveCategory(FoodCategory.SafeHunting);
-				RemoveCategory(FoodCategory.RiskyHunting);
+				RemoveCategory(FoodCategory.Hunt);
 			}
 			else if (!def.race.predator)
 			{
-				RemoveCategory(FoodCategory.SafeHunting);
-				RemoveCategory(FoodCategory.RiskyHunting);
+				RemoveCategory(FoodCategory.Hunt);
 			}
 
-			FoodCategory[] huntCat = { FoodCategory.SafeHunting, FoodCategory.RiskyHunting };
+			FoodCategory[] huntCat = { FoodCategory.Hunt };
 
 			var nonHuntCategories = elements.Where((DietElement arg) => !huntCat.Contains(arg.foodCategory)).ToArray();
 
@@ -58,6 +56,7 @@ namespace WM.SmarterFoodSelection
 			float num = 0;
 			foreach (var current in elements)
 			{
+				//TODO: fix broken diet order when removing the first element for a race (eg: thrumbo)
 				current.totalOffsetValue = num;
 				num += current.scoreOffset;
 			}
@@ -76,6 +75,26 @@ namespace WM.SmarterFoodSelection
 		public static implicit operator List<DietElement>(Diet handle)
 		{
 			return handle.elements;
+		}
+
+		public override string ToString()
+		{
+			var textgroups = new List<string>();
+
+			if (elements == null)
+				return "* Allows anything *"; // TODO: .Translate()
+
+			var list = (from entry in elements
+						group entry by entry.totalOffsetValue);
+
+			foreach (var item in list)
+			{
+				textgroups.Add(string.Join(" = ", item.Select(arg => ("FoodCategory." + arg.foodCategory.ToString()).Translate()).ToArray()));
+			}
+
+			string text = string.Join(" > ", textgroups.ToArray());
+
+			return text;
 		}
 
 		public class DietElement

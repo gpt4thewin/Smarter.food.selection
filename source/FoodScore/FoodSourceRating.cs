@@ -4,10 +4,10 @@ using System.Linq;
 using Verse;
 using RimWorld;
 using WM.SmarterFoodSelection.Detours;
+using UnityEngine;
 
 namespace WM.SmarterFoodSelection
 {
-	//TODO: include Thing and FoodDefRecord to FoodScore
 	public class FoodSourceRating
 	{
 		public class Component
@@ -17,6 +17,12 @@ namespace WM.SmarterFoodSelection
 				Name = name;
 				Value = value;
 				Hidden = hidden;
+			}
+			public Component(Component obj)
+			{
+				Name = obj.Name;
+				Value = obj.Value;
+				Hidden = obj.Hidden;
 			}
 
 			public string Name { get; internal set; }
@@ -33,6 +39,18 @@ namespace WM.SmarterFoodSelection
 			Score = 0f;
 			ScoreComps = new List<Component>();
 			ScoreComps.Add(new Component("Base", 500f, true));
+		}
+		public FoodSourceRating(FoodSourceRating obj)
+		{
+			Score = 0f;
+			FoodSource = obj.FoodSource;
+			DefRecord = obj.DefRecord;
+			ScoreComps = new List<Component>();
+
+			foreach (var item in obj.ScoreComps)
+			{
+				AddComp(item.Name, item.Value, item.Hidden);
+			}
 		}
 
 		public static implicit operator float(FoodSourceRating obj)
@@ -65,16 +83,14 @@ namespace WM.SmarterFoodSelection
 			return ScoreComps.Find((obj) => obj.Name == name);
 		}
 
-		internal string ToWidgetString(bool advancedInfo, FoodCategory category, out float overridedScore, float overrideDistanceFactor = 0f)
+		internal string ToWidgetString(bool advancedInfo, FoodCategory category)
 		{
 			string text = "";
 
-
 			var backupDistanceValue = GetComp("Distance").Value;
-			SetComp("Distance", overrideDistanceFactor);
+			//SetComp("Distance", overrideDistanceFactor);
 
 			float score = ScoreForceSum;
-			overridedScore = score;
 			text += score.ToString("F0");
 
 			if (advancedInfo)

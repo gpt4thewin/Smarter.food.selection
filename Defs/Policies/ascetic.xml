@@ -3,6 +3,7 @@
 	<WM.SmarterFoodSelection.Policy>
 		<defName>SFS_AsceticPolicy</defName>
 		<label>Ascetic</label>
+		<description>Will prefer nutrient paste meal and the cheapest meals first instead of being indifferent. Will also prefer kibble over fine meals.</description>
 		<conditions>
 			<li>default:ascetic</li>
 			<li>human/incapacitated</li>

@@ -3,6 +3,7 @@
 	<WM.SmarterFoodSelection.Policy>
 		<defName>SFS_DefaultColonistPolicy</defName>
 		<label>Default colonist policy</label>
+		<description>Default colonist policy.\nWill care a lot about the thoughts given by meals.</description>
 		<moodEffectMatters>true</moodEffectMatters>
 		<moodEffectFactor>2</moodEffectFactor>
 		<costFactorMultiplier>0.5</costFactorMultiplier>

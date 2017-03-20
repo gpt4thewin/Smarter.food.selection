@@ -2,9 +2,9 @@
 
 <KeyBindingDefs>	
 	<KeyBindingDef>
-		<category>WM_KeyBindings</category>
+		<category>WMSFS_KeyBindings</category>
 		<defName>WM_SFS_ToggleFoodScore</defName>
-		<label>Toggle food score</label>
-		<defaultKeyCodeA>H</defaultKeyCodeA>
+		<label>Cycle food score display mode.</label>
+		<defaultKeyCodeA>Backslash</defaultKeyCodeA>
 	</KeyBindingDef>
 </KeyBindingDefs>

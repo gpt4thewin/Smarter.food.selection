@@ -8,7 +8,7 @@ namespace WM.SmarterFoodSelection
 {
 	public static class PolicyUtils
 	{
-		internal static Policy GetPolicyAssignedTo(this Pawn eater, Pawn getter=null)
+		internal static Policy GetPolicyAssignedTo(this Pawn eater, Pawn getter = null)
 		{
 #if DEBUG
 			if (Config.debugNoPawnsRestricted)
@@ -17,45 +17,54 @@ namespace WM.SmarterFoodSelection
 			if (getter == null)
 				getter = eater;
 
-			Policy policy = GetHardcodedPolicy(eater);
+			Policy policy = GetHardcodedPolicy(eater, getter);
 
 			if (policy != null)
 				return policy;
 
 			return WorldDataStore_PawnPolicies.GetPawnEntry(eater);
 
-		//nopolicy:
+			//nopolicy:
 
-		//	Log.Warning("Found no active policy for " + eater + ". Using default policy.");
-		//	return Policies.Unrestricted;
+			//	Log.Warning("Found no active policy for " + eater + ". Using default policy.");
+			//	return Policies.Unrestricted;
 		}
 
 		public static bool CanHaveFoodPolicy(this Pawn pawn)
 		{
-			if (HasHardcodedPolicy(pawn))
-				return true;
+			//if (HasHardcodedPolicy(pawn))
+			//	return true;
 
 			if (pawn.isWildAnimal())
 				return false;
 
-			if (pawn.Faction != Faction.OfPlayer && pawn.HostFaction != Faction.OfPlayer)
-				return false;
+			//if (pawn.Faction != Faction.OfPlayer && pawn.HostFaction != Faction.OfPlayer)
+			//	return false;
 
 			//null checked in isWildAnimal()
-			if (pawn.Faction != null && pawn.Faction.HostileTo(Faction.OfPlayer))
-				return false;
+			if (pawn.Faction != null)
+			{
+				if (pawn.HostFaction == Faction.OfPlayer)
+					return true;
+				if (pawn.Faction.HostileTo(Faction.OfPlayer))
+					return false;
+			}
 
-			if (pawn.needs.food == null)
+
+			if (pawn.needs == null || pawn.needs.food == null)
 				return false;
 
 			return true;
 		}
 
-		internal static Policy GetHardcodedPolicy(this Pawn eater)
+		internal static Policy GetHardcodedPolicy(this Pawn eater, Pawn getter = null)
 		{
 			if (eater.isWildAnimal())
 			{
-				return Policies.Wild;
+				if (getter != null && getter.IsColonist)
+					return Policies.Taming;
+				else
+					return Policies.Wild;
 			}
 
 			if (!eater.Faction.IsPlayer && !eater.Faction.RelationWith(Faction.OfPlayer).hostile && !eater.IsPrisonerOfColony)

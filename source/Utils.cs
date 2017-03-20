@@ -75,7 +75,7 @@ namespace WM.SmarterFoodSelection
 		}
 		private static IEnumerable<Thing> GetAllWorldNonVanillaThings()
 		{
-			List<Thing> list = new List<Thing>();
+			var list = new List<Thing>();
 
 			foreach (var map in Find.Maps)
 			{
@@ -143,6 +143,11 @@ namespace WM.SmarterFoodSelection
 			return pawn.CanReach(position, Verse.AI.PathEndMode.OnCell, Danger.Deadly, false, TraverseMode.ByPawn);
 		}
 
+		public static bool IsAnyoneCapturing(Map map, Pawn pawn)
+		{
+			return map.mapPawns.FreeColonists.Any(arg => arg.CurJob.targetA == pawn && arg.CurJob.def == JobDefOf.Capture);
+		}
+
 		// Verse.Corpse
 		public static BodyPartRecord GetBestBodyPartToEat(this Corpse self, Pawn ingester, float nutritionWanted)
 		{
@@ -152,6 +157,11 @@ namespace WM.SmarterFoodSelection
 		internal static bool isWildAnimal(this Pawn pawn)
 		{
 			return pawn.Faction == null;
+		}
+
+		internal static bool IsPetOfColony(this Pawn pawn)
+		{
+			return pawn.Faction != null && pawn.Faction.IsPlayer && pawn.RaceProps.Animal;
 		}
 
 		internal static bool IsIncapacitated(this Pawn pawn)
@@ -194,27 +204,23 @@ namespace WM.SmarterFoodSelection
 
 			return def.ToString();
 		}
+
+		public static float GetNutritionAmount(this Thing thing)
+		{
+			if (thing is Building_NutrientPasteDispenser)
+			{
+				return ((Building_NutrientPasteDispenser)thing).DispensableDef.ingestible.nutrition;
+			}
+
+			if (thing.def.ingestible == null)
+				throw new Exception(thing + " is not food or food source");
+
+			return thing.def.ingestible.nutrition;
+		}
+
 		public static bool CaseUnsensitiveCompare(this string a, string b)
 		{
 			return string.Equals(a, b, StringComparison.OrdinalIgnoreCase);
-		}
-
-		[Conditional("DEBUG")]
-		public static void DebugPrintTrace(string message)
-		{
-			StackTrace stackTrace = new StackTrace(true);
-			StackFrame sf = stackTrace.GetFrame(1);
-
-			string text = "";
-
-			text += ("Trace "
-				+ sf.GetMethod().Name + " "
-				+ sf.GetFileName() + ":"
-				+ sf.GetFileLineNumber() + Environment.NewLine);
-
-			text += (message + Environment.NewLine);
-
-			Log.Message(text);
 		}
 	}
 }

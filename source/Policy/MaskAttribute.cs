@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using Verse;
 
 namespace WM.SmarterFoodSelection
 {
@@ -123,8 +121,7 @@ namespace WM.SmarterFoodSelection
 			{
 				if (valueName.CaseUnsensitiveCompare(name))
 					return true;
-				else
-					return null;
+				return null;
 			}
 
 			if (value_int.GetType().IsEnum)

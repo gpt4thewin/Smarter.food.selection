@@ -6,8 +6,10 @@
 		<conditions>
 			<li>default:pet</li>
 		</conditions>
+		<description>Will prefer food for animals. Hunt &gt; Grass &gt; Human corpses &gt; hay &gt; kibble..\nBut will allow other foods if those are not available.
+		</description>
 		<diet>
-				SafeHunting /
+				Hunt /
 				Grass /
 				HumanlikeCorpse /
 				Hay /		
@@ -21,8 +23,7 @@
 				InsectCorpse /
 				Corpse /
 				MealFine /
-				MealLavish /
-				RiskyHunting
+				MealLavish 
 		</diet>
 	</WM.SmarterFoodSelection.Policy>
 	<WM.SmarterFoodSelection.Policy>
@@ -50,12 +51,14 @@
 	</WM.SmarterFoodSelection.Policy>
 	<WM.SmarterFoodSelection.Policy>
 		<defName>SFS_PetPolicy_Limited</defName>
-		<label>Hunt-Grass-Hay-Kibble-Humans</label>
+		<label>Food4animals only</label>
+		<description>Only foods for animal: Grass, hay, kibble, raw human meat/corpse.\nBut also simple and nutrient paste meals (they are more cost efficient than kibble!).
+		</description>
 		<conditions>
 			<li>pet</li>
 		</conditions>
 		<diet>
-				SafeHunting /
+				Hunt /
 				Grass /
 				HumanlikeCorpse /
 				Hay /		
@@ -63,6 +66,33 @@
 				MealAwful /
 				MealSimple /
 				RawHuman
+		</diet>
+	</WM.SmarterFoodSelection.Policy>
+	<WM.SmarterFoodSelection.Policy>
+		<defName>SFS_DefaultPetPolicy_AllowTrees</defName>
+		<label>Allow trees</label>
+		<conditions>
+			<li>pet</li>
+		</conditions>
+		<description>Same as "animals" but allows trees. Useful for thrumbos
+		</description>
+		<diet>
+				Hunt /
+				Grass /
+				Tree /
+				HumanlikeCorpse /
+				Hay /
+				Kibble =
+				MealAwful /
+				MealSimple /
+				RawHuman /
+				RawInsect /
+				RawBad /
+				RawTasty /
+				InsectCorpse /
+				Corpse /
+				MealFine /
+				MealLavish
 		</diet>
 	</WM.SmarterFoodSelection.Policy>
 </Defs>

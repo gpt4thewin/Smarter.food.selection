@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using HugsLib.Settings;
-using HugsLib.Core;
-using UnityEngine;
 using Verse;
 
 namespace WM.SmarterFoodSelection
@@ -12,17 +8,18 @@ namespace WM.SmarterFoodSelection
 	{
 		internal const float CONFIG_DEFAULT_COST_FACTOR = 250f;
 
-		//TODO: discard obsolette settings
-
 		public static SettingHandle<bool> useCorpsesForTaming { get; set; }
 
-		//TODO: implement setting
 		public static SettingHandle<bool> useHumanlikeCorpsesForTaming { get; set; }
+
+		public static SettingHandle<bool> useMealsForTaming { get; set; }
 
 		// Somehow obsolete but user friendly
 		//public static SettingHandle<bool> privilegedPrisoners { get; set; }
 		//public static SettingHandle<IncapFeedMode> IncapColonistsFeedMode { get; set; }
 		//public static SettingHandle<bool> petsPreferHunt { get; set; }
+
+		public static SettingHandle<bool> SeparatedNutrientPaste { get; set; }
 
 		//TODO: make custom UI ajustment
 		//TODO: implement hunting safe ratio
@@ -44,12 +41,23 @@ namespace WM.SmarterFoodSelection
 
 		public static SettingHandle<bool> controlColonists { get; set; }
 
+		internal static bool ControlDisabledForPawn(Pawn eater)
+		{
+			if (eater.IsColonist && !controlColonists)
+				return true;
+			if (eater.IsPrisonerOfColony && !controlPrisoners)
+				return true;
+			if (eater.IsPetOfColony() && !controlPets)
+				return true;
+
+			return false;
+		}
+
 		// now default true
 		//public static SettingHandle<bool> ColonistsPrefPasteOverTasty { get; set; }
 
 		public static SettingHandle<bool> PrintPreferencesCommand { get; set; }
 
-		public static SettingHandle<bool> SeparatedNutrientPaste { get; set; }
 
 		public static SettingHandle<bool> CostFactorMatters { get; set; }
 		public static SettingHandle<float> CostFactor { get; set; }

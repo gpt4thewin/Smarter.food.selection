@@ -5,7 +5,7 @@ using Verse.AI;
 
 namespace WM.SmarterFoodSelection.Detours
 {
-	public class Toils_Ingest
+	public static class Toils_Ingest
 	{
 		[DetourMethod(typeof(RimWorld.Toils_Ingest), "TakeMealFromDispenser")]
 		// RimWorld.Toils_Ingest
@@ -16,7 +16,7 @@ namespace WM.SmarterFoodSelection.Detours
 			{
 				Pawn actor = toil.actor;
 				Job curJob = actor.jobs.curJob;
-				Building_NutrientPasteDispenser building_NutrientPasteDispenser = (Building_NutrientPasteDispenser)curJob.GetTarget(ind).Thing;
+				var building_NutrientPasteDispenser = (Building_NutrientPasteDispenser)curJob.GetTarget(ind).Thing;
 
 				DispenseMode mode;
 

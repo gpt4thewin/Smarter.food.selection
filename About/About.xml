@@ -9,21 +9,23 @@
 &lt;b&gt;Allows you to restrict the foods of your pawns (prisoners, animals, ascetic, cannibal).&lt;/b&gt;
 		
 &lt;b&gt;Assign and customize your food policies.&lt;/b&gt;
-		
-&lt;b&gt;Improves the food selection algorithm.&lt;/b&gt;
-		
+
+&lt;b&gt;Better food selection algorithm.&lt;/b&gt;
+
 &lt;b&gt;Upgraded and smarter nutrient paste dispenser. &lt;/b&gt;
 		
 Will pick ingredients in this order: raw bad &gt; raw tasty &gt; insect meat &gt; human meat.
 The NPD will prioritize human meat for cannibals, and human meat then insect meat for animals.
-		
-Version 2.0a
-		
+
 &lt;b&gt;More... &lt;/b&gt;
+
+More information on the web link.
+
+Version 2.0a
 
 &lt;size=18&gt;&lt;color=orange&gt;&lt;b&gt;Credits&lt;/b&gt;&lt;/color&gt; &lt;/size&gt;
 
-* UnlimitedHugs for assistance and for HugsLib.
+* UnlimitedHugs for HugsLib and for assistance.
   </description>
 	<url>https://ludeon.com/forums/index.php?topic=30708.0</url>
 </ModMetaData>

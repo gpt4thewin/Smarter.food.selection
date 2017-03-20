@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using HugsLib.Settings;
 using RimWorld;
 using Verse;
 
@@ -53,8 +52,8 @@ namespace WM.SmarterFoodSelection
 			new MaskAttribute(PawnMaskType.WildAnimal),
 			new MaskAttribute(PawnMaskFaction.Wild),
 			new MaskAttribute("AppealedPrisoner", new bool()),
-			new MaskAttribute("cannibal", new bool()),
-			new MaskAttribute("ascetic", new bool()),
+			new MaskAttribute("Cannibal", new bool()),
+			new MaskAttribute("Ascetic", new bool()),
 			new MaskAttribute("Incapacitated", new bool())
 		};
 
@@ -264,7 +263,7 @@ namespace WM.SmarterFoodSelection
 			throw new Exception("Wrong mask format: " + syntax);
 		}
 
-		public static PawnMask MakeCompleteMask(Pawn pawn)
+		public static PawnMask MakeCompleteMaskFromPawn(Pawn pawn)
 		{
 			var mask = new PawnMask();
 
@@ -312,6 +311,33 @@ namespace WM.SmarterFoodSelection
 				return "(no attributes specified)";
 
 			return string.Join(" - ", specifiedFieldsValue.Select((arg) => arg.GetValueName()).ToArray());
+		}
+
+		public string ToExtendedString()
+		{
+			var text = new List<string>(Attributes.Length);
+
+			foreach (var item in Attributes)
+			{
+				var value = item.Value;
+
+				if (value != null)
+				{
+					if (value is bool)
+					{
+						if (((bool)value))
+						{
+							text.Add(item.Name.ToString());
+						}
+					}
+					else
+					{
+						text.Add(value.ToString());
+					}
+				}
+			}
+
+			return string.Join(" - ", text.ToArray());
 		}
 
 		public override bool Equals(object obj)

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using RimWorld;
 using Verse;
 
 namespace WM.SmarterFoodSelection
@@ -18,7 +17,7 @@ namespace WM.SmarterFoodSelection
 		//public bool targetDefault = false;
 		public List<ThingDef> targetPawnDefs = new List<ThingDef>(); //TODO: implement custom target pawn defs
 		public bool moodEffectMatters = false;
-		public string diet;
+		public string diet = "";
 
 		// -------- Uncommon parameters -------- 
 
@@ -32,6 +31,9 @@ namespace WM.SmarterFoodSelection
 		public float distanceFactor = DEFAULT_DISTANCE_FACTOR;
 		public float costFactorMultiplier = 1f;
 		public SimpleCurve FoodOptimalityEffectMoodCurve = Detours.Original.FoodUtility.FoodOptimalityEffectFromMoodCurve;
+
+		internal Func<PawnPair, bool> conditionPredicate = null;
+		internal Func<Thing, bool> allowFoodPredicate = null;
 
 		// -------- Parsed stuff -------- 
 
@@ -80,7 +82,7 @@ namespace WM.SmarterFoodSelection
 			{
 				_DefsLoaded();
 #if DEBUG
-				Verse.Log.Message(string.Format("Recorded policy {1} \"{0}\". Target = {4}. {3} diet elements. {2} races diets.", label, defName, PerRacesDiet != null ? PerRacesDiet.Count : 0, baseDiet != null ? baseDiet.Count : 0, conditions.ToString()));
+				Verse.Log.Message(string.Format("Recorded policy {1} \"{0}\". {3} diet elements. {2} races diets.", label, defName, PerRacesDiet != null ? PerRacesDiet.Count : 0, baseDiet != null ? baseDiet.Count : 0));
 #endif
 			}
 			catch (Exception ex)
@@ -101,28 +103,31 @@ namespace WM.SmarterFoodSelection
 
 			if (label == "" || label == null)
 			{
-				label = string.Format("Policy #{1} for {0}", string.Join(" / ", conditions.ToArray()), PoliciesCount);
+				label = string.Format("Policy #{1} for {0}", (conditions != null && conditions.Any()) ? string.Join(" / ", conditions.ToArray()) : "everyone", PoliciesCount);
 			}
 
 			// ----------- Parse masks -----------
 
-			foreach (var textmask in conditions)
+			if (conditions != null)
 			{
-				pawnMasks.Add(PawnMask.Parse(textmask, this));
-			}
-			var pawnMasks2 = pawnMasks.Distinct().ToList();
+				foreach (var textmask in conditions)
+				{
+					pawnMasks.Add(PawnMask.Parse(textmask, this));
+				}
+				var pawnMasks2 = pawnMasks.Distinct().ToList();
 
-			if (pawnMasks2.Count() < pawnMasks.Count())
-			{
-				var list = pawnMasks2.Where((arg) => !pawnMasks.Any((arg2) => arg2 == arg)).Select((arg) => arg.ToString());
-				Log.Warning("Policy " + label + " has redundant conditions: " + list);
-			}
+				if (pawnMasks2.Count() < pawnMasks.Count())
+				{
+					var list = pawnMasks2.Where((arg) => !pawnMasks.Any((arg2) => arg2 == arg)).Select((arg) => arg.ToString());
+					Log.Warning("Policy " + label + " has redundant conditions: " + list);
+				}
 
-			pawnMasks = pawnMasks2;
+				pawnMasks = pawnMasks2;
+			}
 
 			// ----------- Parse base diet -----------
 
-			if (diet != null)
+			if (diet != null && diet.Any())
 			{
 				//	var diet = new Diet();
 				var dietElements = Regex.Replace(diet, "[\n\r\t ]", "").Split('/');
@@ -138,6 +143,7 @@ namespace WM.SmarterFoodSelection
 							bool customOffsetDefined = false;
 							float num;
 
+							//not implemented
 							if (float.TryParse(item2, out num))
 							{
 								if (customOffsetDefined)
@@ -191,12 +197,24 @@ namespace WM.SmarterFoodSelection
 
 		internal bool AdmitsPawnDef(ThingDef pawn)
 		{
-			return pawnMasks.Any((arg) => arg.MatchesPawnDef(pawn));
+			return
+				conditions == null ||
+				pawnMasks.Any((arg) => arg.MatchesPawnDef(pawn));
 		}
 		internal bool AdmitsPawn(Pawn pawn)
 		{
-			return pawnMasks.Any((arg) => arg.MatchesPawn(pawn));
+			return
+				conditions == null ||
+				pawnMasks.Any((arg) => arg.MatchesPawn(pawn));
 		}
+		internal bool AdmitsPawnPair(PawnPair pair)
+		{
+			if (conditionPredicate != null && conditionPredicate(pair))
+				return true;
+
+			return AdmitsPawn(pair.eater);
+		}
+
 
 		internal int IndexOfPref(ThingDef pawnDef, FoodCategory foodPref)
 		{
@@ -205,6 +223,9 @@ namespace WM.SmarterFoodSelection
 
 		internal bool PolicyAllows(Pawn pawn, Thing t)
 		{
+			if (allowFoodPredicate != null && !allowFoodPredicate(t))
+				return false;
+			
 			return PolicyAllows(pawn, t.DetermineFoodCategory());
 		}
 		internal bool PolicyAllows(Pawn pawn, ThingDef def)

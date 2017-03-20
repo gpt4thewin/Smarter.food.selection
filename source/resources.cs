@@ -15,6 +15,11 @@ namespace WM.SmarterFoodSelection
 
 		public static Texture2D Cycle = ContentFinder<Texture2D>.Get("UI/Cycle", true);
 
+		public static class Color
+		{
+			public static UnityEngine.Color Orange = new UnityEngine.Color(1, 0.5f, 0);
+		}
+
 
 		//public static Texture2D humanmeat = ContentFinder<Texture2D>.Get("UI/MeatHuman", true);
 		//public static Texture2D humanmeat_forbidden = ContentFinder<Texture2D>.Get("UI/MeatHuman_forbidden", true);

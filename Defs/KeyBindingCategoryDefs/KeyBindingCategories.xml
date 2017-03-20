@@ -2,12 +2,17 @@
 
 <KeyBindingCategoryDefs>
 	<KeyBindingCategoryDef>
-		<defName>WM_KeyBindings</defName>
+		<defName>WMSFS_KeyBindings</defName>
 		<label>WM Smarter Food Selection</label>
 		<description></description>
 		<checkForConflicts>
 			<li>GameMapCamera</li>
 			<li>Game</li>
+			<li>SelectionMisc</li>
+			<li>SelectionSpecial</li>
+			<li>Architect</li>
+			<li>MainTabs</li>
+			<li>Development</li>
 		</checkForConflicts>
 	</KeyBindingCategoryDef>
 	

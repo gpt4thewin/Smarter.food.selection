@@ -40,17 +40,16 @@ namespace WM.SmarterFoodSelection
 			{
 				foreach (var item in AssignedPolicies.ToList())
 				{
-					if (!item.Key.CanHaveFoodPolicy() || item.Key.HasHardcodedPolicy())
+					// policy defname missing ? reset policy
+					if (item.Value == null || item.Key == null || item.Key.Dead || !item.Key.CanHaveFoodPolicy() || item.Key.HasHardcodedPolicy())
 					{
 						AssignedPolicies.Remove(item.Key);
-#if DEBUG
-						Log.Warning(item.Key + " had assigned policy but should not have one. Discarding. Did it changed faction ?");
-#endif
+
+						Log.Warning(item.Key + " had a wrong assigned policy. Reseting. Did you remove its policy from Defs ?");
+
 					}
 				}
 			}
-
-			//TODO: manage missing policy defs
 		}
 
 		// redundant
@@ -58,29 +57,39 @@ namespace WM.SmarterFoodSelection
 		//{
 		//}
 
-		internal static void SetDefaultForRaces(Policy policy)
+
+		internal static void AssignToAllPawnsOfRacesOnMap(Policy policy, ThingDef race)
 		{
-			throw new NotImplementedException();
+			Func<Pawn, bool> validator = (arg) => arg.def == race;
+			AssignToAllPawnsMatchingOnMap(policy, validator);
 		}
 
-		internal static void AssignToAllPawnsOfRacesOnMap(Policy policy)
+		internal static void AssignToAllPawnsWithMaskOnMap(Policy policy, PawnMask mask)
 		{
-			throw new NotImplementedException();
+			Func<Pawn, bool> validator = (arg) => mask.MatchesPawn(arg);
+			AssignToAllPawnsMatchingOnMap(policy, validator);
 		}
 
-		internal static void AssignToAllPawnsOfRaces(Policy policy)
+		internal static void AssignToAllPawnsMatchingOnMap(Policy policy, Func<Pawn, bool> validator)
 		{
-			throw new NotImplementedException();
-		}
+			var map = Find.VisibleMap;
 
-		internal static void AssignToAllPawnsWithMask(PawnMask mask)
-		{
-			throw new NotImplementedException();
+			var pawns = map.mapPawns.AllPawnsSpawned.Where(validator);
+
+			foreach (var item in pawns)
+			{
+				WorldDataStore_PawnPolicies.SetPolicyForPawn(item, policy);
+			}
 		}
 
 		internal static void SetPolicyForPawn(Pawn pawn, Policy policy)
 		{
 			GetPawnEntry(pawn);
+
+			if (policy == null)
+			{
+				policy = GetDefaultPolicyFor(pawn);
+			}
 
 			SingleInstance.AssignedPolicies[pawn] = policy;
 
@@ -98,16 +107,7 @@ namespace WM.SmarterFoodSelection
 
 			if (!SingleInstance.AssignedPolicies.TryGetValue(pawn, out value))
 			{
-				//var list = Policies.GetAllPoliciesForPawn(pawn).Where((Policy arg) => arg.pa;
-				var list = Policies.AllPawnMasks.Where((PawnMask arg) => arg.MatchesPawn(pawn));
-				if (!list.Any())
-				{
-					value = Policies.Unrestricted;
-				}
-				else
-				{
-					value = list.MaxBy(arg => arg.AllSpecifiedAttributes().Count()).targetDefault;
-				}
+				value = GetDefaultPolicyFor(pawn);
 				SingleInstance.AssignedPolicies.Add(pawn, value);
 			}
 			else
@@ -116,6 +116,29 @@ namespace WM.SmarterFoodSelection
 			}
 
 			return value;
+		}
+
+		internal static Policy GetDefaultPolicyFor(Pawn pawn)
+		{
+			Policy policy = Policies.Unrestricted;
+
+			//var list = Policies.GetAllPoliciesForPawn(pawn).Where((Policy arg) => arg.pa;
+			var list = Policies.AllPawnMasks.Where((PawnMask arg) => arg.MatchesPawn(pawn));
+			if (!list.Any())
+			{
+				policy = Policies.Unrestricted;
+			}
+			else
+			{
+				var list2 = list.OrderByDescending(arg => arg.AllSpecifiedAttributes().Count());
+
+				var entry = list2.FirstOrDefault((arg) => arg.targetDefault != Policies.Unrestricted);
+
+				if (entry != null)
+					policy = entry.targetDefault;
+			}
+
+			return policy;
 		}
 
 	}

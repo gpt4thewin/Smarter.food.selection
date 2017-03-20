@@ -32,7 +32,7 @@ namespace WM.SmarterFoodSelection.Detours
 
 		public override IEnumerable<Gizmo> CompGetGizmosExtra()
 		{
-			List<Gizmo> gizmos = new List<Gizmo>();
+			var gizmos = new List<Gizmo>();
 
 			gizmos.Add(MakeDispenseNGizmo(1));
 			gizmos.Add(MakeDispenseNGizmo(5));
@@ -61,7 +61,7 @@ namespace WM.SmarterFoodSelection.Detours
 
 		Gizmo MakeDispenseNGizmo(int count)
 		{
-			Command_Action gizmo = new Command_Action();
+			var gizmo = new Command_Action();
 
 			gizmo.defaultLabel = string.Format("DispenseXcount".Translate(), count);
 			gizmo.defaultDesc = string.Format("DispenseXcount_desc".Translate(), count) + "\n" + string.Format("ManualDispenseCostWarning".Translate(), ForceDispensePowerCost, count, ForceDispensePowerCost * count);
@@ -97,7 +97,7 @@ namespace WM.SmarterFoodSelection.Detours
 
 			for (int i = 0; i < count; i++)
 			{
-				Thing meal = Building_NutrientPasteDispenser_Detour.TryDispenseFood((Building_NutrientPasteDispenser)this.parent, mode, true);
+				Thing meal = ((Building_NutrientPasteDispenser)this.parent).TryDispenseFood(mode, true);
 				if (meal == null)
 					return false;
 

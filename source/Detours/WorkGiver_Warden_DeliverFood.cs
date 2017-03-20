@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using HugsLib.Source.Detour;
 using RimWorld;
 using Verse;
@@ -55,7 +54,7 @@ namespace WM.SmarterFoodSelection.Detours
 			return num2 + 0.5f >= num;
 		}
 
-		//todo: use reflection
+		//TODO: use reflection
 		private static float NutritionAvailableForFrom(Pawn p, Thing foodSource)
 		{
 			if (foodSource.def.IsNutritionGivingIngestible && p.RaceProps.WillAutomaticallyEat(foodSource))
@@ -64,7 +63,7 @@ namespace WM.SmarterFoodSelection.Detours
 			}
 			if (p.RaceProps.ToolUser && p.health.capacities.CapableOf(PawnCapacityDefOf.Manipulation))
 			{
-				Building_NutrientPasteDispenser building_NutrientPasteDispenser = foodSource as Building_NutrientPasteDispenser;
+				var building_NutrientPasteDispenser = foodSource as Building_NutrientPasteDispenser;
 				if (building_NutrientPasteDispenser != null && building_NutrientPasteDispenser.CanDispenseNow)
 				{
 					return Building_NutrientPasteDispenser_Detour.GetAvailableNutrition(building_NutrientPasteDispenser);

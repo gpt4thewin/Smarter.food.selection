@@ -7,7 +7,6 @@ using Verse.Sound;
 
 namespace WM.SmarterFoodSelection.UI
 {
-	//TODO: policy card for world pawns (broken atm)
 	public class WITab_Caravan_Needs : RimWorld.Planet.WITab_Caravan_Needs
 	{
 		// RimWorld.Planet.WITab_Caravan_Needs
@@ -69,7 +68,6 @@ namespace WM.SmarterFoodSelection.UI
 			}
 		}
 
-		//TODO: fix reference
 		// RimWorld.Planet.WITab_Caravan_Needs
 		private Vector2 thoughtScrollPosition;
 

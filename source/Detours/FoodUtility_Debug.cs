@@ -15,6 +15,9 @@ namespace WM.SmarterFoodSelection.Detours
 		static Thing bestFoodSource;
 		static Thing bestFoodSourceFromMouse;
 
+		static Pawn pawnA = null;
+		static Pawn pawnB = null;
+
 		static Pawn eater;
 		static Pawn getter;
 
@@ -28,7 +31,7 @@ namespace WM.SmarterFoodSelection.Detours
 			}
 			catch (Exception ex)
 			{
-				DebugViewSettings.drawFoodSearchFromMouse = false;
+				ModCore.drawFoodSearchMode = ModCore.DrawFoodSearchMode.Off;
 
 				throw new Exception("DebugFoodSearchFromMouse_OnGUI() threw exception." + ex.Message + "\n" + ex.StackTrace, ex);
 			}
@@ -37,14 +40,15 @@ namespace WM.SmarterFoodSelection.Detours
 		static void _DebugFoodSearchFromMouse_OnGUI()
 		{
 			IntVec3 a = Verse.UI.MouseCell();
+			var thingAtCursorCell = Find.VisibleMap.thingGrid.ThingsAt(a).FirstOrDefault(arg => arg.GetFoodCategory() != FoodCategory.Null);
 
 			bestFoodSourceFromMouse = null;
 			bestFoodSource = null;
 
 			// ------------------------------------------------------------------------------
 
-			Pawn pawnA = null;
-			Pawn pawnB = null;
+			pawnA = null;
+			pawnB = null;
 
 			var pawnSelection = Find.Selector.SelectedObjects.Where(arg => arg is Pawn).Cast<Pawn>();
 			pawnA = pawnSelection.FirstOrDefault();
@@ -52,7 +56,7 @@ namespace WM.SmarterFoodSelection.Detours
 				pawnB = pawnSelection.ElementAt(1);
 
 
-			if (pawnB != null && pawnA != null && pawnA.Faction != pawnB.Faction)
+			if (pawnB != null && pawnA != null && (pawnA.Faction != pawnB.Faction || RimWorld.FoodUtility.ShouldBeFedBySomeone(pawnA) || RimWorld.FoodUtility.ShouldBeFedBySomeone(pawnB)))
 			{
 				//TODO: watch out for compatibility
 				if (pawnA.IsColonist)
@@ -92,6 +96,7 @@ namespace WM.SmarterFoodSelection.Detours
 			var foundFood = FoodUtility.TryFindBestFoodSourceFor(getter, eater, true, out bestFoodSource, out dum2);
 
 			if (!foundFood)
+				//goto cursorwidget;
 				return;
 
 			// ------------------------------------------------------------------------------
@@ -102,30 +107,48 @@ namespace WM.SmarterFoodSelection.Detours
 												.Where(arg => (arg is Thing) && (arg as Thing).DetermineFoodCategory() != FoodCategory.Null)
 												.Cast<Thing>().ToList();
 
-			FoodSearchCache.PawnEntry foodList;
+			FoodSearchCache.PawnEntry pawnEntry;
 			//IEnumerable<Thing> foodList = 
-			if (getter.isWildAnimal() || policy.unrestricted || !FoodSearchCache.TryGetEntryForPawn(getter, eater, out foodList, true))
+			//TODO: no score shown with unrestricted policies
+			if (getter.isWildAnimal() || policy.unrestricted || !FoodSearchCache.TryGetEntryForPawn(getter, eater, out pawnEntry, true))
 				return;
 
-			foodsToDisplay = foodList.AllRankedFoods
+			foodsToDisplay = pawnEntry.AllRankedFoods
 									 .OrderBy(arg => (a - arg.FoodSource.Position).LengthManhattan).ToList()
-										 .GetRange(0, Math.Min(200, foodList.AllRankedFoods.Count));
+										 .GetRange(0, Math.Min(300, pawnEntry.AllRankedFoods.Count));
 
+			//bool advancedInfoForAll;
 
-			bool advancedInfoForAll;
+			//if (!selectedFoods.Any())
+			//{
+			//	selectedFoods.Add(bestFoodSource);
+			//	selectedFoods.Add(foodList.AllRankedFoods.MinBy((arg) => (a - arg.FoodSource.Position).LengthHorizontal).FoodSource);
+			//	advancedInfoForAll = false;
+			//}
+			//else
+			//	advancedInfoForAll = true;
 
-			if (!selectedFoods.Any())
+			bool advancedInfoForAll = ModCore.drawFoodSearchMode == ModCore.DrawFoodSearchMode.Advanced;
+
+			// ----------------------- Recalculate food source rating distance factors ------------------------------
+
+			FoodSourceRating bestScoreFromMouse = null;
+
+			for (int i = 0; i < foodsToDisplay.Count; i++)
 			{
-				selectedFoods.Add(bestFoodSource);
-				selectedFoods.Add(foodList.AllRankedFoods.MinBy((arg) => (a - arg.FoodSource.Position).LengthHorizontal).FoodSource);
-				advancedInfoForAll = false;
+				var current = foodsToDisplay[i];
+
+				foodsToDisplay[i] = new FoodSourceRating(foodsToDisplay[i]);
+
+				foodsToDisplay[i].SetComp("Distance", -(a - current.FoodSource.Position).LengthManhattan * policy.distanceFactor);
 			}
-			else
-				advancedInfoForAll = true;
 
-			// ------------------------------------------------------------------------------
+			//bestScoreFromMouse = foodsToDisplay.MaxBy((arg) => arg.Score);
 
-			float bestScoreFromMouse = float.MinValue;
+			bestScoreFromMouse = foodsToDisplay.MaxBy((arg) => arg.ScoreForceSum);
+			bestFoodSourceFromMouse = bestScoreFromMouse.FoodSource;
+
+			// ----------------------- Food sources widgets ------------------------------
 
 			foreach (var current in foodsToDisplay)
 			{
@@ -137,39 +160,87 @@ namespace WM.SmarterFoodSelection.Detours
 
 				if (getter.inventory == null || !getter.inventory.innerContainer.Contains(current.FoodSource))
 				{
-					bool advancedInfo = ModCore.drawFoodSearchMode == ModCore.DrawFoodSearchMode.Advanced && (advancedInfoForAll || selectedFoods.Contains(current.FoodSource));
-					float scoreFromMouse;
-					string text = current.ToWidgetString(advancedInfo, current.FoodSource.DetermineFoodCategory(), out scoreFromMouse, -(a - current.FoodSource.Position).LengthManhattan * policy.distanceFactor);
+					bool advancedInfo = (advancedInfoForAll);
 
-					if (scoreFromMouse > bestScoreFromMouse)
+					Color widgetColor;
+					if (current == bestScoreFromMouse || current.FoodSource == bestFoodSource || current.FoodSource == thingAtCursorCell)
 					{
-						bestScoreFromMouse = scoreFromMouse;
-						bestFoodSourceFromMouse = current.FoodSource;
+						if (ModCore.drawFoodSearchMode == ModCore.DrawFoodSearchMode.AdvancedForBest)
+							advancedInfo = true;
+						if (current.FoodSource == thingAtCursorCell)
+							widgetColor = Color.green;
+						else
+							widgetColor = Resources.Color.Orange;
+					}
+					else
+					{
+						widgetColor = Color.white;
 					}
 
+					string text = current.ToWidgetString(advancedInfo, current.FoodSource.DetermineFoodCategory());
+
+#if DEBUG
+					if (current.FoodSource is Pawn)
+					{
+						text += "\n" + "ratio1=" + FoodUtility.GetPreyRatio1(getter, current.FoodSource as Pawn);
+						text += "\n" + "ratio2=" + FoodUtility.GetPreyRatio2(getter, current.FoodSource as Pawn);
+					}
+#endif
+
 					Text.Anchor = TextAnchor.UpperLeft;
-					Widgets.Label(rect, text);
+					{
+						var backup = GUI.color;
+						GUI.color = widgetColor;
+						Widgets.Label(rect, text);
+						GUI.color = backup;
+					}
 				}
 			}
 
-			// ------------------------------------------------------------------------------
+			// ----------------------- Cursor widget -----------------------
+
+			//TODO: cursor widget not drawn when no food found 
 
 			string pawninfo;
 			pawninfo = string.Format("{0}", getter.NameStringShort);
 			if (getter != eater)
+			{
 				pawninfo += string.Format(" (gives to) {0}", eater.NameStringShort);
+			}
 
-			pawninfo += string.Format(" ---> {4}\nFood: {1:F1}/{2:F1} {4}\nPolicy: {3}",
-									  eater.NameStringShort,
-									  eater.needs.food.CurLevel,
-									  eater.needs.food.MaxLevel,
-									  policy != null ? policy.label : "(no policy)",
-			                          bestFoodSourceFromMouse != null ? bestFoodSourceFromMouse.Label : "(no reachable food)",
-			                          (bestFoodSourceFromMouse != null && getter.inventory != null && getter.inventory.innerContainer.Contains(bestFoodSourceFromMouse)) ? " (inventory)" : ""
-			                         );
+			//pawninfo += string.Format(" ---> {4} ({6:F0}){5}\nFood need: {1:F1} / {2:F1}\nPolicy: {3}",
+			//						  eater.NameStringShort,
+			//eater.needs.food.CurLevel,
+			//eater.needs.food.MaxLevel,
+			//policy != null ? policy.label : "(no policy)",
+			//bestFoodSourceFromMouse != null ? bestFoodSourceFromMouse.Label : "(no reachable food)",
+			//(bestFoodSourceFromMouse != null && getter.inventory != null && getter.inventory.innerContainer.Contains(bestFoodSourceFromMouse)) ? " (inventory)" : "",
+			//bestScoreFromMouse.Score);
+
+
+			{
+				string score;
+				string foodname;
+
+				if (bestFoodSourceFromMouse != null)
+				{
+					foodname = bestFoodSourceFromMouse.Label;
+					score = bestScoreFromMouse.ScoreForceSum.ToString("F0");
+				}
+				else
+				{
+					foodname = "(no reachable food)";
+					score = "";
+				}
+
+				pawninfo += " ---> " + foodname + " (" + score + ")" + "\n";
+				pawninfo += "Food need: " + eater.needs.food.CurLevel.ToString("F1") + " / " + eater.needs.food.MaxLevel.ToString("F1") + "\n";
+				pawninfo += "Policy: " + (policy != null ? policy.label : "(no policy)") + "\n";
+			}
+
 			Text.Anchor = TextAnchor.UpperLeft;
 			//TODO: spread or merge widgets +
-			Widgets.Label(new Rect(a.ToUIPosition(), new Vector2(200f, 200f)), pawninfo);
+			Widgets.Label(new Rect((a.ToUIPosition() + new Vector2(-100f, -80f)), new Vector2(200f, 200f)), pawninfo);
 		}
 
 		// RimWorld.FoodUtility
@@ -182,7 +253,7 @@ namespace WM.SmarterFoodSelection.Detours
 			}
 			catch (Exception ex)
 			{
-				DebugViewSettings.drawFoodSearchFromMouse = false;
+				ModCore.drawFoodSearchMode = ModCore.DrawFoodSearchMode.Off;
 				throw ex;
 			}
 		}
@@ -198,14 +269,35 @@ namespace WM.SmarterFoodSelection.Detours
 			{
 				return;
 			}
-
-			if (bestFoodSource != null)
 			{
-				GenDraw.DrawLineBetween(pawn.Position.ToVector3Shifted(), bestFoodSource.Position.ToVector3Shifted());
+				//TODO: fix broken lines
+				if (bestFoodSource != null)
+				{
+					GenDraw.DrawLineBetween(pawn.Position.ToVector3Shifted(), bestFoodSource.Position.ToVector3Shifted(), SimpleColor.Yellow);
+				}
+				if (bestFoodSourceFromMouse != null)
+				{
+					GenDraw.DrawLineBetween(root.ToVector3Shifted(), bestFoodSourceFromMouse.Position.ToVector3Shifted(), SimpleColor.Yellow);
+				}
+				if (pawnB != null && null != pawnA && pawnA != pawnB)
+				{
+					GenDraw.DrawLineBetween(pawnA.Position.ToVector3Shifted(), pawnB.Position.ToVector3Shifted(), SimpleColor.Green);
+				}
 			}
-			if (bestFoodSourceFromMouse != null)
+
+			//duck tape
+			try
 			{
-				GenDraw.DrawLineBetween(root.ToVector3Shifted(), bestFoodSourceFromMouse.Position.ToVector3Shifted());
+				if (getter.playerSettings != null && getter.playerSettings.AreaRestrictionInPawnCurrentMap != null)
+				{
+					GenDraw.DrawFieldEdges(getter.playerSettings.AreaRestrictionInPawnCurrentMap.ActiveCells.ToList(), Color.red);
+				}
+			}
+			catch (Exception)
+			{
+#if DEBUG
+				Log.Warning("DrawFieldEdges() failed");
+#endif
 			}
 		}
 

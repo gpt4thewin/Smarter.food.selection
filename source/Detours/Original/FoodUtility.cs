@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using HugsLib.Source.Detour;
 using RimWorld;
 using Verse;
 using Verse.AI;
@@ -78,7 +77,7 @@ namespace WM.SmarterFoodSelection.Detours.Original
 				foodDef = RimWorld.FoodUtility.GetFinalIngestibleDef(foodSource);
 				return true;
 			}
-			float num = FoodUtility.FoodSourceOptimality(eater, thing2, (float)(getter.Position - thing2.Position).LengthManhattan);
+			float num = FoodUtility.FoodSourceOptimality(eater, thing2, (getter.Position - thing2.Position).LengthManhattan);
 			float num2 = FoodUtility.FoodSourceOptimality(eater, thing, 0f);
 			num2 -= 32f;
 			if (num > num2)

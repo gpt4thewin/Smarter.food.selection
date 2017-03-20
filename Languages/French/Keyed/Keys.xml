@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+	
+	<!-- ============== Basic ============== -->
+	
+	<colonists>colons</colonists>
+	<prisoners>prisonniers</prisoners>
+
+	<!-- ============== Settings ============== -->
+
+	<ShowAdvancedOptions>Afficher plus d'options</ShowAdvancedOptions>
+	<ShowAdvancedOptions_desc>Affiche plus d'options.</ShowAdvancedOptions_desc>
+
+	<PetsSafeHuntMaxStrenghtRatio>Ratio de chasse max. des familiers</PetsSafeHuntMaxStrenghtRatio>
+
+	<PetsSafeHuntMaxStrenghtRatio_desc>Vos familiers ne chasseront pas de proies avec lesquelles leur rapport de force est supérieur à la valeur indiquée. Utile pour les éviter d'être blessés.\nLa valeur par défaut du jeu est de 0.5</PetsSafeHuntMaxStrenghtRatio_desc>
+	
+	<UseCorpsesForTaming>Autoriser les cadavres pour le dressage</UseCorpsesForTaming>
+	<UseCorpsesForTaming_desc>!! EXPERIMENTAL !! Les colons pourront utiliser les cadavres pour apprivoiser ou entrainer les animaux.</UseCorpsesForTaming_desc>
+	
+	<UseHumanlikeCorpsesForTaming>Autoriser les cadavres humains pour le dressage</UseHumanlikeCorpsesForTaming>
+	<UseHumanlikeCorpsesForTaming_desc>!! EXPERIMENTAL !! Les colons pourront utiliser les cadavres humains pour apprivoiser ou entrainer les animaux</UseHumanlikeCorpsesForTaming_desc>
+
+	<PrintReportCommand>Afficher un rapport de compatibilité</PrintReportCommand>
+	<PrintReportCommand_desc>Créé un rapport de compatibilité contenant tout les régimes pour chaque politiques ainsi que toute la classification des sources de nourriture.\nUtile pour vérifier le bon fonctionnement du mod avec les autres.</PrintReportCommand_desc>
+	<commandPrintReportButton>Mode du rapport</commandPrintReportButton>
+	<commandPrintReportOption_DefName>Noms des définitions</commandPrintReportOption_DefName>
+	<commandPrintReportOption_Label>Noms affichés en jeu</commandPrintReportOption_Label>
+	<ReportPrintedInLogMessage>Rapport de compatibilité disponible dans le log.</ReportPrintedInLogMessage>
+
+	<CostFactor>Facteur coût</CostFactor>
+	<CostFactor_desc>Points perdus par le score d'une source de nourriture pour chaque unités de nutrition en trop.</CostFactor_desc>
+
+	<FoodSearchMaxItemsCount>Nombre de sources max.</FoodSearchMaxItemsCount>
+
+	<FoodSearchMaxItemsCount_desc>Nombre maximum de sources de nourriture à rechercher par une créature.\nLes valeurs faibles améliorent les performances mais réduisent le rayon de recherche..</FoodSearchMaxItemsCount_desc>
+	
+	<SeparatedNutrientPaste>Repas cannibals spécifiques.</SeparatedNutrientPaste>
+	<SeparatedNutrientPaste_desc>Les distributeurs de pâte créeront un item différent si celui-ci contient de viande humaine. Utile pour éviter que les ces repas et leurs ingredients se mélanges avec d'autres.</SeparatedNutrientPaste_desc>
+
+	<ControlPets>Contrôler les familiers</ControlPets>
+	<ControlPets_desc>Désactiver cette option pour que les familiers se nourrissent comme dans le jeu vanilla.</ControlPets_desc>
+	<ControlPrisoners>Contrôler les prisonniers</ControlPrisoners>
+	<ControlPrisoners_desc>Désactiver cette option pour que les prisonniers soient nourris comme dans le jeu vanilla.</ControlPrisoners_desc>
+	<ControlColonists>Contrôler les colons</ControlColonists>
+	<ControlColonists_desc>Désactiver cette option pour que les colons soient nourris comme dans le jeu vanilla</ControlColonists_desc>
+
+	<UseMealsForTaming>Autoriser les repas pour le dressage</UseMealsForTaming>
+	<UseMealsForTaming_desc>!!! BROKEN ATM !!!. à vos risques et périls.Autorise les repas pour le dressage. Inclut et préfère la pâte nutritive.</UseMealsForTaming_desc>
+	
+	<!-- ============== Nutrient paste dispenser ============== -->
+	
+	<DispenseXcount>Faire x{0}</DispenseXcount>
+	<DispenseXcount_desc>Force le distributeur à créer {0} repas.</DispenseXcount_desc>
+
+	<StandardMode>Mode standard</StandardMode>
+	<StandardMode_desc>Tout ingredient. Les normaux, puis la viande d'insecte et la viande humaine en dernier.</StandardMode_desc>
+	
+	<CannibalMode>Mode cannibal</CannibalMode>
+	<CannibalMode_desc>Préfère la viande humaine.</CannibalMode_desc>
+
+	<CannibalCleanMode>Mode cannibal "propre"</CannibalCleanMode>
+	<CannibalCleanMode_desc>La viande humaine d'abord puis les autres ingredients (pas de viande d'insecte).</CannibalCleanMode_desc>
+	
+	<AnimalMode>Mode animaux</AnimalMode>
+	<AnimalMode_desc>La viande humaine puis la viande d'insecte et enfin le reste.</AnimalMode_desc>
+	
+	<CleanMode>Mode propre</CleanMode>
+	<CleanMode_desc>Pas de viande humaine ni de viande d'insecte.</CleanMode_desc>
+
+	<DispenserModeWarning>Distribution manuelle seulement.</DispenserModeWarning>
+	<ManualDispenseCostWarning>Distribution manuelle coûtera {0} x {1} = {2} Wd.</ManualDispenseCostWarning>
+
+	<CannibalMealLabel>{0} (cannibal)</CannibalMealLabel>
+
+	<!-- ============== Pawn policy card ============== -->
+
+	<PawnPolicyCard_Title>Afficher/Masquer les options</PawnPolicyCard_Title>
+	<PawnPolicyCard_AssignToAll>Attributer à tout les [{0}]</PawnPolicyCard_AssignToAll>
+	<PawnPolicyCard_AssignToAllOnMap>Attributer à tout les [{0}] de la carte</PawnPolicyCard_AssignToAllOnMap>
+	<PawnPolicyCard_ResetAllOnMap>Valeur par défaut pour tout les [{0}] de la carte</PawnPolicyCard_ResetAllOnMap>
+	<PawnPolicyCard_CurrentBestFood>Meilleure source: {0}</PawnPolicyCard_CurrentBestFood>
+	<PawnPolicyCard_Inventory>(inventaire)</PawnPolicyCard_Inventory>
+	<PawnPolicyCard_NoFoodFound>(pas de source de nourriture)</PawnPolicyCard_NoFoodFound>
+	<PawnPolicyCard_Policy>Politique:</PawnPolicyCard_Policy>
+	<PawnPolicyCard_ResetPolicy>Par défaut</PawnPolicyCard_ResetPolicy>
+	<PawnPolicyCard_CannotSetPolicy>* Impossible de définir la politique *</PawnPolicyCard_CannotSetPolicy>
+	
+	<!-- ============== Others ============== -->
+
+	<UnrestrictedPolicyLabel>* Sans restrictions *</UnrestrictedPolicyLabel>
+
+	<!-- ============== Food categories ============== -->
+	
+	<FoodCategory.Null>Null</FoodCategory.Null>
+	<FoodCategory.Ignore>Ignore</FoodCategory.Ignore>
+	<FoodCategory.HumanlikeCorpse>Cadavre humain</FoodCategory.HumanlikeCorpse>
+	<FoodCategory.InsectCorpse>Cadavre d'insecte</FoodCategory.InsectCorpse>
+	<FoodCategory.Corpse>Cadavre</FoodCategory.Corpse>
+	<FoodCategory.Hay>Foin</FoodCategory.Hay>
+	<FoodCategory.Kibble>Croquettes</FoodCategory.Kibble>
+	<FoodCategory.RawBad>RawBad</FoodCategory.RawBad>
+	<FoodCategory.RawTasty>RawTasty</FoodCategory.RawTasty>
+	<FoodCategory.RawInsect>RawInsect</FoodCategory.RawInsect>
+	<FoodCategory.RawHuman>RawHuman</FoodCategory.RawHuman>
+	<FoodCategory.FertEggs>FertEggs</FoodCategory.FertEggs>
+	<FoodCategory.AnimalProduct>AnimalProduct</FoodCategory.AnimalProduct>
+	<FoodCategory.MealAwful>MealAwful</FoodCategory.MealAwful>
+	<FoodCategory.MealSimple>MealSimple</FoodCategory.MealSimple>
+	<FoodCategory.MealFine>MealFine</FoodCategory.MealFine>
+	<FoodCategory.MealLavish>MealLavish</FoodCategory.MealLavish>
+	<FoodCategory.Plant>Plant</FoodCategory.Plant>
+	<FoodCategory.Grass>Grass</FoodCategory.Grass>
+	<FoodCategory.Luxury>Luxury</FoodCategory.Luxury>
+	<FoodCategory.Hunt>Hunt</FoodCategory.Hunt>
+	<FoodCategory.Tree>Tree</FoodCategory.Tree>
+
+	<!-- ============== Obsolete keys ============== -->
+
+</LanguageData>
