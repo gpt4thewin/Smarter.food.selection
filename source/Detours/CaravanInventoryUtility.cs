@@ -10,14 +10,29 @@ namespace WM.SmarterFoodSelection.Detours
 	public class CaravanInventoryUtility
 	{
 		[DetourMethod(typeof(RimWorld.Planet.CaravanInventoryUtility), "TryGetBestFood")]
-		// RimWorld.Planet.CaravanInventoryUtility
 		public static bool TryGetBestFood(Caravan caravan, Pawn forPawn, out Thing food, out Pawn owner)
 		{
-			List<Thing> list = RimWorld.Planet.CaravanInventoryUtility.AllInventoryItems(caravan);
+			try
+			{
+				return _TryGetBestFood(caravan, forPawn, out food, out owner);
+			}
+			catch (Exception ex)
+			{
+				throw new Exception("Error when trying to find best food in caravan. eater=" + forPawn, ex);
+			}
+		}
+		// RimWorld.Planet.CaravanInventoryUtility
+		public static bool _TryGetBestFood(Caravan caravan, Pawn forPawn, out Thing food, out Pawn owner)
+		{
+			List<Thing> list = RimWorld.Planet.CaravanInventoryUtility.AllInventoryItems(caravan)
+									   .Where(arg => CaravanPawnsNeedsUtility.CanNowEatForNutrition(arg.def, forPawn)).ToList();
 			Thing thing = null;
 
+			Policy policy = forPawn.GetPolicyAssignedTo();
 			var foodsForPawn = FoodUtility.MakeRatedFoodListFromThingList(list, forPawn, forPawn.GetPolicyAssignedTo())
-			                              .Where(arg => RimWorld.Planet.CaravanPawnsNeedsUtility.CanNowEatForNutrition(arg.FoodSource.def, forPawn));
+										  .Where(arg => RimWorld.Planet.CaravanPawnsNeedsUtility.CanNowEatForNutrition(arg.FoodSource.def, forPawn) &&
+			                                     policy.PolicyAllows(forPawn,arg.FoodSource)
+												);
 
 			var foodEntry = foodsForPawn.FirstOrDefault();
 

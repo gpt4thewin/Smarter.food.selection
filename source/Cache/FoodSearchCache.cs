@@ -89,13 +89,20 @@ namespace WM.SmarterFoodSelection
 				if (!AllRankedFoods.Any())
 					return null;
 
-				var disallowedCategories = new List<FoodCategory>(3);
+				var disallowedCategories = new List<FoodCategory>(5);
 
 				if (!allowPlant)
+				{
 					disallowedCategories.Add(FoodCategory.Plant);
+					disallowedCategories.Add(FoodCategory.Tree);
+					disallowedCategories.Add(FoodCategory.Grass);
+				}
 
 				if (!allowCorpse)
+				{
 					disallowedCategories.Add(FoodCategory.Corpse);
+					disallowedCategories.Add(FoodCategory.HumanlikeCorpse);
+				}
 
 				if (!allowPrey)
 					disallowedCategories.Add(FoodCategory.Hunt);

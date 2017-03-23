@@ -108,7 +108,23 @@ namespace WM.SmarterFoodSelection
 			{
 				new string("human/friendly".ToCharArray())
 			},
-			unrestricted = true
+			//unrestricted = true
+			moodEffectFactor = 1.5f, // we're guests after all
+			allowUnlisted = true,
+			baseDiet =
+			{
+				new Diet.DietElement() {foodCategory = FoodCategory.MealLavish},
+				new Diet.DietElement() {foodCategory = FoodCategory.MealFine},
+				new Diet.DietElement() {foodCategory = FoodCategory.MealSimple},
+				new Diet.DietElement() {foodCategory = FoodCategory.MealAwful},
+				new Diet.DietElement() {foodCategory = FoodCategory.RawTasty},
+				new Diet.DietElement() {foodCategory = FoodCategory.Kibble},
+				new Diet.DietElement() {foodCategory = FoodCategory.RawInsect},
+				new Diet.DietElement() {foodCategory = FoodCategory.RawBad},
+				new Diet.DietElement() {foodCategory = FoodCategory.InsectCorpse},
+				new Diet.DietElement() {foodCategory = FoodCategory.Corpse},
+				new Diet.DietElement() {foodCategory = FoodCategory.RawHuman},
+			}
 		};
 
 		public static IEnumerable<Policy> AllPolicies

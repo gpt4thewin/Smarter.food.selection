@@ -9,4 +9,13 @@
 		</conditions>
 		<diet>MealLavish=MealFine=MealSimple=MealAwful</diet>
 	</WM.SmarterFoodSelection.Policy>
+	<WM.SmarterFoodSelection.Policy>
+		<defName>SFS_MealsOnly_Worst</defName>
+		<label>Meals only (Worst 1st)</label>
+		<moodEffectMatters>false</moodEffectMatters>
+		<conditions>
+			<li>human</li>
+		</conditions>
+		<diet>MealAwful/MealSimple/MealFine/MealLavish</diet>
+	</WM.SmarterFoodSelection.Policy>
 </Defs>

@@ -154,6 +154,12 @@ namespace WM.SmarterFoodSelection
 			return (BodyPartRecord)typeof(Corpse).GetMethod("GetBestBodyPartToEat", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).Invoke(self, new object[] { ingester, nutritionWanted });
 		}
 
+		public static float GetCurrentHunger(this Pawn pawn)
+		{
+			var foodneed = pawn.needs.food;
+			return foodneed.MaxLevel - foodneed.CurLevel;
+		}
+
 		internal static bool isWildAnimal(this Pawn pawn)
 		{
 			return pawn.Faction == null;
@@ -205,6 +211,10 @@ namespace WM.SmarterFoodSelection
 			return def.ToString();
 		}
 
+		public static ThingDef GetIngestibleDef(this Thing thing)
+		{
+			return RimWorld.FoodUtility.GetFinalIngestibleDef(thing);
+		}
 		public static float GetNutritionAmount(this Thing thing)
 		{
 			if (thing is Building_NutrientPasteDispenser)

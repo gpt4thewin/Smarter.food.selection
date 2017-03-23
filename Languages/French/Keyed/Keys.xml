@@ -45,6 +45,9 @@
 	<ControlColonists>Contrôler les colons</ControlColonists>
 	<ControlColonists_desc>Désactiver cette option pour que les colons soient nourris comme dans le jeu vanilla</ControlColonists_desc>
 
+	<NeedsTabUIHeight>Taille de l'IU.</NeedsTabUIHeight>
+	<NeedsTabUIHeight_desc>Hauteur de l'IU dans l'onglet "besoins" des créatures. Une valeur trop faible peut empêcher le bon affiche de l'IU.\nChanger avec précaution.</NeedsTabUIHeight_desc>
+
 	<UseMealsForTaming>Autoriser les repas pour le dressage</UseMealsForTaming>
 	<UseMealsForTaming_desc>!!! BROKEN ATM !!!. à vos risques et périls.Autorise les repas pour le dressage. Inclut et préfère la pâte nutritive.</UseMealsForTaming_desc>
 	
@@ -75,16 +78,17 @@
 
 	<!-- ============== Pawn policy card ============== -->
 
-	<PawnPolicyCard_Title>Afficher/Masquer les options</PawnPolicyCard_Title>
+	<PawnPolicyCard_Title>Afficher/Masquer plus d'options</PawnPolicyCard_Title>
 	<PawnPolicyCard_AssignToAll>Attributer à tout les [{0}]</PawnPolicyCard_AssignToAll>
 	<PawnPolicyCard_AssignToAllOnMap>Attributer à tout les [{0}] de la carte</PawnPolicyCard_AssignToAllOnMap>
 	<PawnPolicyCard_ResetAllOnMap>Valeur par défaut pour tout les [{0}] de la carte</PawnPolicyCard_ResetAllOnMap>
 	<PawnPolicyCard_CurrentBestFood>Meilleure source: {0}</PawnPolicyCard_CurrentBestFood>
 	<PawnPolicyCard_Inventory>(inventaire)</PawnPolicyCard_Inventory>
 	<PawnPolicyCard_NoFoodFound>(pas de source de nourriture)</PawnPolicyCard_NoFoodFound>
-	<PawnPolicyCard_Policy>Politique:</PawnPolicyCard_Policy>
+	<PawnPolicyCard_Policy>Alimentation:</PawnPolicyCard_Policy>
 	<PawnPolicyCard_ResetPolicy>Par défaut</PawnPolicyCard_ResetPolicy>
-	<PawnPolicyCard_CannotSetPolicy>* Impossible de définir la politique *</PawnPolicyCard_CannotSetPolicy>
+	<PawnPolicyCard_CannotSetPolicy>* Impossible de changer la politique *</PawnPolicyCard_CannotSetPolicy>
+	<PawnPolicyCard_CurrentPolicy>Politique actuelle: </PawnPolicyCard_CurrentPolicy>
 	
 	<!-- ============== Others ============== -->
 

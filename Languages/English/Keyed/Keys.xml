@@ -43,6 +43,9 @@
 	<ControlColonists>Enable control over colonists</ControlColonists>
 	<ControlColonists_desc>Enable control over colonists</ControlColonists_desc>
 
+	<NeedsTabUIHeight>UI height in needs tab.</NeedsTabUIHeight>
+	<NeedsTabUIHeight_desc>UI height in needs tab when the UI is sploied. Too small values may prevent the UI to be shown correctly.\nUse with caution.</NeedsTabUIHeight_desc>
+
 	<UseMealsForTaming>Use meals for handling</UseMealsForTaming>
 	<UseMealsForTaming_desc>!!! BROKEN ATM !!!. Use at your own risk. Allow meals for taming and training animals. Includes and prefer nutrient paste.</UseMealsForTaming_desc>
 	
@@ -74,7 +77,7 @@
 
 	<!-- ============== Pawn policy card ============== -->
 
-	<PawnPolicyCard_Title>Show/Hide food settings</PawnPolicyCard_Title>
+	<PawnPolicyCard_Title>Show/Hide more options</PawnPolicyCard_Title>
 	<PawnPolicyCard_AssignToAll>Assign to all [{0}]</PawnPolicyCard_AssignToAll>
 	<PawnPolicyCard_AssignToAllOnMap>Assign to all [{0}] on map</PawnPolicyCard_AssignToAllOnMap>
 	<PawnPolicyCard_ResetAllOnMap>Reset policy for all [{0}] on map</PawnPolicyCard_ResetAllOnMap>
@@ -82,10 +85,10 @@
 	<PawnPolicyCard_CurrentBestFood>Current best food: {0}</PawnPolicyCard_CurrentBestFood>
 	<PawnPolicyCard_Inventory>(inventory)</PawnPolicyCard_Inventory>
 	<PawnPolicyCard_NoFoodFound>(no food found)</PawnPolicyCard_NoFoodFound>
-	<PawnPolicyCard_Policy>Select policy:</PawnPolicyCard_Policy>
+	<PawnPolicyCard_Policy>Food policy:</PawnPolicyCard_Policy>
 	<PawnPolicyCard_ResetPolicy>Reset to default</PawnPolicyCard_ResetPolicy>
 	<PawnPolicyCard_CannotSetPolicy>* Cannot select policy *</PawnPolicyCard_CannotSetPolicy>
-
+	<PawnPolicyCard_CurrentPolicy>Current policy: </PawnPolicyCard_CurrentPolicy>
 	
 	<!-- ============== Others ============== -->
 

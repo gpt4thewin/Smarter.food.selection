@@ -154,6 +154,24 @@ namespace WM.SmarterFoodSelection
 				return true;
 			};
 
+			Config.NeedsTabUIHeight = Settings.GetHandle<float>("NeedsTabUIHeight", "NeedsTabUIHeight".Translate(), "NeedsTabUIHeight_desc".Translate(), 140);
+			Config.NeedsTabUIHeight.Validator = delegate (string text)
+			{
+				float value;
+
+				if (!float.TryParse(text, out value))
+					return false;
+
+				if (value < 100)
+					return false;
+
+				return true;
+			};
+			Config.NeedsTabUIHeight.OnValueChanged = delegate (float value)
+			{
+				UI.PawnPolicyCard.middleRectHeigth = value;
+			};
+
 			Config.controlPets = Settings.GetHandle<bool>("controlPets", "ControlPets".Translate(), "ControlPets_desc".Translate(), true);
 			Config.controlPrisoners = Settings.GetHandle<bool>("controlPrisoners", "ControlPrisoners".Translate(), "ControlPrisoners_desc".Translate(), true);
 			Config.controlColonists = Settings.GetHandle<bool>("controlColonists", "ControlColonists".Translate(), "ControlColonists_desc".Translate(), true);
@@ -242,8 +260,8 @@ namespace WM.SmarterFoodSelection
 			//	if (caravanDef.inspectorTabs.Remove(oldTabType))
 			//	{
 			//		caravanDef.inspectorTabsResolved.Remove(InspectTabManager.GetSharedInstance(oldTabType));
-			//		caravanDef.inspectorTabs.Add(newTabType);
-			//		caravanDef.inspectorTabsResolved.Add(InspectTabManager.GetSharedInstance(newTabType));
+			//caravanDef.inspectorTabs.Add(newTabType);
+			//caravanDef.inspectorTabsResolved.Add(InspectTabManager.GetSharedInstance(newTabType));
 			//	}
 			//	else
 			//	{
@@ -257,11 +275,18 @@ namespace WM.SmarterFoodSelection
 				var newTabType = typeof(UI.ITab_Pawn_Needs);
 				var oldTabType = typeof(ITab_Pawn_Needs);
 
-				if (current.inspectorTabs.Remove(oldTabType))
+				int index = current.inspectorTabs.IndexOf(oldTabType);
+
+				if (index != -1)
 				{
-					current.inspectorTabsResolved.Remove(InspectTabManager.GetSharedInstance(oldTabType));
-					current.inspectorTabs.Add(newTabType);
-					current.inspectorTabsResolved.Add(InspectTabManager.GetSharedInstance(newTabType));
+					current.inspectorTabs[index] = newTabType;
+
+					int index2 = current.inspectorTabsResolved.IndexOf(InspectTabManager.GetSharedInstance(oldTabType));
+
+					if (index2 != -1)
+					{
+						current.inspectorTabsResolved[index2] = InspectTabManager.GetSharedInstance(newTabType);
+					}
 				}
 			}
 

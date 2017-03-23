@@ -40,7 +40,6 @@ namespace WM.SmarterFoodSelection.Detours
 		static void _DebugFoodSearchFromMouse_OnGUI()
 		{
 			IntVec3 a = Verse.UI.MouseCell();
-			var thingAtCursorCell = Find.VisibleMap.thingGrid.ThingsAt(a).FirstOrDefault(arg => arg.GetFoodCategory() != FoodCategory.Null);
 
 			bestFoodSourceFromMouse = null;
 			bestFoodSource = null;
@@ -90,6 +89,15 @@ namespace WM.SmarterFoodSelection.Detours
 			Text.Font = GameFont.Tiny;
 
 			var policy = eater.GetPolicyAssignedTo();
+
+			var thingAtCursorCell = Find.VisibleMap.thingGrid.ThingsAt(a).FirstOrDefault(delegate (Thing t)
+			{
+				var category = t.GetFoodCategory();
+				if (category == FoodCategory.Null)
+					return false;
+
+				return FoodUtility.IsValidFoodSourceForPawn(t, eater, getter, policy, false);
+			} );
 
 			ThingDef dum2;
 			// Generates cache

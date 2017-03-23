@@ -254,9 +254,12 @@ namespace WM.SmarterFoodSelection.Detours
 					var category = food.DetermineFoodCategory();
 					if (!eater.RaceProps.CanEverEat((food is Building_NutrientPasteDispenser) ? ((Building_NutrientPasteDispenser)food).DispensableDef : food.def) ||
 					   ((food is Building_NutrientPasteDispenser) && (!((Building_NutrientPasteDispenser)food).CanDispenseNow || !canManipulate)) ||
-					   !policy.PolicyAllows(category))
+					   !policy.PolicyAllows(category) ||
+					  	category == FoodCategory.Ignore ||
+						category == FoodCategory.Luxury)
 						return false;
 
+					//TODO: plant pot avoidance not tested
 					if (food.def.plant != null && food.Position.GetThingList(food.Map).Any((obj) => obj.def == ThingDef.Named("PlantPot")))
 						return false;
 				}

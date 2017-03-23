@@ -10,24 +10,37 @@ namespace WM.SmarterFoodSelection.UI
 	//TODO: card for caravans
 	public static class PawnPolicyCard
 	{
-		static readonly Vector2 leftRectSize = new Vector2(300, 180);
-		static readonly Vector2 rightRectSize = new Vector2(280, leftRectSize.y);
-		static readonly Vector2 topRectSize = new Vector2(leftRectSize.x + rightRectSize.x, 75);
-		static readonly Vector2 botRectSize = new Vector2(topRectSize.x, 60);
+		static Vector2 middleRectSize = new Vector2(580, Config.NeedsTabUIHeight);
+		static readonly float middleLeftColumnSize = 280;
+		static readonly float middleRightColumnSize = middleRectSize.x - middleLeftColumnSize;
+
+		static readonly Vector2 topRectSize = new Vector2(middleRectSize.x, 40);
+		static readonly Vector2 botRectSize = new Vector2(topRectSize.x, 30);
+
+		static Vector2 scrollposition;
 
 		public static Vector2 Size
 		{
 			get
 			{
 				if (Spoil)
-					return new Vector2(topRectSize.x, Math.Max(leftRectSize.y, rightRectSize.y) + topRectSize.y + botRectSize.y);
+					return new Vector2(topRectSize.x, middleRectSize.y + topRectSize.y + botRectSize.y);
 				else
 					return new Vector2(topRectSize.x, topRectSize.y + botRectSize.y);
+				//return new Vector2(topRectSize.x, botRectSize.y);
+			}
+		}
+
+		internal static float middleRectHeigth
+		{
+			set
+			{
+				middleRectSize.y = value;
 			}
 		}
 
 		static readonly int horizontalMargin = 10;
-		static readonly float verticalMargin = 8;
+		static readonly float verticalMargin = 5;
 
 		static bool Spoil;
 
@@ -44,6 +57,10 @@ namespace WM.SmarterFoodSelection.UI
 				listing.Label(ex.Message);
 				listing.Label(ex.StackTrace);
 				listing.End();
+
+#if DEBUG
+				Log.Error(ex.Message + "\n" + ex.StackTrace);
+#endif
 			}
 			Text.Anchor = textanchor;
 			return;
@@ -54,14 +71,49 @@ namespace WM.SmarterFoodSelection.UI
 
 			Text.Anchor = TextAnchor.MiddleLeft;
 
-			// -------------------- Top --------------------------
-
-			var mask = PawnMask.MakeCompleteMaskFromPawn(pawn);
+			// -------------------- Top left --------------------------
 
 			Rect topRect = new Rect(rect.position.x + horizontalMargin, rect.position.y, topRectSize.x - horizontalMargin * 2, topRectSize.y);
 
 			Listing_Standard listing = new Listing_Standard(topRect);
+			listing.ColumnWidth = topRect.width / 2;
 			listing.verticalSpacing = 4;
+
+			Text.Anchor = TextAnchor.MiddleCenter;
+			//listingLeft.Label("PawnPolicyCard_Policy".Translate());
+
+			string readable = pawn.GetPolicyAssignedTo().label;
+
+			var flag = pawn.HasHardcodedPolicy();
+
+			if (flag)
+			{
+				listing.Label(string.Format("{0} ({1})", "PawnPolicyCard_CannotSetPolicy".Translate(), policy.label));
+			}
+			else
+			{
+				if (listing.ButtonTextLabeled("PawnPolicyCard_Policy".Translate(), readable))
+				{
+					var floatOptions = new List<FloatMenuOption>();
+					var policies = Policies.GetAllPoliciesForPawn(pawn)
+#if !DEBUG
+										   .Where(arg => arg.Visible)
+#endif
+										   ;
+					foreach (var item in policies)
+					{
+						floatOptions.Add(new FloatMenuOption(item.label, () => WorldDataStore_PawnPolicies.SetPolicyForPawn(pawn, item), MenuOptionPriority.Default,
+							 delegate
+						{
+							//TODO: policy tooltip
+						}));
+					}
+					Find.WindowStack.Add(new FloatMenu(floatOptions));
+				}
+			}
+			listing.NewColumn();
+
+			// -------------------- Top right --------------------------
 
 			Thing bestFood;
 			ThingDef bestFoodDef;
@@ -78,83 +130,75 @@ namespace WM.SmarterFoodSelection.UI
 				bestFoodInfo = "PawnPolicyCard_NoFoodFound".Translate();
 			}
 
-			listing.GapLine();
-			//listing.GapLine(20);
 			listing.Label(string.Format("PawnPolicyCard_CurrentBestFood".Translate(), bestFoodInfo));
-			listing.Label(mask.ToString());
-			listing.GapLine();
+
+			//var mask = PawnMask.MakeCompleteMaskFromPawn(pawn);
+			//listing.Label(mask.ToString());
 			listing.End();
+
+			// -------------------- Top end --------------------------
+
+			Widgets.DrawLineHorizontal(rect.x + horizontalMargin, rect.y + topRectSize.y - verticalMargin, rect.width - horizontalMargin * 2);
 
 			if (!Spoil)
 				goto drawbot;
 
-			// ---------------------------- Bottom left -------------------------------
+			// ---------------------------- Middle -------------------------------
 
-			Rect policyRectLeft = new Rect(rect.x + horizontalMargin, rect.y + topRect.height, leftRectSize.x - horizontalMargin, leftRectSize.y);
+			Rect policyRectMiddle = new Rect(rect.x + horizontalMargin, rect.y + topRectSize.y, middleRectSize.x - horizontalMargin, middleRectSize.y);
+
+			// ---------------------------- Middle left -------------------------------
+
+			Listing_Standard listingMiddleLeft = new Listing_Standard(policyRectMiddle.LeftPart(middleLeftColumnSize / policyRectMiddle.width));
+
+			listingMiddleLeft.verticalSpacing = verticalMargin;
+
+			//listingMiddleLeft.ColumnWidth = middleLeftColumnSize;
+
+			//Rect policyRectMiddleLeft = policyRectMiddle.LeftHalf();
 
 			Text.Font = GameFont.Small;
-			//Rect rect = new Rect(0f, 20f, this.size.x, this.size.y - 20f).ContractedBy(10f);
-			Listing_Standard listingLeft = new Listing_Standard(policyRectLeft);
-			listingLeft.verticalSpacing = verticalMargin;
 
-			Text.Anchor = TextAnchor.MiddleCenter;
-			//listingLeft.Label("PawnPolicyCard_Policy".Translate());
+			//string policyDesc = "";
 
-			string readable = pawn.GetPolicyAssignedTo().label;
 
-			var flag = pawn.HasHardcodedPolicy();
+			//Rect policyRectMiddleLeft_inner = new Rect(0, 0, policyRectMiddleLeft.width, policyRectMiddleLeft.height * 2);
+			//Widgets.BeginScrollView(policyRectMiddleLeft, ref scrollposition, policyRectMiddleLeft_inner);
 
-			if (flag)
-			{
-				listingLeft.Label("PawnPolicyCard_CannotSetPolicy".Translate());
-				listingLeft.Label(policy.label);
-			}
-			else
-			{
-				if (listingLeft.ButtonTextLabeled("PawnPolicyCard_Policy".Translate(), readable))
-				{
-					var floatOptions = new List<FloatMenuOption>();
-					var policies = Policies.GetAllPoliciesForPawn(pawn)
-#if !DEBUG
-										   .Where(arg => arg.Visible)
-#endif
-										   ;
-					foreach (var item in policies)
-					{
-						floatOptions.Add(new FloatMenuOption(item.label, () => WorldDataStore_PawnPolicies.SetPolicyForPawn(pawn, item)));
-					}
-					Find.WindowStack.Add(new FloatMenu(floatOptions));
-				}
-			}
+			//var listingMiddleLeft_inner = new Listing_Standard(policyRectMiddleLeft);
 
 			Text.Anchor = TextAnchor.UpperLeft;
 			if (policy.description != null && policy.description.Any())
-				listingLeft.Label(policy.description);
+				listingMiddleLeft.Label(policy.description);
 			else
-				listingLeft.Label("(No description)");
+				listingMiddleLeft.Label("(No description)"); //TODO: lang file
 
 			{
 				var font = Text.Font;
 				Text.Font = GameFont.Tiny;
-				listingLeft.Label(policy.GetDietForPawn(pawn).ToString());
+				listingMiddleLeft.Label(policy.GetDietForPawn(pawn).ToString());
 				Text.Font = font;
 			}
 
+			listingMiddleLeft.End();
 
-			listingLeft.End();
+			//Widgets.EndScrollView();
 
-			// ----------------------------- Bottom right ----------------------------------
+			// ----------------------------- Middle right ----------------------------------
+
+			var rectMiddleRight = policyRectMiddle.RightPart((middleRightColumnSize - horizontalMargin * 4) / policyRectMiddle.width);
+			rectMiddleRight.x -= horizontalMargin;
+			Listing_Standard listingMiddleRight = new Listing_Standard(rectMiddleRight);
+
+			listingMiddleRight.verticalSpacing = verticalMargin;
 
 			if (!flag)
 			{
 				Text.Anchor = TextAnchor.MiddleCenter;
-				Rect policyRectRight = new Rect(rect.x + leftRectSize.x + horizontalMargin, rect.y + topRect.height, rightRectSize.x - horizontalMargin * 2, rightRectSize.y);
 
-				Listing_Standard listingRight = new Listing_Standard(policyRectRight);
-				listingRight.verticalSpacing = verticalMargin;
+				listingMiddleRight.verticalSpacing = verticalMargin;
 
-
-				if (listingRight.ButtonText("PawnPolicyCard_ResetPolicy".Translate()))
+				if (listingMiddleRight.ButtonText("PawnPolicyCard_ResetPolicy".Translate()))
 				{
 					WorldDataStore_PawnPolicies.SetPolicyForPawn(pawn, null);
 				}
@@ -176,6 +220,12 @@ namespace WM.SmarterFoodSelection.UI
 						validator = (arg) => arg.IsPrisonerOfColony;
 						targetGroupName = "prisoners".Translate();
 					}
+					//TODO: setter for rescued pawns
+					//else if (pawn.HostFaction != null && pawn.HostFaction.IsPlayer)
+					//{
+					//	validator = (arg) => (pawn.HostFaction != null && pawn.HostFaction.IsPlayer);
+					//	targetGroupName = "guests".Translate();
+					//}
 					else if (pawn.Faction.IsPlayer && pawn.RaceProps.Animal)
 					{
 						validator = (arg) => (pawn.Faction.IsPlayer && arg.RaceProps.Animal && arg.def == pawn.def);
@@ -184,20 +234,20 @@ namespace WM.SmarterFoodSelection.UI
 
 					if (validator != null)
 					{
-						if (listingRight.ButtonText(string.Format("PawnPolicyCard_AssignToAllOnMap".Translate(), targetGroupName)))
+						if (listingMiddleRight.ButtonText(string.Format("PawnPolicyCard_AssignToAllOnMap".Translate(), targetGroupName)))
 						{
 							WorldDataStore_PawnPolicies.AssignToAllPawnsMatchingOnMap(policy, validator);
 						}
-						if (listingRight.ButtonText(string.Format("PawnPolicyCard_ResetAllOnMap".Translate(), targetGroupName)))
+						if (listingMiddleRight.ButtonText(string.Format("PawnPolicyCard_ResetAllOnMap".Translate(), targetGroupName)))
 						{
 							WorldDataStore_PawnPolicies.AssignToAllPawnsMatchingOnMap(null, validator);
 						}
 					}
 				}
-
-				listingRight.End();
-
 			}
+
+			listingMiddleRight.End();
+
 		// ----------------------------- Bottom ----------------------------------
 
 		drawbot:
@@ -205,13 +255,13 @@ namespace WM.SmarterFoodSelection.UI
 			{
 				var font = Text.Font;
 				var anchor = Text.Anchor;
-				Text.Font = GameFont.Medium;
+				Text.Font = GameFont.Small;
 				Text.Anchor = TextAnchor.MiddleCenter;
 
-				Vector2 botrectpos = new Vector2(rect.x + 0 + horizontalMargin, rect.y + topRectSize.y + 0 + verticalMargin);
+				Vector2 botrectpos = new Vector2(rect.x + 0 + horizontalMargin, rect.y + topRectSize.y + verticalMargin);
 
 				if (Spoil)
-					botrectpos += new Vector2(0, rightRectSize.y);
+					botrectpos += new Vector2(0, middleRectSize.y);
 
 				Rect botrect = new Rect(botrectpos, new Vector2(botRectSize.x - horizontalMargin * 2, botRectSize.y - verticalMargin * 2));
 

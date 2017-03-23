@@ -22,10 +22,10 @@ namespace WM.SmarterFoodSelection
 		public static SettingHandle<bool> SeparatedNutrientPaste { get; set; }
 
 		//TODO: make custom UI ajustment
-		//TODO: implement hunting safe ratio
 		public static SettingHandle<float> petsSafeHuntMaxStrengthRatio { get; set; }
 
 		//public static SettingHandle<bool> extendedFoodOptimality { get; set; }
+		public static SettingHandle<float> NeedsTabUIHeight { get; set; }
 
 		public static SettingHandle<bool> ShowAdvancedOptions { get; set; }
 
