@@ -151,6 +151,15 @@ namespace WM.SmarterFoodSelection
 			//TODO: dispose objects ?
 			AllByPawnPair.Clear();
 		}
+		static internal void ClearExpired()
+		{
+			//TODO: dispose objects ?
+			int count1 = AllByPawnPair.Count();
+			int count2 = AllByPawnPair.RemoveAll(arg => arg.Value.Expired());
+#if DEBUG
+			Log.Message(string.Format("Cleared {0}/{1} expired cache items", count2, count1));
+#endif
+		}
 
 		internal static void ClearCacheForPawn(Pawn pawn)
 		{

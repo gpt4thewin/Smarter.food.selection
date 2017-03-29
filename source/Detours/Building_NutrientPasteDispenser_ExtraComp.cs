@@ -80,6 +80,9 @@ namespace WM.SmarterFoodSelection.Detours
 				case DispenseMode.CannibalClean:
 					gizmo.icon = Resources.NutrientPasteCornHuman;
 					break;
+				case DispenseMode.Animal:
+					gizmo.icon = Resources.NutrientPasteCornHuman;
+					break;
 			}
 
 			gizmo.action = delegate

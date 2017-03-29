@@ -32,8 +32,10 @@ namespace WM.SmarterFoodSelection
 		public float costFactorMultiplier = 1f;
 		public SimpleCurve FoodOptimalityEffectMoodCurve = Detours.Original.FoodUtility.FoodOptimalityEffectFromMoodCurve;
 
-		internal Func<PawnPair, bool> conditionPredicate = null;
-		internal Func<Thing, bool> allowFoodPredicate = null;
+		// -------- Hardcoded parameters -------- 
+
+		internal Func<PawnPair, bool> pawnValidator = null;
+		internal Func<FoodCategory, bool> foodcategoryValidator = null;
 
 		// -------- Parsed stuff -------- 
 
@@ -209,7 +211,7 @@ namespace WM.SmarterFoodSelection
 		}
 		internal bool AdmitsPawnPair(PawnPair pair)
 		{
-			if (conditionPredicate != null && conditionPredicate(pair))
+			if (pawnValidator != null && pawnValidator(pair))
 				return true;
 
 			return AdmitsPawn(pair.eater);
@@ -223,9 +225,6 @@ namespace WM.SmarterFoodSelection
 
 		internal bool PolicyAllows(Pawn pawn, Thing t)
 		{
-			if (allowFoodPredicate != null && !allowFoodPredicate(t))
-				return false;
-			
 			return PolicyAllows(pawn, t.DetermineFoodCategory());
 		}
 		internal bool PolicyAllows(Pawn pawn, ThingDef def)
@@ -234,6 +233,9 @@ namespace WM.SmarterFoodSelection
 		}
 		internal bool PolicyAllows(Pawn pawn, FoodCategory pref)
 		{
+			if (foodcategoryValidator != null && !foodcategoryValidator(pref))
+				return false;
+			
 			if (allowUnlisted || unrestricted)
 				return true;
 
@@ -245,38 +247,6 @@ namespace WM.SmarterFoodSelection
 				return true;
 
 			return baseDiet.Any((obj) => obj.foodCategory == pref);
-		}
-
-		public float GetFoodScoreOffset(Pawn pawn, Thing t)
-		{
-			return GetFoodScoreOffset(pawn, t.def.DetermineFoodCategory());
-		}
-		public float GetFoodScoreOffset(Pawn pawn, ThingDef def)
-		{
-			return GetFoodScoreOffset(pawn, def.DetermineFoodCategory());
-		}
-		public float GetFoodScoreOffset(Pawn pawn, FoodCategory category)
-#if DEBUG
-		{
-			var result = _GetFoodScoreOffset(pawn, category);
-
-			//Log.Message(string.Format("GetFoodScoreOffset({0},{1}) = {2}", pawn, pref, result));
-
-			return result;
-		}
-		private float _GetFoodScoreOffset(Pawn pawn, FoodCategory category)
-#endif
-		{
-			if (unrestricted)
-				return 0f;
-
-			var diet = GetDietForPawn(pawn);
-			var element = diet.elements.FirstOrDefault((obj) => obj.foodCategory == category);
-
-			if (element == null)
-				return diet.elements.Last().totalOffsetValue + Diet.DietElement.DefaultOffset;
-
-			return element.totalOffsetValue;
 		}
 
 		public int GetFoodCategoryRankForPawn(Pawn pawn, Thing category)

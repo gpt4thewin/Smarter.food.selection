@@ -83,6 +83,12 @@ namespace WM.SmarterFoodSelection
 			//	Utils.ShowRevertAllWorldNonVanillaThingsDialog();
 		}
 
+		public override void Tick(int currentTick)
+		{
+			if (currentTick % 500 == 0)
+				FoodSearchCache.ClearExpired();
+		}
+
 		internal enum DrawFoodSearchMode
 		{
 			Off = 0,
@@ -175,6 +181,7 @@ namespace WM.SmarterFoodSelection
 			Config.controlPets = Settings.GetHandle<bool>("controlPets", "ControlPets".Translate(), "ControlPets_desc".Translate(), true);
 			Config.controlPrisoners = Settings.GetHandle<bool>("controlPrisoners", "ControlPrisoners".Translate(), "ControlPrisoners_desc".Translate(), true);
 			Config.controlColonists = Settings.GetHandle<bool>("controlColonists", "ControlColonists".Translate(), "ControlColonists_desc".Translate(), true);
+			Config.controlVisitors = Settings.GetHandle<bool>("controlVisitors", "ControlVisitors".Translate(), "ControlColonists_desc".Translate(), true);
 
 			Config.ShowAdvancedOptions = Settings.GetHandle<bool>("showAdvancedOptions", "ShowAdvancedOptions".Translate(), "ShowAdvancedOptions_desc".Translate(), false);
 
@@ -239,7 +246,10 @@ namespace WM.SmarterFoodSelection
 		{
 			try
 			{
-				ThingDef.Named(prefix + "Cannibal").label = string.Format(("CannibalMealLabel".Translate()), ThingDef.Named(prefix).label);
+				var thingDef = ThingDef.Named(prefix + "Cannibal");
+				thingDef.label = string.Format(("CannibalMealLabel".Translate()), ThingDef.Named(prefix).label);
+				//TODO: remove iem from traders
+				//thingDef.tradeTags = null;
 			}
 			catch (Exception ex)
 			{
@@ -271,23 +281,26 @@ namespace WM.SmarterFoodSelection
 
 			foreach (var current in DefDatabase<ThingDef>.AllDefs.Where((ThingDef arg) => arg.race != null))
 			{
-				//Tab inject
-				var newTabType = typeof(UI.ITab_Pawn_Needs);
-				var oldTabType = typeof(ITab_Pawn_Needs);
+				current.inspectorTabs.Add(typeof(UI.ITab_Pawn_Food));
+				current.inspectorTabsResolved.Add(InspectTabManager.GetSharedInstance(typeof(UI.ITab_Pawn_Food)));
+				       
+				////Tab inject
+				//var newTabType = typeof(UI.ITab_Pawn_Needs);
+				//var oldTabType = typeof(ITab_Pawn_Needs);
 
-				int index = current.inspectorTabs.IndexOf(oldTabType);
+				//int index = current.inspectorTabs.IndexOf(oldTabType);
 
-				if (index != -1)
-				{
-					current.inspectorTabs[index] = newTabType;
+				//if (index != -1)
+				//{
+				//	current.inspectorTabs[index] = newTabType;
 
-					int index2 = current.inspectorTabsResolved.IndexOf(InspectTabManager.GetSharedInstance(oldTabType));
+				//	int index2 = current.inspectorTabsResolved.IndexOf(InspectTabManager.GetSharedInstance(oldTabType));
 
-					if (index2 != -1)
-					{
-						current.inspectorTabsResolved[index2] = InspectTabManager.GetSharedInstance(newTabType);
-					}
-				}
+				//	if (index2 != -1)
+				//	{
+				//		current.inspectorTabsResolved[index2] = InspectTabManager.GetSharedInstance(newTabType);
+				//	}
+				//}
 			}
 
 			// ----------- Processing policies and patches -----------

@@ -78,6 +78,8 @@
 
 	<!-- ============== Pawn policy card ============== -->
 
+	<FoodITabLabel>Bouffe</FoodITabLabel>
+
 	<PawnPolicyCard_Title>Afficher/Masquer plus d'options</PawnPolicyCard_Title>
 	<PawnPolicyCard_AssignToAll>Attributer à tout les [{0}]</PawnPolicyCard_AssignToAll>
 	<PawnPolicyCard_AssignToAllOnMap>Attributer à tout les [{0}] de la carte</PawnPolicyCard_AssignToAllOnMap>

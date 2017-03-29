@@ -187,6 +187,25 @@ namespace WM.SmarterFoodSelection
 				return false;
 			return pawn.story.traits.HasTrait(TraitDefOf.Ascetic);
 		}
+		internal static bool isFriendly(this Pawn pawn)
+		{
+			var faction = pawn.Faction;
+
+			if (faction != null && !faction.HostileTo(Faction.OfPlayer))
+				return false;
+
+			return true;
+		}
+
+		internal static bool isInsectFaction(this Pawn pawn)
+		{
+			var faction = pawn.Faction;
+
+			if (faction != null && faction == Faction.OfInsects)
+				return true;
+
+			return false;
+		}
 		public static bool HasForcedFoodPref(this ThingDef def)
 		{
 			foreach (var current in ModCore.patches)

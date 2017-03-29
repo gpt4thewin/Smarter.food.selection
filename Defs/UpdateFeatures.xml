@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<HugsLib.UpdateFeatureDef Abstract="true" Name="WMSFS_UpdateFeatureBase">
+		<modNameReadable>WM Smarter food selection</modNameReadable>
+		<modIdentifier>Smarter_Food_Selection</modIdentifier>
+		<linkUrl>https://ludeon.com/forums/index.php?topic=30708.0</linkUrl>
+	</HugsLib.UpdateFeatureDef>
+	<HugsLib.UpdateFeatureDef ParentName="WMSFS_UpdateFeatureBase">
+		<defName>WMSFS_2_0_a_hotfix_3</defName>
+		<assemblyVersion>2.0.13</assemblyVersion>
+		<content>&lt;size=16&gt;Hotfix&lt;/size&gt;|Fixed bug with colonists and visitors not eating their food in inventory\nVisitors won't steal your food anymore !|Can now make visitors use their vanilla behavior in settings.|Fixed insects affected by a food policy and trying to fetch other foods than their jelly.|Added scheduled food search cache clearing. This might improve performances a bit.</content>
+	</HugsLib.UpdateFeatureDef>
+	
+	<HugsLib.UpdateFeatureDef ParentName="WMSFS_UpdateFeatureBase">
+		<defName>WMSFS_2_0_a_hotfix_4</defName>
+		<assemblyVersion>2.0.14</assemblyVersion>
+		<content>
+&lt;size=20&gt;Hotfix&lt;/size&gt;|
+&lt;b&gt;&lt;size=16&gt;&lt;color=orange&gt;UI Change&lt;/color&gt;&lt;/size&gt;&lt;/b&gt;|
+* New inspect tab. UI is no more shown inside the needs tab.|
+&lt;b&gt;&lt;size=16&gt;Bugs fixes&lt;/size&gt;&lt;/b&gt;|
+* Error messages (yellow) after selling stuff to traders.|
+* Pets still hunting prisoners (oops).
+* Pets will not hunt humans at all anymore (even hostile ones).
+		</content>
+	</HugsLib.UpdateFeatureDef>
+	
+</Defs>

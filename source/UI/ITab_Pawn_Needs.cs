@@ -8,6 +8,8 @@ using System.Collections.Generic;
 
 namespace WM.SmarterFoodSelection.UI
 {
+	// Obsolete
+
 	public class ITab_Pawn_Needs : RimWorld.ITab_Pawn_Needs
 	{
 		private Rect policyCardRect;

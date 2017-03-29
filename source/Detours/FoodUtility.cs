@@ -34,6 +34,10 @@ namespace WM.SmarterFoodSelection.Detours
 		// RimWorld.FoodUtility
 		private static bool _TryFindBestFoodSourceFor(Pawn getter, Pawn eater, bool desperate, out Thing foodSource, out ThingDef foodDef, bool canRefillDispenser = true, bool canUseInventory = true, bool allowForbidden = false, bool allowCorpse = true, Policy forcedPolicy = null)
 		{
+#if DEBUG
+
+			Log.Message("_TryFindBestFoodSourceFor() getter=" + getter + " eater=" + eater + " desperate=" + desperate + " canUseInventory=" + canUseInventory + " allowForbidden=" + allowForbidden);
+#endif
 			Policy policy;
 
 			//taming ? TODO: check for bug free
@@ -42,7 +46,7 @@ namespace WM.SmarterFoodSelection.Detours
 			else
 				policy = eater.GetPolicyAssignedTo(getter);
 
-			if (getter.isWildAnimal() || policy.unrestricted || getter.InMentalState || Config.ControlDisabledForPawn(eater))
+			if (getter.isWildAnimal() || getter.isInsectFaction() || policy.unrestricted || getter.InMentalState || Config.ControlDisabledForPawn(eater))
 			{
 				return Original.FoodUtility.TryFindBestFoodSourceFor(getter, eater, desperate, out foodSource, out foodDef, canRefillDispenser, canUseInventory, allowForbidden, allowCorpse);
 			}
@@ -110,6 +114,10 @@ namespace WM.SmarterFoodSelection.Detours
 
 		private static bool MakeRatedFoodListForPawn(Map map, Pawn eater, Pawn getter, Policy policy, out List<FoodSourceRating> foodList, bool canUseInventory, bool allowForbidden)
 		{
+#if DEBUG
+			Log.Message("MakeRatedFoodListForPawn() eater=" + eater + " getter=" + getter + " canuseinventory=" + canUseInventory);
+#endif
+
 			Func<Thing, bool> FoodValidator = (arg => IsValidFoodSourceForPawn(arg, eater, getter, policy, allowForbidden));
 
 			var diet = policy.GetDietForPawn(eater);
@@ -172,13 +180,30 @@ namespace WM.SmarterFoodSelection.Detours
 				searchSet.AddRange(allPawnsSpawned);
 			}
 
-			if (canUseInventory && getter.inventory != null)
+			if (canUseInventory && getter.RaceProps.ToolUser && getter.health.capacities.CapableOf(PawnCapacityDefOf.Manipulation) && getter.inventory != null)
 			{
-				var inventoryFood = getter.inventory.innerContainer.Where(FoodValidator);
+				var inventoryFood = getter.inventory.innerContainer.Where(arg => arg.def.IsIngestible).Where(FoodValidator);
 				searchSet.AddRange(inventoryFood);
+
+#if DEBUG
+				Log.Message(string.Format("MakeRatedFoodListForPawn() eater={0} getter={1} got {2}/{3} things from inventory", eater, getter, inventoryFood.Count(), getter.inventory.innerContainer.Count));
+#endif
 			}
 
-			foodList = MakeRatedFoodListFromThingList(searchSet, eater, policy);
+			foodList = MakeRatedFoodListFromThingList(searchSet, eater, getter, policy);
+
+#if DEBUG
+			var foodListInventory = foodList.Where(arg => getter.inventory.innerContainer.Contains(arg.FoodSource));
+
+			var inventoryScoreText = "Inventory:";
+
+			foreach (var item in foodListInventory)
+			{
+				inventoryScoreText += "\n-------------\n" + item.ToWidgetString(true, item.DefRecord.category);
+			}
+
+			Log.Message(inventoryScoreText);
+#endif
 
 			if (!foodList.Any())
 				return false;
@@ -186,7 +211,7 @@ namespace WM.SmarterFoodSelection.Detours
 			return true;
 		}
 
-		public static List<FoodSourceRating> MakeRatedFoodListFromThingList(IEnumerable<Thing> list, Pawn eater, Policy policy, bool doScoreSort = true)
+		internal static List<FoodSourceRating> MakeRatedFoodListFromThingList(IEnumerable<Thing> list, Pawn eater, Pawn getter, Policy policy, bool doScoreSort = true)
 		{
 			var foodList = new List<FoodSourceRating>();
 
@@ -197,7 +222,7 @@ namespace WM.SmarterFoodSelection.Detours
 
 			foreach (var item in list)
 			{
-				var foodEntry = FoodScoreUtils.FoodScoreFor(policy, eater, item, eater.Map == null);
+				var foodEntry = FoodScoreUtils.FoodScoreFor(policy, eater, getter, item, eater.Map == null);
 
 				foodList.Add(foodEntry);
 			}
@@ -228,24 +253,27 @@ namespace WM.SmarterFoodSelection.Detours
 			{
 				bool canManipulate = getter.RaceProps.ToolUser && getter.health.capacities.CapableOf(PawnCapacityDefOf.Manipulation);
 
+				bool inventory = (getter.inventory != null && getter.inventory.innerContainer.Contains(food));
+
 				if (!(food != null &&
-						food.Spawned &&
+					  (inventory || food.Spawned) &&
 						!food.Destroyed &&
 					  (allowForbidden || !food.IsForbidden(getter)) &&
 						(!food.def.IsIngestible || food.IngestibleNow) &&
-					  (food.IsSociallyProper(eater) || food.IsSociallyProper(getter)) &&
+					  (inventory || food.IsSociallyProper(eater) || food.IsSociallyProper(getter)) &&
 						//TODO: eater == getter ? 
 						getter.CanReachFoodSource(food) &&
-					  getter.CanReserve(food)
+					  (inventory || getter.CanReserve(food))
 					 ))
 					return false;
 
 				if (food is Pawn)
 				{
-					if (food.Map.designationManager.AllDesignationsOn(food).Any(arg => arg.def == DesignationDefOf.Tame) ||
+					if (((Pawn)food).RaceProps.Humanlike ||
+						food.Map.designationManager.AllDesignationsOn(food).Any(arg => arg.def == DesignationDefOf.Tame) ||
 						!FoodUtility.IsAcceptablePreyFor(eater, food as Pawn) ||
 						!policy.PolicyAllows(FoodCategory.Hunt) ||
-						Utils.IsAnyoneCapturing(food.Map, food as Pawn)
+						Utils.IsAnyoneCapturing(food.Map, food as Pawn) // redundant with humanlike ?
 					   )
 						return false;
 				}

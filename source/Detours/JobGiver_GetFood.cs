@@ -8,7 +8,7 @@ namespace WM.SmarterFoodSelection.Detours
 {
 	public class JobGiver_GetFood : ThinkNode_JobGiver
 	{
-		[DetourMethod(typeof(RimWorld.JobGiver_GetFood),"TryGiveJob")]
+		//[DetourMethod(typeof(RimWorld.JobGiver_GetFood),"TryGiveJob")]
 		// RimWorld.JobGiver_GetFood
 		protected override Job TryGiveJob(Pawn pawn)
 		{

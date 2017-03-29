@@ -23,7 +23,7 @@ namespace WM.SmarterFoodSelection
 			label = "UnrestrictedPolicyLabel".Translate(),
 			moodEffectMatters = true,
 			unrestricted = true,
-			conditionPredicate = (PawnPair arg) => true,
+			pawnValidator = (PawnPair arg) => true,
 			description = "Same behavior as vanilla."
 		};
 		// should never be used by user
@@ -71,16 +71,16 @@ namespace WM.SmarterFoodSelection
 			defName = "hidden_taming_policy",
 			label = "Taming", 
 			Visible = false,
-			conditionPredicate = ((PawnPair arg) => arg.eater.isWildAnimal() && arg.getter.IsColonist),
-			allowFoodPredicate = delegate (Thing food)
+			pawnValidator = ((PawnPair arg) => arg.eater.isWildAnimal() && arg.getter.IsColonist),
+			foodcategoryValidator = delegate (FoodCategory category)
 			{
-				var category = food.DetermineFoodCategory();
 				if (!Config.useHumanlikeCorpsesForTaming && category == FoodCategory.HumanlikeCorpse)
 					return false;
 				if (!Config.useCorpsesForTaming && category == FoodCategory.Corpse)
 					return false;
-				if (!Config.useMealsForTaming && (food.def.ingestible.foodType & FoodTypeFlags.Meal) == FoodTypeFlags.Meal)
-					return false;
+				//if (!Config.useMealsForTaming && (food.def.ingestible.foodType & FoodTypeFlags.Meal) == FoodTypeFlags.Meal)
+				//	return false;
+
 
 				return true;
 			},

@@ -29,9 +29,9 @@ namespace WM.SmarterFoodSelection.Detours
 			Thing thing = null;
 
 			Policy policy = forPawn.GetPolicyAssignedTo();
-			var foodsForPawn = FoodUtility.MakeRatedFoodListFromThingList(list, forPawn, forPawn.GetPolicyAssignedTo())
+			var foodsForPawn = FoodUtility.MakeRatedFoodListFromThingList(list, forPawn, forPawn, forPawn.GetPolicyAssignedTo())
 										  .Where(arg => RimWorld.Planet.CaravanPawnsNeedsUtility.CanNowEatForNutrition(arg.FoodSource.def, forPawn) &&
-			                                     policy.PolicyAllows(forPawn,arg.FoodSource)
+												 policy.PolicyAllows(forPawn, arg.FoodSource)
 												);
 
 			var foodEntry = foodsForPawn.FirstOrDefault();

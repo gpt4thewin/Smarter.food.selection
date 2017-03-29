@@ -41,6 +41,8 @@ namespace WM.SmarterFoodSelection
 
 		public static SettingHandle<bool> controlColonists { get; set; }
 
+		public static SettingHandle<bool> controlVisitors { get; set; }
+
 		internal static bool ControlDisabledForPawn(Pawn eater)
 		{
 			if (eater.IsColonist && !controlColonists)
@@ -48,6 +50,8 @@ namespace WM.SmarterFoodSelection
 			if (eater.IsPrisonerOfColony && !controlPrisoners)
 				return true;
 			if (eater.IsPetOfColony() && !controlPets)
+				return true;
+			if (eater.isFriendly() && !controlVisitors)
 				return true;
 
 			return false;

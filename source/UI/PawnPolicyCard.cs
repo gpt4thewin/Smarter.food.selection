@@ -14,8 +14,8 @@ namespace WM.SmarterFoodSelection.UI
 		static readonly float middleLeftColumnSize = 280;
 		static readonly float middleRightColumnSize = middleRectSize.x - middleLeftColumnSize;
 
-		static readonly Vector2 topRectSize = new Vector2(middleRectSize.x, 40);
-		static readonly Vector2 botRectSize = new Vector2(topRectSize.x, 30);
+		static readonly Vector2 topRectSize = new Vector2(middleRectSize.x, 50 + verticalMargin * 2);
+		//static readonly Vector2 botRectSize = new Vector2(topRectSize.x, 30);
 
 		static Vector2 scrollposition;
 
@@ -23,11 +23,7 @@ namespace WM.SmarterFoodSelection.UI
 		{
 			get
 			{
-				if (Spoil)
-					return new Vector2(topRectSize.x, middleRectSize.y + topRectSize.y + botRectSize.y);
-				else
-					return new Vector2(topRectSize.x, topRectSize.y + botRectSize.y);
-				//return new Vector2(topRectSize.x, botRectSize.y);
+				return new Vector2(topRectSize.x, middleRectSize.y + topRectSize.y);
 			}
 		}
 
@@ -41,8 +37,6 @@ namespace WM.SmarterFoodSelection.UI
 
 		static readonly int horizontalMargin = 10;
 		static readonly float verticalMargin = 5;
-
-		static bool Spoil;
 
 		public static void Draw(Rect rect, Pawn pawn)
 		{
@@ -73,7 +67,7 @@ namespace WM.SmarterFoodSelection.UI
 
 			// -------------------- Top left --------------------------
 
-			Rect topRect = new Rect(rect.position.x + horizontalMargin, rect.position.y, topRectSize.x - horizontalMargin * 2, topRectSize.y);
+			Rect topRect = new Rect(rect.position.x + horizontalMargin, rect.position.y + verticalMargin, topRectSize.x - horizontalMargin * 2, topRectSize.y);
 
 			Listing_Standard listing = new Listing_Standard(topRect);
 			listing.ColumnWidth = topRect.width / 2;
@@ -138,10 +132,7 @@ namespace WM.SmarterFoodSelection.UI
 
 			// -------------------- Top end --------------------------
 
-			Widgets.DrawLineHorizontal(rect.x + horizontalMargin, rect.y + topRectSize.y - verticalMargin, rect.width - horizontalMargin * 2);
-
-			if (!Spoil)
-				goto drawbot;
+			Widgets.DrawLineHoriz ontal(rect.x + horizontalMargin, rect.y + topRectSize.y - verticalMargin, rect.width - horizontalMargin * 2);
 
 			// ---------------------------- Middle -------------------------------
 
@@ -247,31 +238,6 @@ namespace WM.SmarterFoodSelection.UI
 			}
 
 			listingMiddleRight.End();
-
-		// ----------------------------- Bottom ----------------------------------
-
-		drawbot:
-
-			{
-				var font = Text.Font;
-				var anchor = Text.Anchor;
-				Text.Font = GameFont.Small;
-				Text.Anchor = TextAnchor.MiddleCenter;
-
-				Vector2 botrectpos = new Vector2(rect.x + 0 + horizontalMargin, rect.y + topRectSize.y + verticalMargin);
-
-				if (Spoil)
-					botrectpos += new Vector2(0, middleRectSize.y);
-
-				Rect botrect = new Rect(botrectpos, new Vector2(botRectSize.x - horizontalMargin * 2, botRectSize.y - verticalMargin * 2));
-
-				if (Widgets.ButtonText(botrect, "PawnPolicyCard_Title".Translate()))
-				{
-					Spoil ^= true;
-				}
-				Text.Font = font;
-				Text.Anchor = anchor;
-			}
 		}
 	}
 }

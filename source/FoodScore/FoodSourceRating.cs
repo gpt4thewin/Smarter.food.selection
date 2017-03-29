@@ -87,7 +87,14 @@ namespace WM.SmarterFoodSelection
 		{
 			string text = "";
 
-			var backupDistanceValue = GetComp("Distance").Value;
+			var component = GetComp("Distance");
+			float backupDistanceValue;
+
+			if (component != null)
+				backupDistanceValue = component.Value;
+			else
+				backupDistanceValue = 0f;
+
 			//SetComp("Distance", overrideDistanceFactor);
 
 			float score = ScoreForceSum;
@@ -106,7 +113,8 @@ namespace WM.SmarterFoodSelection
 				}
 
 			}
-			SetComp("Distance", backupDistanceValue);
+			if (component != null)
+				SetComp("Distance", backupDistanceValue);
 
 			return text;
 		}

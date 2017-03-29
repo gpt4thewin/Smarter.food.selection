@@ -42,6 +42,8 @@
 	<ControlPrisoners_desc>If disabled, colonists will feed your prisoners normaly.</ControlPrisoners_desc>
 	<ControlColonists>Enable control over colonists</ControlColonists>
 	<ControlColonists_desc>Enable control over colonists</ControlColonists_desc>
+	<ControlVisitors>Enable control over visitors</ControlVisitors>
+	<ControlColonists_desc>If disabled, visitors will use their vanilla behavior.</ControlColonists_desc>
 
 	<NeedsTabUIHeight>UI height in needs tab.</NeedsTabUIHeight>
 	<NeedsTabUIHeight_desc>UI height in needs tab when the UI is sploied. Too small values may prevent the UI to be shown correctly.\nUse with caution.</NeedsTabUIHeight_desc>
@@ -76,6 +78,8 @@
 
 
 	<!-- ============== Pawn policy card ============== -->
+
+	<FoodITabLabel>Food</FoodITabLabel>
 
 	<PawnPolicyCard_Title>Show/Hide more options</PawnPolicyCard_Title>
 	<PawnPolicyCard_AssignToAll>Assign to all [{0}]</PawnPolicyCard_AssignToAll>

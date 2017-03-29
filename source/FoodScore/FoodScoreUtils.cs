@@ -31,7 +31,7 @@ namespace WM.SmarterFoodSelection
 		}
 
 		//TODO: optimize function
-		internal static FoodSourceRating FoodScoreFor(Policy policy, Pawn eater, Thing food, bool noDistanceFactor = false, bool quickScore = false)
+		internal static FoodSourceRating FoodScoreFor(Policy policy, Pawn eater, Pawn getter, Thing food, bool noDistanceFactor = false, bool quickScore = false)
 		{
 			var obj = new FoodSourceRating();
 
@@ -40,17 +40,32 @@ namespace WM.SmarterFoodSelection
 
 			// ------ Distance factor ------ 
 
+			bool inInventory = (getter.inventory != null && getter.inventory.innerContainer.Contains(food));
+
 			if (!noDistanceFactor)
-				obj.AddComp("Distance", -((food.Position - eater.Position).LengthManhattan) * policy.distanceFactor);
+			{
+				float distanceFactor;
+				if (inInventory)
+					distanceFactor = 0f;
+				else
+					distanceFactor = -((food.Position - eater.Position).LengthManhattan) * policy.distanceFactor;
+
+				obj.AddComp("Distance", distanceFactor);
+			}
+
+			if (inInventory && getter == eater && food.def.ingestible.preferability >= FoodPreferability.MealAwful)
+			{
+				obj.AddComp("Inventory", 500f);
+			}
 
 			// ------------- Policy food category factor -------------
 
-			//if (!policy.unrestricted)
-			//	obj.AddComp(food.DetermineFoodCategory().ToString(), policy.GetFoodScoreOffset(eater, food));
+				//if (!policy.unrestricted)
+				//	obj.AddComp(food.DetermineFoodCategory().ToString(), policy.GetFoodScoreOffset(eater, food));
 
-			// ------------- Prey score factor -------------
+				// ------------- Prey score factor -------------
 
-			const float PREY_FACTOR_MULTIPLIER = 5f; //Because the vanilla prey factor is fairly weak.
+				const float PREY_FACTOR_MULTIPLIER = 5f; //Because the vanilla prey factor is fairly weak.
 
 			{
 				if (food is Pawn)

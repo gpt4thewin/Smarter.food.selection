@@ -35,7 +35,7 @@ namespace WM.SmarterFoodSelection
 			//if (HasHardcodedPolicy(pawn))
 			//	return true;
 
-			if (pawn.isWildAnimal())
+			if (pawn.needs == null || !pawn.RaceProps.EatsFood || pawn.isWildAnimal() || pawn.isInsectFaction())
 				return false;
 
 			//if (pawn.Faction != Faction.OfPlayer && pawn.HostFaction != Faction.OfPlayer)
