@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Patch>
+	<Operation Class="PatchOperationAdd">
+		<xpath>*/ThingDef[defName = "NutrientPasteDispenser"]/comps</xpath>
+		<value>
+			<li Class="WM.SmarterFoodSelection.Detours.CompProperties_ExtraNPD" />
+		</value>
+	</Operation>
+</Patch>

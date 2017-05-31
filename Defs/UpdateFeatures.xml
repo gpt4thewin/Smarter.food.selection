@@ -25,4 +25,14 @@
 		</content>
 	</HugsLib.UpdateFeatureDef>
 	
+	<HugsLib.UpdateFeatureDef ParentName="WMSFS_UpdateFeatureBase">
+		<defName>WMSFS_2_1</defName>
+		<assemblyVersion>2.1.0</assemblyVersion>
+		<content>
+&lt;size=20&gt;Updated to A17&lt;/size&gt;|
+&lt;b&gt;&lt;size=16&gt;Minor changes&lt;/size&gt;&lt;/b&gt;|
+* Forcing paste dispense will now show a message if available energy is insufficient.
+		</content>
+	</HugsLib.UpdateFeatureDef>
+	
 </Defs>

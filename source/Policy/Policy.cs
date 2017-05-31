@@ -30,12 +30,13 @@ namespace WM.SmarterFoodSelection
 		public float moodEffectFactor = 1f;
 		public float distanceFactor = DEFAULT_DISTANCE_FACTOR;
 		public float costFactorMultiplier = 1f;
-		public SimpleCurve FoodOptimalityEffectMoodCurve = Detours.Original.FoodUtility.FoodOptimalityEffectFromMoodCurve;
+		public SimpleCurve FoodOptimalityEffectMoodCurve = Detours.Access.FoodOptimalityEffectFromMoodCurve;
 
 		// -------- Hardcoded parameters -------- 
 
 		internal Func<PawnPair, bool> pawnValidator = null;
 		internal Func<FoodCategory, bool> foodcategoryValidator = null;
+		internal Func<Thing, bool> sourceValidator = null;
 
 		// -------- Parsed stuff -------- 
 
@@ -225,6 +226,9 @@ namespace WM.SmarterFoodSelection
 
 		internal bool PolicyAllows(Pawn pawn, Thing t)
 		{
+			if (sourceValidator != null && !sourceValidator(t))
+				return false;
+			
 			return PolicyAllows(pawn, t.DetermineFoodCategory());
 		}
 		internal bool PolicyAllows(Pawn pawn, ThingDef def)
@@ -235,7 +239,7 @@ namespace WM.SmarterFoodSelection
 		{
 			if (foodcategoryValidator != null && !foodcategoryValidator(pref))
 				return false;
-			
+
 			if (allowUnlisted || unrestricted)
 				return true;
 

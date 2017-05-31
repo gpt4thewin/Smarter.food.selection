@@ -189,7 +189,7 @@ namespace WM.SmarterFoodSelection
 			if (AllByPawnPair.TryGetValue(pawnPair, out foodSourceEntry))
 				if (!foodSourceEntry.Expired() &&
 					(foodSourceEntry.BestFood == null || // Accepts null
-					 Detours.FoodUtility.IsValidFoodSourceForPawn(foodSourceEntry.BestFood, eater, getter, eater.GetPolicyAssignedTo(), allowForbidden)))
+			         FoodUtils.IsValidFoodSourceForPawn(foodSourceEntry.BestFood, eater, getter, eater.GetPolicyAssignedTo(), allowForbidden)))
 				{
 #if DEBUG
 					//Log.Message(string.Format("Found food entry for {0}/{1} = {2}", eater, getter, foodSourceEntry.BestFood));

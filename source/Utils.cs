@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using RimWorld;
 using RimWorld.Planet;
 using Verse;
@@ -10,6 +11,8 @@ namespace WM.SmarterFoodSelection
 {
 	public static class Utils
 	{
+		internal static BindingFlags AllBindingFlags = BindingFlags.Instance | BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public;
+
 		public static bool DrawPowerFromNetwork(Building building, float amount, bool simulate = false, bool silent = true)
 		{
 			var comp = building.GetComp<CompPowerTrader>();

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Verse;
 using RimWorld;
 using System.Linq;
+using Verse.Sound;
 
 namespace WM.SmarterFoodSelection.Detours
 {
@@ -96,7 +97,10 @@ namespace WM.SmarterFoodSelection.Detours
 		bool ForceDispense(int count, DispenseMode mode)
 		{
 			if (!Utils.DrawPowerFromNetwork((Verse.Building)this.parent, ForceDispensePowerCost * count, true))
+			{
+				Messages.Message("NPDNoEnergy".Translate(), MessageSound.RejectInput);
 				return false;
+			}
 
 			for (int i = 0; i < count; i++)
 			{

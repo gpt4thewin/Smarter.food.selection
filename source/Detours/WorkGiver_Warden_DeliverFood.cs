@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using HugsLib.Source.Detour;
+using Harmony;
 using RimWorld;
 using Verse;
 
@@ -8,7 +8,7 @@ namespace WM.SmarterFoodSelection.Detours
 	public class WorkGiver_Warden_DeliverFood
 	{
 		// RimWorld.WorkGiver_Warden_DeliverFood
-		[DetourMethod(typeof(RimWorld.WorkGiver_Warden_DeliverFood), "FoodAvailableInRoomTo")]
+		//[DetourMethod(typeof(RimWorld.WorkGiver_Warden_DeliverFood), "FoodAvailableInRoomTo")]
 		private static bool FoodAvailableInRoomTo(Pawn prisoner)
 		{
 			if (prisoner.carryTracker.CarriedThing != null && WorkGiver_Warden_DeliverFood.NutritionAvailableForFrom(prisoner, prisoner.carryTracker.CarriedThing) > 0f)
@@ -17,7 +17,7 @@ namespace WM.SmarterFoodSelection.Detours
 			}
 			float num = 0f;
 			float num2 = 0f;
-			Room room = RoomQuery.RoomAt(prisoner);
+			Room room = RegionAndRoomQuery.GetRoom(prisoner);
 			if (room == null)
 			{
 				return false;

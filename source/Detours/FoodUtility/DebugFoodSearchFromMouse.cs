@@ -2,28 +2,66 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using HugsLib.Source.Detour;
+using Harmony;
 using RimWorld;
 using UnityEngine;
 using Verse;
 using Verse.AI;
 
-namespace WM.SmarterFoodSelection.Detours
+namespace WM.SmarterFoodSelection.Detours.FoodUtility
 {
-	public static class FoodUtility_Debug
+	[HarmonyPatch(typeof(RimWorld.FoodUtility), "DebugFoodSearchFromMouse_OnGUI")]
+	public static class DebugFoodSearchFromMouse_OnGUI
 	{
 		static Thing bestFoodSource;
-		static Thing bestFoodSourceFromMouse;
-
-		static Pawn pawnA = null;
-		static Pawn pawnB = null;
 
 		static Pawn eater;
 		static Pawn getter;
 
-		// RimWorld.FoodUtility
-		[DetourMethod(typeof(RimWorld.FoodUtility), "DebugFoodSearchFromMouse_OnGUI")]
-		public static void DebugFoodSearchFromMouse_OnGUI()
+		internal static Thing BestFoodSource
+		{
+			get;
+			private set;
+		}
+
+		internal static Thing BestFoodSourceFromMouse
+		{
+			get;
+			private set;
+		}
+
+		public static Pawn PawnB
+		{
+			get;
+			private set;
+		}
+
+		public static Pawn PawnA
+		{
+			get;
+			private set;
+		}
+
+		public static Pawn Eater
+		{
+			get;
+			private set;
+		}
+
+		public static Pawn Getter
+		{
+			get;
+			private set;
+		}
+
+		[HarmonyPrefix]
+		public static bool Prefix()
+		{
+			return false;
+		}
+
+		[HarmonyPostfix]
+		public static void Postfix()
 		{
 			try
 			{
@@ -41,38 +79,38 @@ namespace WM.SmarterFoodSelection.Detours
 		{
 			IntVec3 a = Verse.UI.MouseCell();
 
-			bestFoodSourceFromMouse = null;
-			bestFoodSource = null;
+			BestFoodSourceFromMouse = null;
+			BestFoodSource = null;
 
 			// ------------------------------------------------------------------------------
 
-			pawnA = null;
-			pawnB = null;
+			PawnA = null;
+			PawnB = null;
 
 			var pawnSelection = Find.Selector.SelectedObjects.Where(arg => arg is Pawn).Cast<Pawn>();
-			pawnA = pawnSelection.FirstOrDefault();
+			PawnA = pawnSelection.FirstOrDefault();
 			if (pawnSelection.Count() == 2)
-				pawnB = pawnSelection.ElementAt(1);
+				PawnB = pawnSelection.ElementAt(1);
 
 
-			if (pawnB != null && pawnA != null && (pawnA.Faction != pawnB.Faction || RimWorld.FoodUtility.ShouldBeFedBySomeone(pawnA) || RimWorld.FoodUtility.ShouldBeFedBySomeone(pawnB)))
+			if (PawnB != null && PawnA != null && (PawnA.Faction != PawnB.Faction || RimWorld.FoodUtility.ShouldBeFedBySomeone(PawnA) || RimWorld.FoodUtility.ShouldBeFedBySomeone(PawnB)))
 			{
 				//TODO: watch out for compatibility
-				if (pawnA.IsColonist)
+				if (PawnA.IsColonist)
 				{
-					eater = pawnB;
-					getter = pawnA;
+					eater = PawnB;
+					getter = PawnA;
 				}
-				else if (pawnB.IsColonist)
+				else if (PawnB.IsColonist)
 				{
-					eater = pawnA;
-					getter = pawnB;
+					eater = PawnA;
+					getter = PawnB;
 				}
 				else
-					eater = getter = pawnA;
+					eater = getter = PawnA;
 			}
 			else
-				eater = getter = pawnA;
+				eater = getter = PawnA;
 
 
 			// ------------------------------------------------------------------------------
@@ -96,12 +134,12 @@ namespace WM.SmarterFoodSelection.Detours
 				if (category == FoodCategory.Null)
 					return false;
 
-				return FoodUtility.IsValidFoodSourceForPawn(t, eater, getter, policy, false);
+				return FoodUtils.IsValidFoodSourceForPawn(t, eater, getter, policy, false);
 			} );
 
 			ThingDef dum2;
 			// Generates cache
-			var foundFood = FoodUtility.TryFindBestFoodSourceFor(getter, eater, true, out bestFoodSource, out dum2);
+			var foundFood = RimWorld.FoodUtility.TryFindBestFoodSourceFor(getter, eater, true, out bestFoodSource, out dum2);
 
 			if (!foundFood)
 				//goto cursorwidget;
@@ -154,7 +192,7 @@ namespace WM.SmarterFoodSelection.Detours
 			//bestScoreFromMouse = foodsToDisplay.MaxBy((arg) => arg.Score);
 
 			bestScoreFromMouse = foodsToDisplay.MaxBy((arg) => arg.ScoreForceSum);
-			bestFoodSourceFromMouse = bestScoreFromMouse.FoodSource;
+			BestFoodSourceFromMouse = bestScoreFromMouse.FoodSource;
 
 			// ----------------------- Food sources widgets ------------------------------
 
@@ -171,7 +209,7 @@ namespace WM.SmarterFoodSelection.Detours
 					bool advancedInfo = (advancedInfoForAll);
 
 					Color widgetColor;
-					if (current == bestScoreFromMouse || current.FoodSource == bestFoodSource || current.FoodSource == thingAtCursorCell)
+					if (current == bestScoreFromMouse || current.FoodSource == BestFoodSource || current.FoodSource == thingAtCursorCell)
 					{
 						if (ModCore.drawFoodSearchMode == ModCore.DrawFoodSearchMode.AdvancedForBest)
 							advancedInfo = true;
@@ -190,8 +228,8 @@ namespace WM.SmarterFoodSelection.Detours
 #if DEBUG
 					if (current.FoodSource is Pawn)
 					{
-						text += "\n" + "ratio1=" + FoodUtility.GetPreyRatio1(getter, current.FoodSource as Pawn);
-						text += "\n" + "ratio2=" + FoodUtility.GetPreyRatio2(getter, current.FoodSource as Pawn);
+						text += "\n" + "ratio1=" + FoodUtils.GetPreyRatio1(getter, current.FoodSource as Pawn);
+						text += "\n" + "ratio2=" + FoodUtils.GetPreyRatio2(getter, current.FoodSource as Pawn);
 					}
 #endif
 
@@ -230,9 +268,9 @@ namespace WM.SmarterFoodSelection.Detours
 				string score;
 				string foodname;
 
-				if (bestFoodSourceFromMouse != null)
+				if (BestFoodSourceFromMouse != null)
 				{
-					foodname = bestFoodSourceFromMouse.Label;
+					foodname = BestFoodSourceFromMouse.Label;
 					score = bestScoreFromMouse.ScoreForceSum.ToString("F0");
 				}
 				else
@@ -250,10 +288,19 @@ namespace WM.SmarterFoodSelection.Detours
 			//TODO: spread or merge widgets +
 			Widgets.Label(new Rect((a.ToUIPosition() + new Vector2(-100f, -80f)), new Vector2(200f, 200f)), pawninfo);
 		}
+	}
 
-		// RimWorld.FoodUtility
-		[DetourMethod(typeof(RimWorld.FoodUtility), "DebugFoodSearchFromMouse_Update")]
-		public static void DebugFoodSearchFromMouse_Update()
+	[HarmonyPatch(typeof(RimWorld.FoodUtility), "DebugFoodSearchFromMouse_Update")]
+	public static class DebugFoodSearchFromMouse_Update
+	{
+		[HarmonyPrefix]
+		public static bool Prefix()
+		{
+			return false;
+		}
+
+		[HarmonyPostfix]
+		public static void Postfix()
 		{
 			try
 			{
@@ -279,26 +326,26 @@ namespace WM.SmarterFoodSelection.Detours
 			}
 			{
 				//TODO: fix broken lines
-				if (bestFoodSource != null)
+				if (DebugFoodSearchFromMouse_OnGUI.BestFoodSource != null)
 				{
-					GenDraw.DrawLineBetween(pawn.Position.ToVector3Shifted(), bestFoodSource.Position.ToVector3Shifted(), SimpleColor.Yellow);
+					GenDraw.DrawLineBetween(pawn.Position.ToVector3Shifted(), DebugFoodSearchFromMouse_OnGUI.BestFoodSource.Position.ToVector3Shifted(), SimpleColor.Yellow);
 				}
-				if (bestFoodSourceFromMouse != null)
+				if (DebugFoodSearchFromMouse_OnGUI.BestFoodSourceFromMouse != null)
 				{
-					GenDraw.DrawLineBetween(root.ToVector3Shifted(), bestFoodSourceFromMouse.Position.ToVector3Shifted(), SimpleColor.Yellow);
+					GenDraw.DrawLineBetween(root.ToVector3Shifted(), DebugFoodSearchFromMouse_OnGUI.BestFoodSourceFromMouse.Position.ToVector3Shifted(), SimpleColor.Yellow);
 				}
-				if (pawnB != null && null != pawnA && pawnA != pawnB)
+				if (DebugFoodSearchFromMouse_OnGUI.PawnB != null && null != DebugFoodSearchFromMouse_OnGUI.PawnA && DebugFoodSearchFromMouse_OnGUI.PawnA != DebugFoodSearchFromMouse_OnGUI.PawnB)
 				{
-					GenDraw.DrawLineBetween(pawnA.Position.ToVector3Shifted(), pawnB.Position.ToVector3Shifted(), SimpleColor.Green);
+					GenDraw.DrawLineBetween(DebugFoodSearchFromMouse_OnGUI.PawnA.Position.ToVector3Shifted(), DebugFoodSearchFromMouse_OnGUI.PawnB.Position.ToVector3Shifted(), SimpleColor.Green);
 				}
 			}
 
 			//duck tape
 			try
 			{
-				if (getter.playerSettings != null && getter.playerSettings.AreaRestrictionInPawnCurrentMap != null)
+				if (DebugFoodSearchFromMouse_OnGUI.Getter.playerSettings != null && DebugFoodSearchFromMouse_OnGUI.Getter.playerSettings.EffectiveAreaRestrictionInPawnCurrentMap != null)
 				{
-					GenDraw.DrawFieldEdges(getter.playerSettings.AreaRestrictionInPawnCurrentMap.ActiveCells.ToList(), Color.red);
+					GenDraw.DrawFieldEdges(DebugFoodSearchFromMouse_OnGUI.Getter.playerSettings.EffectiveAreaRestrictionInPawnCurrentMap.ActiveCells.ToList(), Color.red);
 				}
 			}
 			catch (Exception)
@@ -308,30 +355,5 @@ namespace WM.SmarterFoodSelection.Detours
 #endif
 			}
 		}
-
-		// RimWorld.FoodUtility
-		//[DetourMethod(typeof(RimWorld.FoodUtility),"DebugDrawPredatorFoodSource")]
-		//public static void DebugDrawPredatorFoodSource()
-		//{
-		//	Pawn pawn = Find.Selector.SingleSelectedThing as Pawn;
-		//	if (pawn == null)
-		//	{
-		//		return;
-		//	}
-		//	Thing thing;
-		//	ThingDef thingDef;
-		//	if (FoodUtility.TryFindBestFoodSourceFor(pawn, pawn, true, out thing, out thingDef, false, false, false, true))
-		//	{
-		//		GenDraw.DrawLineBetween(pawn.Position.ToVector3Shifted(), thing.Position.ToVector3Shifted());
-		//		if (!(thing is Pawn))
-		//		{
-		//			Pawn pawn2 = FoodUtility.BestPawnToHuntForPredator(pawn);
-		//			if (pawn2 != null)
-		//			{
-		//				GenDraw.DrawLineBetween(pawn.Position.ToVector3Shifted(), pawn2.Position.ToVector3Shifted());
-		//			}
-		//		}
-		//	}
-		//}
 	}
 }

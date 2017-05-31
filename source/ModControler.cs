@@ -35,9 +35,9 @@ namespace WM.SmarterFoodSelection
 		// ducktapestan
 		private static ModCore running;
 
-		public readonly static string modname = "Smarter_Food_Selection";
-
 		internal static List<CompabilityDef> patches = new List<CompabilityDef>();
+
+		public readonly static string modname = "Smarter_Food_Selection";
 
 		public override string ModIdentifier
 		{

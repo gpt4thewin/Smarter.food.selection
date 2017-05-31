@@ -34,7 +34,7 @@ namespace WM.SmarterFoodSelection
 		{
 			base.ExposeData();
 
-			Scribe_Collections.LookDictionary<Pawn, Policy>(ref AssignedPolicies, "WMSFS_PawnFoodPolicies", LookMode.Reference, LookMode.Def, ref keysList, ref valuesList);
+			Scribe_Collections.Look<Pawn, Policy>(ref AssignedPolicies, "WMSFS_PawnFoodPolicies", LookMode.Reference, LookMode.Def, ref keysList, ref valuesList);
 
 			if (Scribe.mode == LoadSaveMode.PostLoadInit)
 			{

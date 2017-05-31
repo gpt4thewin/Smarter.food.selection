@@ -17,8 +17,6 @@ namespace WM.SmarterFoodSelection.UI
 		static readonly Vector2 topRectSize = new Vector2(middleRectSize.x, 50 + verticalMargin * 2);
 		//static readonly Vector2 botRectSize = new Vector2(topRectSize.x, 30);
 
-		static Vector2 scrollposition;
-
 		public static Vector2 Size
 		{
 			get
@@ -47,7 +45,8 @@ namespace WM.SmarterFoodSelection.UI
 			}
 			catch (Exception ex)
 			{
-				Listing_Standard listing = new Listing_Standard(rect);
+				Listing_Standard listing = new Listing_Standard();
+				listing.Begin(rect);
 				listing.Label(ex.Message);
 				listing.Label(ex.StackTrace);
 				listing.End();
@@ -69,7 +68,8 @@ namespace WM.SmarterFoodSelection.UI
 
 			Rect topRect = new Rect(rect.position.x + horizontalMargin, rect.position.y + verticalMargin, topRectSize.x - horizontalMargin * 2, topRectSize.y);
 
-			Listing_Standard listing = new Listing_Standard(topRect);
+			Listing_Standard listing = new Listing_Standard();
+			listing.Begin(topRect);
 			listing.ColumnWidth = topRect.width / 2;
 			listing.verticalSpacing = 4;
 
@@ -132,7 +132,7 @@ namespace WM.SmarterFoodSelection.UI
 
 			// -------------------- Top end --------------------------
 
-			Widgets.DrawLineHoriz ontal(rect.x + horizontalMargin, rect.y + topRectSize.y - verticalMargin, rect.width - horizontalMargin * 2);
+			Widgets.DrawLineHorizontal(rect.x + horizontalMargin, rect.y + topRectSize.y - verticalMargin, rect.width - horizontalMargin * 2);
 
 			// ---------------------------- Middle -------------------------------
 
@@ -140,15 +140,15 @@ namespace WM.SmarterFoodSelection.UI
 
 			// ---------------------------- Middle left -------------------------------
 
-			Listing_Standard listingMiddleLeft = new Listing_Standard(policyRectMiddle.LeftPart(middleLeftColumnSize / policyRectMiddle.width));
+			Listing_Standard listingMiddleLeft = new Listing_Standard(GameFont.Small);
+
+			listingMiddleLeft.Begin(policyRectMiddle.LeftPart(middleLeftColumnSize / policyRectMiddle.width));
 
 			listingMiddleLeft.verticalSpacing = verticalMargin;
 
 			//listingMiddleLeft.ColumnWidth = middleLeftColumnSize;
 
 			//Rect policyRectMiddleLeft = policyRectMiddle.LeftHalf();
-
-			Text.Font = GameFont.Small;
 
 			//string policyDesc = "";
 
@@ -179,7 +179,9 @@ namespace WM.SmarterFoodSelection.UI
 
 			var rectMiddleRight = policyRectMiddle.RightPart((middleRightColumnSize - horizontalMargin * 4) / policyRectMiddle.width);
 			rectMiddleRight.x -= horizontalMargin;
-			Listing_Standard listingMiddleRight = new Listing_Standard(rectMiddleRight);
+			Listing_Standard listingMiddleRight = new Listing_Standard();
+
+			listingMiddleRight.Begin(rectMiddleRight);
 
 			listingMiddleRight.verticalSpacing = verticalMargin;
 

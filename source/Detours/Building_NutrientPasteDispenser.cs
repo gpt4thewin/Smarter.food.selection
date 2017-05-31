@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using HugsLib.Source.Detour;
+using Harmony;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -41,17 +41,15 @@ namespace WM.SmarterFoodSelection.Detours
 			FoodCategory.RawTasty
 		};
 
-		public static int FoodCostPerDispense
+		public static float NutritionCostPerDispense
 		{
 			get
 			{
-				return ThingDefOf.NutrientPasteDispenser.building.foodCostPerDispense;
+				return (ThingDefOf.NutrientPasteDispenser.building.nutritionCostPerDispense);
 			}
 		}
 
-#pragma warning disable RECS0082 // Parameter has the same name as a member and hides it
 		static int rankForPawn(DispenseMode mode, ThingDef def)
-#pragma warning restore RECS0082 // Parameter has the same name as a member and hides it
 		{
 			FoodCategory pref = def.DetermineFoodCategory();
 			FoodCategory[] rank;
@@ -90,10 +88,10 @@ namespace WM.SmarterFoodSelection.Detours
 
 			ingredients = IngredientsFor(self, mode);
 
-			if (ingredients.Sum((arg) => arg.stackCount) < FoodCostPerDispense)
+			if (ingredients.Sum((arg) => arg.stackCount) < NutritionCostPerDispense)
 			{
 				if (!silent)
-					Log.Error("Did not find enough food in hoppers while trying to dispense. (" + ingredients.Count + "/" + FoodCostPerDispense + ")");
+					Log.Error("Did not find enough food in hoppers while trying to dispense. (" + ingredients.Count + "/" + NutritionCostPerDispense + ")");
 				return null;
 			}
 #if DEBUG
@@ -109,13 +107,15 @@ namespace WM.SmarterFoodSelection.Detours
 			Thing thing2 = ThingMaker.MakeThing(ThingDefOf.MealNutrientPaste, null);
 			CompIngredients compIngredients = thing2.TryGetComp<CompIngredients>();
 
-			int num = 0;
+			float num = 0;
 
-			for (int i = 0; num < FoodCostPerDispense; i++)
+			for (int i = 0; num < NutritionCostPerDispense; i++)
 			{
-				int num2 = Math.Min(ingredients[i].stackCount, FoodCostPerDispense);
+				var nutrition = ingredients[i].def.ingestible.nutrition;
+
+				float num2 = Mathf.Min(ingredients[i].stackCount * nutrition, NutritionCostPerDispense);
 				num += num2;
-				ingredients[i].SplitOff(num2);
+				ingredients[i].SplitOff(Convert.ToInt32(num2 / nutrition));
 				compIngredients.RegisterIngredient(ingredients[i].def);
 			}
 
@@ -181,7 +181,7 @@ namespace WM.SmarterFoodSelection.Detours
 			
 			var list = GetAllHoppersThings(self);
 
-			return  Mathf.Floor(list.Sum((arg) => arg.stackCount) / FoodCostPerDispense) * ThingDefOf.MealNutrientPaste.ingestible.nutrition;
+			return  Mathf.Floor(list.Sum((arg) => arg.stackCount) / NutritionCostPerDispense) * ThingDefOf.MealNutrientPaste.ingestible.nutrition;
 		}
 
 		static List<Thing> GetAllHoppersThings(this RimWorld.Building_NutrientPasteDispenser self)
@@ -219,11 +219,11 @@ namespace WM.SmarterFoodSelection.Detours
 			Thing dummyMeal = ThingMaker.MakeThing(ThingDefOf.MealNutrientPaste, null);
 			CompIngredients compIngredients = dummyMeal.TryGetComp<CompIngredients>();
 
-			int num = 0;
+			float num = 0;
 
-			for (int i = 0; num < FoodCostPerDispense; i++)
+			for (int i = 0; num < NutritionCostPerDispense; i++)
 			{
-				int num2 = Math.Min(list[i].stackCount, FoodCostPerDispense);
+				float num2 = Mathf.Min(list[i].stackCount * list[i].def.ingestible.nutrition, NutritionCostPerDispense);
 				num += num2;
 				compIngredients.RegisterIngredient(list[i].def);
 			}
@@ -237,7 +237,7 @@ namespace WM.SmarterFoodSelection.Detours
 
 		static Thing FindFeedInAnyHopper(RimWorld.Building_NutrientPasteDispenser self)
 		{
-			return (Thing)typeof(RimWorld.Building_NutrientPasteDispenser).GetMethod("FindFeedInAnyHopper", Helpers.AllBindingFlags).Invoke(self, null);
+			return (Thing)typeof(RimWorld.Building_NutrientPasteDispenser).GetMethod("FindFeedInAnyHopper", AccessTools.all).Invoke(self, null);
 		}
 
 		// RimWorld.Building_NutrientPasteDispenser
@@ -261,11 +261,11 @@ namespace WM.SmarterFoodSelection.Detours
 
 		static private List<IntVec3> cachedAdjCellsCardinal(this Building_NutrientPasteDispenser self)
 		{
-			return (List<IntVec3>)typeof(RimWorld.Building_NutrientPasteDispenser).GetField("cachedAdjCellsCardinal", Helpers.AllBindingFlags).GetValue(self);
+			return (List<IntVec3>)typeof(RimWorld.Building_NutrientPasteDispenser).GetField("cachedAdjCellsCardinal", AccessTools.all).GetValue(self);
 		}
 		static private void cachedAdjCellsCardinal_set_(this Building_NutrientPasteDispenser self, List<IntVec3> value)
 		{
-			typeof(RimWorld.Building_NutrientPasteDispenser).GetField("cachedAdjCellsCardinal", Helpers.AllBindingFlags).SetValue(self, value);
+			typeof(RimWorld.Building_NutrientPasteDispenser).GetField("cachedAdjCellsCardinal", AccessTools.all).SetValue(self, value);
 		}
 	}
 }

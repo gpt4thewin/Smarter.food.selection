@@ -160,8 +160,8 @@ namespace WM.SmarterFoodSelection
 
 			if (!this.pawnType.Matches(pawnType))
 				return false;
-
-			if (!appealedPrisoner.Matches(pawn.guest != null && pawn.IsPrisonerOfColony && pawn.guest.interactionMode == PrisonerInteractionMode.AttemptRecruit))
+			
+			if (!appealedPrisoner.Matches(pawn.guest != null && pawn.IsPrisonerOfColony && pawn.guest.interactionMode == PrisonerInteractionModeDefOf.AttemptRecruit))
 				return false;
 
 			//if (pawn.story != null)

@@ -1,24 +1,22 @@
-using System;
-using HugsLib.Source.Detour;
+﻿using System;
 using RimWorld;
 using UnityEngine;
 using Verse;
 using Verse.AI;
 
-namespace WM.SmarterFoodSelection.Detours
+namespace WM.SmarterFoodSelection.Detours.WorkGiver_InteractAnimal
 {
-
-	public class WorkGiver_InteractAnimal
+	public static class WorkGiver_InteractAnimal
 	{
-		[DetourMethod(typeof(RimWorld.WorkGiver_InteractAnimal), "TakeFoodForAnimalInteractJob")]
-		// RimWorld.WorkGiver_InteractAnimal
-		protected Job TakeFoodForAnimalInteractJob(Pawn pawn, Pawn tamee)
+		internal static Job TakeFoodForAnimalInteractJob(Pawn pawn, Pawn tamee)
 		{
 			float num = JobDriver_InteractAnimal.RequiredNutritionPerFeed(tamee) * 2f * 4f;
 			Thing thing;
-			ThingDef def;
-
-			if (!FoodUtility.TryFindBestFoodSourceFor_Internal(pawn, tamee, false, out thing, out def, false, false, false, Config.useCorpsesForTaming, Policies.Taming))
+			ThingDef thingdef;
+			// -------- MOD --------
+			bool result = Detours.FoodUtility.TryFindBestFoodSourceFor.Internal(pawn, tamee, false, out thing, out thingdef, true, false, false, Config.useCorpsesForTaming, Policies.Taming);
+			// -------- --------
+			if (!result)
 			{
 				return null;
 			}
@@ -27,15 +25,12 @@ namespace WM.SmarterFoodSelection.Detours
 				count = Mathf.CeilToInt(num / thing.GetNutritionAmount())
 			};
 		}
-
-		[DetourMethod(typeof(RimWorld.WorkGiver_InteractAnimal), "HasFoodToInteractAnimal")]
-		// RimWorld.WorkGiver_InteractAnimal
-		protected bool HasFoodToInteractAnimal(Pawn pawn, Pawn tamee)
+		internal static bool HasFoodToInteractAnimal(Pawn pawn, Pawn tamee)
 		{
 			if (Policies.Taming == null)
 				throw new Exception("Everything is broken !");
 
-			ThingContainer innerContainer = pawn.inventory.innerContainer;
+			ThingOwner innerContainer = pawn.inventory.innerContainer;
 			int num = 0;
 			float num2 = JobDriver_InteractAnimal.RequiredNutritionPerFeed(tamee);
 			float num3 = 0f;
@@ -62,6 +57,5 @@ namespace WM.SmarterFoodSelection.Detours
 			}
 			return false;
 		}
-
 	}
 }

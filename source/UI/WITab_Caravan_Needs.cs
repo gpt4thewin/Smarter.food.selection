@@ -1,5 +1,5 @@
 ﻿using System;
-using HugsLib.Source.Detour;
+using Harmony;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -64,7 +64,7 @@ namespace WM.SmarterFoodSelection.UI
 		{
 			get
 			{
-				return (float)typeof(RimWorld.Planet.WITab_Caravan_Needs).GetProperty("SpecificNeedsTabWidth", Helpers.AllBindingFlags).GetValue(this, null);
+				return (float)typeof(RimWorld.Planet.WITab_Caravan_Needs).GetProperty("SpecificNeedsTabWidth", AccessTools.all).GetValue(this, null);
 			}
 		}
 

@@ -43,7 +43,7 @@
 	<ControlColonists>Enable control over colonists</ControlColonists>
 	<ControlColonists_desc>Enable control over colonists</ControlColonists_desc>
 	<ControlVisitors>Enable control over visitors</ControlVisitors>
-	<ControlColonists_desc>If disabled, visitors will use their vanilla behavior.</ControlColonists_desc>
+	<ControlVisitors_desc>If disabled, visitors will use their vanilla behavior.</ControlVisitors_desc>
 
 	<NeedsTabUIHeight>UI height in needs tab.</NeedsTabUIHeight>
 	<NeedsTabUIHeight_desc>UI height in needs tab when the UI is sploied. Too small values may prevent the UI to be shown correctly.\nUse with caution.</NeedsTabUIHeight_desc>
@@ -76,6 +76,7 @@
 
 	<CannibalMealLabel>{0} (cannibal)</CannibalMealLabel>
 
+	<NPDNoEnergy>Insufficient energy stored in power network.</NPDNoEnergy>
 
 	<!-- ============== Pawn policy card ============== -->
 

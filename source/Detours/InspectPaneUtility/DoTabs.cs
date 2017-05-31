@@ -1,24 +1,31 @@
 ﻿using System;
 using System.Linq;
-using HugsLib.Source.Detour;
+using Harmony;
 using RimWorld;
 using UnityEngine;
 using Verse;
 
-namespace WM.SmarterFoodSelection.Detours
+namespace WM.SmarterFoodSelection.Detours.InspectPaneUtility
 {
-	public class InspectPaneUtility
+	[HarmonyPatch(typeof(RimWorld.InspectPaneUtility), "DoTabs")]
+	public static class DoTabs
 	{
-		public InspectPaneUtility()
-		{
-		}
-
 		//const float TAB_WIDTH = 72f;
 		const float TABLIST_WIDTH = 432f;
 
-		[DetourMethod(typeof(RimWorld.InspectPaneUtility), "DoTabs")]
-		// RimWorld.InspectPaneUtility
-		private static void DoTabs(IInspectPane pane)
+		//[HarmonyPrepare]
+		//static bool MyInitializer()
+		//{
+		//	return false;
+		//}
+
+		[HarmonyPrefix]
+		public static bool Prefix()
+		{ return false; }
+
+		[HarmonyPostfix]
+		//private static void DoTabs(IInspectPane pane)
+		private static void Postfix(IInspectPane pane)
 		{
 			float TAB_WIDTH = TABLIST_WIDTH / Math.Max(pane.CurTabs.Count(arg => arg.IsVisible), 6);
 
@@ -44,7 +51,7 @@ namespace WM.SmarterFoodSelection.Detours
 
 						if (Widgets.ButtonText(rect, current.labelKey.Translate(), true, false, true))
 						{
-							InspectPaneUtility.InterfaceToggleTab(current, pane);
+							InspectPaneUtility.DoTabs.InterfaceToggleTab(current, pane);
 						}
 						bool flag2 = current.GetType() == pane.OpenTabType;
 						if (!flag2 && !current.TutorHighlightTagClosed.NullOrEmpty())
@@ -62,7 +69,7 @@ namespace WM.SmarterFoodSelection.Detours
 				}
 				if (flag)
 				{
-					GUI.DrawTexture(new Rect(0f, y, width, 30f), InspectPaneUtility.InspectTabButtonFillTex);
+					GUI.DrawTexture(new Rect(0f, y, width, 30f), InspectPaneUtility.DoTabs.InspectTabButtonFillTex);
 				}
 			}
 			catch (Exception ex)
@@ -71,17 +78,16 @@ namespace WM.SmarterFoodSelection.Detours
 			}
 		}
 
-
 		public static Texture2D InspectTabButtonFillTex
 		{
 			get
 			{
-				return (Texture2D)typeof(RimWorld.InspectPaneUtility).GetField("InspectTabButtonFillTex", Helpers.AllBindingFlags).GetValue(null);
+				return (Texture2D)typeof(RimWorld.InspectPaneUtility).GetField("InspectTabButtonFillTex", AccessTools.all).GetValue(null);
 			}
 		}
 		static void InterfaceToggleTab(InspectTabBase current, IInspectPane pane)
 		{
-			typeof(RimWorld.InspectPaneUtility).GetMethod("InterfaceToggleTab", Helpers.AllBindingFlags).Invoke(null, new object[] { current, pane });
+			typeof(RimWorld.InspectPaneUtility).GetMethod("InterfaceToggleTab", AccessTools.all).Invoke(null, new object[] { current, pane });
 		}
 	}
 }

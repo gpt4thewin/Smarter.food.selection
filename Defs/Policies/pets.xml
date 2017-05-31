@@ -27,6 +27,20 @@
 		</diet>
 	</WM.SmarterFoodSelection.Policy>
 	<WM.SmarterFoodSelection.Policy>
+		<defName>SFS_GrassHayKibble</defName>
+		<label>Hay, kibble</label>
+		<conditions>
+			<li>pet</li>
+		</conditions>
+		<description>Grass hay and kibble only.
+		</description>
+		<diet>
+				Grass /
+				Hay /		
+				Kibble
+		</diet>
+	</WM.SmarterFoodSelection.Policy>
+	<WM.SmarterFoodSelection.Policy>
 		<defName>SFS_PetPolicy_NoHunt</defName>
 		<label>No hunt</label>
 		<conditions>

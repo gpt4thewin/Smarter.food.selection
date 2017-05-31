@@ -1,38 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using HugsLib.Source.Detour;
+using Harmony;
 using RimWorld.Planet;
 using Verse;
+using WM.SmarterFoodSelection.Detours.FoodUtility;
 
-namespace WM.SmarterFoodSelection.Detours
+namespace WM.SmarterFoodSelection.Detours.CaravanInventoryUtility
 {
-	public class CaravanInventoryUtility
+	[HarmonyPatch(typeof(RimWorld.Planet.CaravanInventoryUtility), "TryGetBestFood")]
+	public class TryGetBestFood
 	{
-		[DetourMethod(typeof(RimWorld.Planet.CaravanInventoryUtility), "TryGetBestFood")]
-		public static bool TryGetBestFood(Caravan caravan, Pawn forPawn, out Thing food, out Pawn owner)
+		public static void Postfix(ref bool __result,Caravan caravan, Pawn forPawn, out Thing food, out Pawn owner)
 		{
 			try
 			{
-				return _TryGetBestFood(caravan, forPawn, out food, out owner);
+				__result = Internal(caravan, forPawn, out food, out owner);
 			}
 			catch (Exception ex)
 			{
 				throw new Exception("Error when trying to find best food in caravan. eater=" + forPawn, ex);
 			}
 		}
-		// RimWorld.Planet.CaravanInventoryUtility
-		public static bool _TryGetBestFood(Caravan caravan, Pawn forPawn, out Thing food, out Pawn owner)
+		static bool Internal(Caravan caravan, Pawn forPawn, out Thing food, out Pawn owner)
 		{
 			List<Thing> list = RimWorld.Planet.CaravanInventoryUtility.AllInventoryItems(caravan)
 									   .Where(arg => CaravanPawnsNeedsUtility.CanNowEatForNutrition(arg.def, forPawn)).ToList();
 			Thing thing = null;
 
 			Policy policy = forPawn.GetPolicyAssignedTo();
-			var foodsForPawn = FoodUtility.MakeRatedFoodListFromThingList(list, forPawn, forPawn, forPawn.GetPolicyAssignedTo())
+			var foodsForPawn = FoodUtils.MakeRatedFoodListFromThingList(list, forPawn, forPawn, forPawn.GetPolicyAssignedTo())
 										  .Where(arg => RimWorld.Planet.CaravanPawnsNeedsUtility.CanNowEatForNutrition(arg.FoodSource.def, forPawn) &&
-												 policy.PolicyAllows(forPawn, arg.FoodSource)
-												);
+												 policy.PolicyAllows(forPawn, arg.FoodSource) );
 
 			var foodEntry = foodsForPawn.FirstOrDefault();
 

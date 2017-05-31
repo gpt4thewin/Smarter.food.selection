@@ -1,11 +1,15 @@
 ﻿using System;
-using HugsLib.Source.Detour;
+using Harmony;
 using RimWorld;
 using Verse;
 using Verse.AI;
 
-namespace WM.SmarterFoodSelection.Detours
+namespace WM.SmarterFoodSelection.Detours.JobGiver_GetFood
 {
+	//[HarmonyPatch(typeof(RimWorld.JobGiver_GetFood), "JobGiver_GetFood")]
+	public static class TryGiveJob
+	{
+	}
 	public class JobGiver_GetFood : ThinkNode_JobGiver
 	{
 		//[DetourMethod(typeof(RimWorld.JobGiver_GetFood),"TryGiveJob")]
@@ -26,7 +30,7 @@ namespace WM.SmarterFoodSelection.Detours
 			bool allowCorpse = flag;
 			Thing thing;
 			ThingDef def;
-			if (!FoodUtility.TryFindBestFoodSourceFor(pawn, pawn, desperate, out thing, out def, true, true, false, allowCorpse))
+			if (!RimWorld.FoodUtility.TryFindBestFoodSourceFor(pawn, pawn, desperate, out thing, out def, true, true, false, allowCorpse))
 			{
 				return null;
 			}
@@ -45,7 +49,8 @@ namespace WM.SmarterFoodSelection.Detours
 				if (building != null)
 				{
 					ISlotGroupParent hopperSgp = building as ISlotGroupParent;
-					Job job = Original.WorkGiver_CookFillHopper.HopperFillFoodJob(pawn, hopperSgp);
+					//TODO utiliser original?
+					Job job = RimWorld.WorkGiver_CookFillHopper.HopperFillFoodJob(pawn, hopperSgp);
 					if (job != null)
 					{
 						return job;
@@ -63,6 +68,5 @@ namespace WM.SmarterFoodSelection.Detours
 				count = RimWorld.FoodUtility.WillIngestStackCountOf(pawn, def)
 			};
 		}
-
 	}
 }

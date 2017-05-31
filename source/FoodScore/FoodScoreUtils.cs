@@ -73,7 +73,7 @@ namespace WM.SmarterFoodSelection
 					var preyScore = RimWorld.FoodUtility.GetPreyScoreFor(eater, food as Pawn) * PREY_FACTOR_MULTIPLIER;
 					//ducktape, negates the distance factor of the vanilla function as it is already calculated by the mod.
 					preyScore += (eater.Position - food.Position).LengthHorizontal * PREY_FACTOR_MULTIPLIER;
-					obj.AddComp("Prey (ratio=" + Detours.FoodUtility.GetPreyRatio(eater, food as Pawn).ToString("F2") + ")", preyScore);
+					obj.AddComp("Prey (ratio=" + FoodUtils.GetPreyRatio(eater, food as Pawn).ToString("F2") + ")", preyScore);
 					return obj;
 				}
 			}
@@ -102,11 +102,13 @@ namespace WM.SmarterFoodSelection
 					for (int i = 0; i < list.Count; i++)
 					{
 						obj.AddComp(list[i].defName,
-									policy.moodEffectFactor * Detours.Original.FoodUtility.FoodOptimalityEffectFromMoodCurve.Evaluate(list[i].stages[0].baseMoodEffect));
+						            policy.moodEffectFactor * Detours.Access.FoodOptimalityEffectFromMoodCurve.Evaluate(list[i].stages[0].baseMoodEffect));
 					}
 				}
 
 				// ------------- Cost factor (waste factor aswell) -------------
+
+				//TODO: concurrent based waste factor.
 
 				float costRatio;
 				float foodNutrition;
@@ -128,9 +130,12 @@ namespace WM.SmarterFoodSelection
 					//TODO: ajust; add record for the NPD
 
 					if (food is RimWorld.Building_NutrientPasteDispenser)
-						costRatio = (food.def.building.foodCostPerDispense * 0.05f) / ThingDefOf.MealNutrientPaste.ingestible.nutrition;
+						costRatio = (food.def.building.nutritionCostPerDispense * 0.05f) / ThingDefOf.MealNutrientPaste.ingestible.nutrition;
 					else
 						costRatio = (obj.DefRecord.costFactor);
+
+					if (food.def.IsCorpse)
+						costRatio *= 0.25f;
 
 					//TODO: combine waste & cost factors
 

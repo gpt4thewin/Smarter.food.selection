@@ -1,17 +1,23 @@
-﻿using HugsLib.Source.Detour;
+﻿using Harmony;
 using RimWorld;
 using Verse;
 using Verse.AI;
 
-namespace WM.SmarterFoodSelection.Detours
+namespace WM.SmarterFoodSelection.Detours.Toils_Ingest
 {
-	public static class Toils_Ingest
+	[HarmonyPatch(typeof(RimWorld.Toils_Ingest), "TakeMealFromDispenser")]
+	public static class TakeMealFromDispenser
 	{
-		[DetourMethod(typeof(RimWorld.Toils_Ingest), "TakeMealFromDispenser")]
-		// RimWorld.Toils_Ingest
-		public static Toil TakeMealFromDispenser(TargetIndex ind, Pawn eater)
+		[HarmonyPrefix]
+		public static bool Prefix()
 		{
-			Toil toil = new Toil();
+			return false;
+		}
+
+		[HarmonyPostfix]
+		public static void Postfix(out Toil __result,TargetIndex ind, Pawn eater)
+		{
+			var toil = new Toil();
 			toil.initAction = delegate
 			{
 				Pawn actor = toil.actor;
@@ -38,7 +44,10 @@ namespace WM.SmarterFoodSelection.Detours
 			};
 			toil.defaultCompleteMode = ToilCompleteMode.Delay;
 			toil.defaultDuration = Building_NutrientPasteDispenser.CollectDuration;
-			return toil;
+
+			__result = toil;
+
+			return;
 		}
 	}
 }

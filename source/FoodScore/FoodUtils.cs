@@ -1,118 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using HugsLib.Source.Detour;
 using RimWorld;
 using Verse;
+using System.Linq;
 using Verse.AI;
 
-namespace WM.SmarterFoodSelection.Detours
+namespace WM.SmarterFoodSelection
 {
-	public static class FoodUtility
+	public static class FoodUtils
 	{
-		[DetourMethod(typeof(RimWorld.FoodUtility), "TryFindBestFoodSourceFor")]
-		public static bool TryFindBestFoodSourceFor(Pawn getter, Pawn eater, bool desperate, out Thing foodSource, out ThingDef foodDef, bool canRefillDispenser = true, bool canUseInventory = true, bool allowForbidden = false, bool allowCorpse = true)
-		{
-			return TryFindBestFoodSourceFor_Internal(getter, eater, desperate, out foodSource, out foodDef, canRefillDispenser, canUseInventory, allowForbidden, allowCorpse);
-		}
-
-		internal static bool TryFindBestFoodSourceFor_Internal(Pawn getter, Pawn eater, bool desperate, out Thing foodSource, out ThingDef foodDef, bool canRefillDispenser = true, bool canUseInventory = true, bool allowForbidden = false, bool allowCorpse = true, Policy forcedPolicy = null)
-		{
-			try
-			{
-				bool result = false;
-				result = _TryFindBestFoodSourceFor(getter, eater, desperate, out foodSource, out foodDef, canRefillDispenser, canUseInventory, allowForbidden, allowCorpse, forcedPolicy);
-				return result;
-			}
-			catch (Exception ex)
-			{
-				throw new Exception(string.Format("{0}: Exception when fetching. (getter={1} eater={2})\n{3}\n{4}", ModCore.modname, getter, eater, ex.Message, ex.StackTrace), ex);
-			}
-		}
-
-
-		// RimWorld.FoodUtility
-		private static bool _TryFindBestFoodSourceFor(Pawn getter, Pawn eater, bool desperate, out Thing foodSource, out ThingDef foodDef, bool canRefillDispenser = true, bool canUseInventory = true, bool allowForbidden = false, bool allowCorpse = true, Policy forcedPolicy = null)
-		{
-#if DEBUG
-
-			Log.Message("_TryFindBestFoodSourceFor() getter=" + getter + " eater=" + eater + " desperate=" + desperate + " canUseInventory=" + canUseInventory + " allowForbidden=" + allowForbidden);
-#endif
-			Policy policy;
-
-			//taming ? TODO: check for bug free
-			if (forcedPolicy != null)
-				policy = forcedPolicy;
-			else
-				policy = eater.GetPolicyAssignedTo(getter);
-
-			if (getter.isWildAnimal() || getter.isInsectFaction() || policy.unrestricted || getter.InMentalState || Config.ControlDisabledForPawn(eater))
-			{
-				return Original.FoodUtility.TryFindBestFoodSourceFor(getter, eater, desperate, out foodSource, out foodDef, canRefillDispenser, canUseInventory, allowForbidden, allowCorpse);
-			}
-
-			List<FoodSourceRating> FoodListForPawn;
-
-			FoodSearchCache.PawnEntry pawnEntry;
-
-			if (!FoodSearchCache.TryGetEntryForPawn(getter, eater, out pawnEntry, allowForbidden))
-			{
-				bool foundFood = MakeRatedFoodListForPawn(getter.Map, eater, getter, policy, out FoodListForPawn, canUseInventory, allowForbidden);
-
-				pawnEntry = FoodSearchCache.AddPawnEntry(getter, eater, FoodListForPawn);
-			}
-
-			bool flagAllowHunt = (getter == eater && eater.RaceProps.predator && !eater.health.hediffSet.HasTendableInjury());
-			bool flagAllowPlant = (getter == eater);
-
-			// C# 5 :'(
-			var foodSourceRating = pawnEntry.GetBestFoodEntry(flagAllowPlant, allowCorpse, flagAllowHunt);
-			if (foodSourceRating != null)
-			{
-				foodSource = foodSourceRating.FoodSource;
-			}
-			else
-				foodSource = null;
-
-			if (foodSource == null)
-			{
-				foodDef = null;
-				return false;
-			}
-
-			foodDef = RimWorld.FoodUtility.GetFinalIngestibleDef(foodSource);
-			return true;
-
-			//bool flag = getter.RaceProps.ToolUser && getter.health.capacities.CapableOf(PawnCapacityDefOf.Manipulation);
-			//Thing thing = null;
-			//if (canUseInventory)
-			//{
-			//	if (flag)
-			//	{
-			//		thing = RimWorld.FoodUtility.BestFoodInInventory(getter, null, FoodPreferability.MealAwful, FoodPreferability.MealLavish, 0f, false);
-			//	}
-			//	if (thing != null)
-			//	{
-			//		if (getter.Faction != Faction.OfPlayer)
-			//		{
-			//			foodSource = thing;
-			//			foodDef = RimWorld.FoodUtility.GetFinalIngestibleDef(foodSource);
-			//			return true;
-			//		}
-			//		CompRottable compRottable = thing.TryGetComp<CompRottable>();
-			//		if (compRottable != null && compRottable.Stage == RotStage.Fresh && compRottable.TicksUntilRotAtCurrentTemp < 30000)
-			//		{
-			//			foodSource = thing;
-			//			foodDef = RimWorld.FoodUtility.GetFinalIngestibleDef(foodSource);
-			//			return true;
-			//		}
-			//	}
-			//}
-			//bool allowPlant = getter == eater;
-		}
-
-
-		private static bool MakeRatedFoodListForPawn(Map map, Pawn eater, Pawn getter, Policy policy, out List<FoodSourceRating> foodList, bool canUseInventory, bool allowForbidden)
+		internal static bool MakeRatedFoodListForPawn(Map map, Pawn eater, Pawn getter, Policy policy, out List<FoodSourceRating> foodList, bool canUseInventory, bool allowForbidden)
 		{
 #if DEBUG
 			Log.Message("MakeRatedFoodListForPawn() eater=" + eater + " getter=" + getter + " canuseinventory=" + canUseInventory);
@@ -271,7 +168,7 @@ namespace WM.SmarterFoodSelection.Detours
 				{
 					if (((Pawn)food).RaceProps.Humanlike ||
 						food.Map.designationManager.AllDesignationsOn(food).Any(arg => arg.def == DesignationDefOf.Tame) ||
-						!FoodUtility.IsAcceptablePreyFor(eater, food as Pawn) ||
+						!FoodUtils.IsAcceptablePreyFor(eater, food as Pawn) ||
 						!policy.PolicyAllows(FoodCategory.Hunt) ||
 						Utils.IsAnyoneCapturing(food.Map, food as Pawn) // redundant with humanlike ?
 					   )

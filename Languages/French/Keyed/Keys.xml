@@ -76,6 +76,8 @@
 
 	<CannibalMealLabel>{0} (cannibal)</CannibalMealLabel>
 
+	<NPDNoEnergy>Pas assez d'énergie stockée dans le réseau électrique.</NPDNoEnergy>
+
 	<!-- ============== Pawn policy card ============== -->
 
 	<FoodITabLabel>Bouffe</FoodITabLabel>

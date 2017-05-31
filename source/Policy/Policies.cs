@@ -50,7 +50,7 @@ namespace WM.SmarterFoodSelection
 			baseDiet =
 			{
 				new Diet.DietElement() {foodCategory = FoodCategory.Grass},
-				new Diet.DietElement() {foodCategory = FoodCategory.HumanlikeCorpse}, 
+				new Diet.DietElement() {foodCategory = FoodCategory.HumanlikeCorpse},
 				new Diet.DietElement() {foodCategory = FoodCategory.Hay},
 				new Diet.DietElement() {foodCategory = FoodCategory.Kibble},
 				new Diet.DietElement() {foodCategory = FoodCategory.MealAwful},
@@ -69,7 +69,7 @@ namespace WM.SmarterFoodSelection
 		internal static readonly Policy Taming = new Policy
 		{
 			defName = "hidden_taming_policy",
-			label = "Taming", 
+			label = "Taming",
 			Visible = false,
 			pawnValidator = ((PawnPair arg) => arg.eater.isWildAnimal() && arg.getter.IsColonist),
 			foodcategoryValidator = delegate (FoodCategory category)
@@ -81,8 +81,15 @@ namespace WM.SmarterFoodSelection
 				//if (!Config.useMealsForTaming && (food.def.ingestible.foodType & FoodTypeFlags.Meal) == FoodTypeFlags.Meal)
 				//	return false;
 
-
 				return true;
+			},
+			sourceValidator = delegate (Thing t)
+			{
+				var v = !t.def.IsFoodDispenser;
+#if DEBUG
+				Log.Message("sourceValidator() " + t + " = " + v);
+#endif
+				return v;
 			},
 			baseDiet =
 			{
