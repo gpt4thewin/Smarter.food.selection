@@ -109,4 +109,29 @@
 				MealLavish
 		</diet>
 	</WM.SmarterFoodSelection.Policy>
+	<WM.SmarterFoodSelection.Policy>
+		<defName>SFS_DefaultPetPolicy_NoHumanCorpses</defName>
+		<label>No human corpse</label>
+		<conditions>
+			<li>pet</li>
+		</conditions>
+		<description>Same as "Animals" default but will not eat humanlike corpses.
+		</description>
+		<diet>
+				Hunt /
+				Grass /
+				Hay /		
+				Kibble =
+				MealAwful /
+				MealSimple /
+				RawHuman /
+				RawInsect /
+				RawBad /
+				RawTasty /
+				InsectCorpse /
+				Corpse /
+				MealFine /
+				MealLavish 
+		</diet>
+	</WM.SmarterFoodSelection.Policy>
 </Defs>

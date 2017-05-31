@@ -2,4 +2,4 @@
 using System.Runtime.InteropServices;
 
 //[assembly: AssemblyTitle("WM.Smarter.Food.Selection")]
-//[assembly: AssemblyVersion("2.0.13")] 
+[assembly: AssemblyVersion("2.1.1")] 

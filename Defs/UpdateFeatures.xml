@@ -35,4 +35,19 @@
 		</content>
 	</HugsLib.UpdateFeatureDef>
 	
+	<HugsLib.UpdateFeatureDef ParentName="WMSFS_UpdateFeatureBase">
+		<defName>WMSFS_2_1_1</defName>
+		<assemblyVersion>2.1.1</assemblyVersion>
+		<content>
+&lt;size=20&gt;Hotfix&lt;/size&gt;|
+&lt;b&gt;&lt;size=16&gt;&lt;color=orange&gt;Compatibility&lt;/color&gt;&lt;/size&gt;&lt;/b&gt;|
+* Zombieland by Pardekei.
+* All Star Wars mods by Jecrell.
+* Perhaps more mods...|
+&lt;b&gt;&lt;size=16&gt;Misc&lt;/size&gt;&lt;/b&gt;|
+* General compatibility enhancement.
+* Enhanced conflicts messages.
+		</content>
+	</HugsLib.UpdateFeatureDef>
+	
 </Defs>

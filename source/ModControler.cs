@@ -281,26 +281,36 @@ namespace WM.SmarterFoodSelection
 
 			foreach (var current in DefDatabase<ThingDef>.AllDefs.Where((ThingDef arg) => arg.race != null))
 			{
-				current.inspectorTabs.Add(typeof(UI.ITab_Pawn_Food));
-				current.inspectorTabsResolved.Add(InspectTabManager.GetSharedInstance(typeof(UI.ITab_Pawn_Food)));
-				       
-				////Tab inject
-				//var newTabType = typeof(UI.ITab_Pawn_Needs);
-				//var oldTabType = typeof(ITab_Pawn_Needs);
+				try
+				{
+					if (current.selectable && current.inspectorTabs != null && current.inspectorTabsResolved != null)
+					{
+						current.inspectorTabs.Add(typeof(UI.ITab_Pawn_Food));
+						current.inspectorTabsResolved.Add(InspectTabManager.GetSharedInstance(typeof(UI.ITab_Pawn_Food)));
+					}
 
-				//int index = current.inspectorTabs.IndexOf(oldTabType);
+					////Tab inject
+					//var newTabType = typeof(UI.ITab_Pawn_Needs);
+					//var oldTabType = typeof(ITab_Pawn_Needs);
 
-				//if (index != -1)
-				//{
-				//	current.inspectorTabs[index] = newTabType;
+					//int index = current.inspectorTabs.IndexOf(oldTabType);
 
-				//	int index2 = current.inspectorTabsResolved.IndexOf(InspectTabManager.GetSharedInstance(oldTabType));
+					//if (index != -1)
+					//{
+					//	current.inspectorTabs[index] = newTabType;
 
-				//	if (index2 != -1)
-				//	{
-				//		current.inspectorTabsResolved[index2] = InspectTabManager.GetSharedInstance(newTabType);
-				//	}
-				//}
+					//	int index2 = current.inspectorTabsResolved.IndexOf(InspectTabManager.GetSharedInstance(oldTabType));
+
+					//	if (index2 != -1)
+					//	{
+					//		current.inspectorTabsResolved[index2] = InspectTabManager.GetSharedInstance(newTabType);
+					//	}
+
+				}
+				catch (Exception ex)
+				{
+					Log.Warning("Could not inject inspection tab to " + current + " " + ex.Message + " " + ex.StackTrace);
+				}
 			}
 
 			// ----------- Processing policies and patches -----------
@@ -319,7 +329,14 @@ namespace WM.SmarterFoodSelection
 
 			foreach (MyDefClass current in Policies.AllPolicies)
 			{
-				current.DefsLoaded();
+				try
+				{
+					current.DefsLoaded();
+				}
+				catch (Exception ex)
+				{
+					Log.Error("Error when trying to process policy: " + current.defName + ". " + ex.Message + " " + ex.StackTrace);
+				}
 			}
 
 			Policies.BuildMaskTree();
@@ -328,21 +345,28 @@ namespace WM.SmarterFoodSelection
 
 			foreach (ThingDef current in DefDatabaseHelper.AllDefsIngestibleNAnimals)
 			{
-				if (current.ingestible != null)
+				try
 				{
-					current.DetermineFoodCategory(true);
-				}
-				else if (current.race != null && current.race.IsFlesh)
-				{
-					if (current.race.meatDef != null)
+					if (current.ingestible != null)
 					{
-						current.race.meatDef.DetermineFoodCategory(true);
+						current.DetermineFoodCategory(true);
 					}
+					else if (current.race != null && current.race.IsFlesh)
+					{
+						if (current.race.meatDef != null)
+						{
+							current.race.meatDef.DetermineFoodCategory(true);
+						}
 
-					if (current.race.corpseDef != null)
-					{
-						current.race.corpseDef.DetermineFoodCategory(true);
+						if (current.race.corpseDef != null)
+						{
+							current.race.corpseDef.DetermineFoodCategory(true);
+						}
 					}
+				}
+				catch (Exception ex)
+				{
+					Log.Error("Error when trying to process def: " + current + ". " + ex.Message + " " + ex.StackTrace);
 				}
 			}
 
