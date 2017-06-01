@@ -50,4 +50,16 @@
 		</content>
 	</HugsLib.UpdateFeatureDef>
 	
+	<HugsLib.UpdateFeatureDef ParentName="WMSFS_UpdateFeatureBase">
+		<defName>WMSFS_2_1_2</defName>
+		<assemblyVersion>2.1.2</assemblyVersion>
+		<content>
+&lt;size=20&gt;Hotfix&lt;/size&gt;|
+&lt;b&gt;&lt;size=16&gt;&lt;color=orange&gt;Saving Package Survival Meals&lt;/color&gt;&lt;/size&gt;(and all never-rotting foods).&lt;/b&gt;|
+* Your pawns will now dislike foods that never rots such as Package Survival Meals. Usefull to save them for travel.
+* New configurable factors "Rotting factor", "Never rotting factor". See advanced settings.|
+&lt;b&gt;&lt;size=14&gt;&lt;color=red&gt;If you are using foods mods and noticed newly unwanted behavior, please check those new settings.&lt;/color&gt;&lt;/size&gt;&lt;/b&gt;|
+		</content>
+	</HugsLib.UpdateFeatureDef>
+	
 </Defs>

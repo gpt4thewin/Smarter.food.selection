@@ -15,6 +15,7 @@
 		RawHuman,
 		FertEggs,
 		AnimalProduct,
+		MealSurvival,
 		MealAwful,
 		MealSimple,
 		MealFine,

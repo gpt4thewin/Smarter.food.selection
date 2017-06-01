@@ -50,6 +50,11 @@
 
 	<UseMealsForTaming>Use meals for handling</UseMealsForTaming>
 	<UseMealsForTaming_desc>!!! BROKEN ATM !!!. Use at your own risk. Allow meals for taming and training animals. Includes and prefer nutrient paste.</UseMealsForTaming_desc>
+
+	<RottingScoreFactor>Rotting score factor</RottingScoreFactor>
+	<RottingScoreFactor_desc>Food score bonus for food about to rot. Will make your pawn more likely to prefer those foods.\nHigher values increase the weight of this factor.</RottingScoreFactor_desc>
+	<UnrottableFoodScoreOffset>Never rotting food score malus</UnrottableFoodScoreOffset>
+	<UnrottableFoodScoreOffset_desc>Will typically affect Packaged Survival Meals and kibble. Usefull to save your foods for travelling.\nHigher values increase the weight of this factor.</UnrottableFoodScoreOffset_desc>
 	
 	<!-- ============== Nutrient paste dispenser ============== -->
 	

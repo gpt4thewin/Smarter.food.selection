@@ -50,6 +50,11 @@
 
 	<UseMealsForTaming>Autoriser les repas pour le dressage</UseMealsForTaming>
 	<UseMealsForTaming_desc>!!! BROKEN ATM !!!. à vos risques et périls.Autorise les repas pour le dressage. Inclut et préfère la pâte nutritive.</UseMealsForTaming_desc>
+
+	<RottingScoreFactor>Facteur pourrissage</RottingScoreFactor>
+	<RottingScoreFactor_desc>Bonus de sélection pour les plats sur le point de pourrir. Ceci rends vos créatures plus à même de préférer ces plats.\nUne valeur plus élevée accroit l'importance de facteur.</RottingScoreFactor_desc>
+	<UnrottableFoodScoreOffset>Facteur non-pourrissable</UnrottableFoodScoreOffset>
+	<UnrottableFoodScoreOffset_desc>Affectera typiquement les rations de survie et les croquettes. Utile pour économiser vos plats de voyages.\nUne valeur plus élevée accroit l'importance de facteur.</UnrottableFoodScoreOffset_desc>
 	
 	<!-- ============== Nutrient paste dispenser ============== -->
 	

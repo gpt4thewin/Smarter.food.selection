@@ -46,10 +46,10 @@
 				<def>NutrientPasteDispenser</def>
 				<pref>MealAwful</pref>
 			</li>
-			<li>
+<!--			<li>
 				<def>PlantMoss</def>
 				<pref>Grass</pref>
-			</li>
+			</li>-->
         </foods>
     </WM.SmarterFoodSelection.CompabilityDef>    
 </Defs>

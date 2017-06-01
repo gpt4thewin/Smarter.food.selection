@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using RimWorld;
+using UnityEngine;
 using Verse;
 using WM.SmarterFoodSelection.Detours;
 
@@ -60,12 +61,12 @@ namespace WM.SmarterFoodSelection
 
 			// ------------- Policy food category factor -------------
 
-				//if (!policy.unrestricted)
-				//	obj.AddComp(food.DetermineFoodCategory().ToString(), policy.GetFoodScoreOffset(eater, food));
+			//if (!policy.unrestricted)
+			//	obj.AddComp(food.DetermineFoodCategory().ToString(), policy.GetFoodScoreOffset(eater, food));
 
-				// ------------- Prey score factor -------------
+			// ------------- Prey score factor -------------
 
-				const float PREY_FACTOR_MULTIPLIER = 5f; //Because the vanilla prey factor is fairly weak.
+			const float PREY_FACTOR_MULTIPLIER = 5f; //Because the vanilla prey factor is fairly weak.
 
 			{
 				if (food is Pawn)
@@ -102,7 +103,7 @@ namespace WM.SmarterFoodSelection
 					for (int i = 0; i < list.Count; i++)
 					{
 						obj.AddComp(list[i].defName,
-						            policy.moodEffectFactor * Detours.Access.FoodOptimalityEffectFromMoodCurve.Evaluate(list[i].stages[0].baseMoodEffect));
+									policy.moodEffectFactor * Detours.Access.FoodOptimalityEffectFromMoodCurve.Evaluate(list[i].stages[0].baseMoodEffect));
 					}
 				}
 
@@ -141,14 +142,39 @@ namespace WM.SmarterFoodSelection
 
 					float actualMealCost = costRatio * foodNutrition;
 					float costFactorOffset = Math.Max(0, actualMealCost - (maxFoodLevel - curFoodLevel)) * -Config.CostFactor /* * policy.costFactorMultiplier*/;
+					//float costFactorOffset =  (actualMealCost - (maxFoodLevel - curFoodLevel)) * -Config.CostFactor /* * policy.costFactorMultiplier*/;
 					//* Config.CostFactor * policy.costFactorMultiplier;
 
 					if (costFactorOffset != 0f)
-						obj.AddComp("Hunger (min=" + actualMealCost.ToString("F2") + ")", costFactorOffset);
+						obj.AddComp("Hunger/Cost (min=" + actualMealCost.ToString("F2") + ")", costFactorOffset);
 				}
 
 
 				// ------------- TODO: Rot factor -------------
+
+				var compRottable = food.TryGetComp<CompRottable>();
+
+				if (compRottable != null)
+				{
+					var ticksUntilRotAtCurrentTemp = compRottable.TicksUntilRotAtCurrentTemp;
+					const int V = 30000;
+					if (ticksUntilRotAtCurrentTemp < V)
+					{
+						obj.AddComp("Rotting soon", Config.RottingScoreFactor / (ticksUntilRotAtCurrentTemp - V));
+					}
+					else
+					{
+						var daysToRotStart = GenDate.TicksToDays(ticksUntilRotAtCurrentTemp);
+						if (daysToRotStart >= 40)
+						{
+							obj.AddComp("Rots in " + daysToRotStart.ToString("####") + " days.", -Mathf.Min(Config.UnrottableFoodScoreOffset * 0.7f, Mathf.Log((1 + daysToRotStart)) * 20));
+						}
+					}
+				}
+				else
+				{
+					obj.AddComp("Never rots", -Config.UnrottableFoodScoreOffset);
+				}
 			}
 
 			return obj;

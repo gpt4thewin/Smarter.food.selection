@@ -7,6 +7,8 @@ namespace WM.SmarterFoodSelection
 	public static class Config
 	{
 		internal const float CONFIG_DEFAULT_COST_FACTOR = 250f;
+		internal const float CONFIG_DEFAULT_ROTTING_SCORE_FACTOR = 30f;
+		internal const float CONFIG_DEFAULT_NEVER_ROTS_SCORE_FACTOR = 180f;
 
 		public static SettingHandle<bool> useCorpsesForTaming { get; set; }
 
@@ -65,6 +67,9 @@ namespace WM.SmarterFoodSelection
 
 		public static SettingHandle<bool> CostFactorMatters { get; set; }
 		public static SettingHandle<float> CostFactor { get; set; }
+
+		public static SettingHandle<float> RottingScoreFactor { get; internal set; }
+		public static SettingHandle<float> UnrottableFoodScoreOffset { get; internal set; }
 
 		public static SettingHandle<int> FoodSearchMaxItemsCount { get; internal set; }
 

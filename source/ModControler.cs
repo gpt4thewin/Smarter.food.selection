@@ -215,6 +215,12 @@ namespace WM.SmarterFoodSelection
 				Config.CostFactor = Settings.GetHandle<float>("CostFactor", "CostFactor".Translate(), "CostFactor_desc".Translate(), Config.CONFIG_DEFAULT_COST_FACTOR);
 				Config.CostFactor.VisibilityPredicate = VisibilityPredicate;
 
+				Config.RottingScoreFactor = Settings.GetHandle<float>("RottingScoreFactor", "RottingScoreFactor".Translate(), "RottingScoreFactor_desc".Translate(), Config.CONFIG_DEFAULT_ROTTING_SCORE_FACTOR);
+				Config.RottingScoreFactor.VisibilityPredicate = VisibilityPredicate;
+
+				Config.UnrottableFoodScoreOffset = Settings.GetHandle<float>("UnrottableFoodScoreOffset", "UnrottableFoodScoreOffset".Translate(), "UnrottableFoodScoreOffset_desc".Translate(), Config.CONFIG_DEFAULT_NEVER_ROTS_SCORE_FACTOR);
+				Config.UnrottableFoodScoreOffset.VisibilityPredicate = VisibilityPredicate;
+
 				Config.FoodSearchMaxItemsCount = Settings.GetHandle<int>("FoodSearchMaxItemsCount", "FoodSearchMaxItemsCount".Translate(), "FoodSearchMaxItemsCount_desc".Translate(), 2000);
 				Config.FoodSearchMaxItemsCount.VisibilityPredicate = VisibilityPredicate;
 
@@ -395,7 +401,8 @@ namespace WM.SmarterFoodSelection
 
 				if (FoodCategoryUtils.FoodRecords.TryGetValue(singleProduct, out record))
 				{
-					record.costFactor = Math.Min(record.costFactor, costFactor);
+					//record.costFactor = Math.Min(record.costFactor, costFactor);
+					record.costFactor = costFactor;
 				}
 			}
 
