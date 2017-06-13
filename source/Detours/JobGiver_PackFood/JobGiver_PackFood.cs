@@ -7,7 +7,7 @@ using RimWorld;
 using Verse;
 using Verse.AI;
 
-namespace WM.SmarterFoodSelection.Detours.FoodUtility
+namespace WM.SmarterFoodSelection.Detours.JobGiver_PackFood
 {
 	[HarmonyPatch(typeof(RimWorld.JobGiver_PackFood), "TryGiveJob")]
 	public static class TryGiveJob
