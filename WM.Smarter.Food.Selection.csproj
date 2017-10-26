@@ -134,7 +134,6 @@
     <Compile Include="source\Detours\CaravanInventoryUtility\TryGetBestFood.cs" />
     <Compile Include="source\Detours\FoodUtility\DebugFoodSearchFromMouse.cs" />
     <Compile Include="source\Detours\FoodUtility\TryFindBestFoodSourceFor.cs" />
-    <Compile Include="source\Detours\InspectPaneUtility\DoTabs.cs" />
     <Compile Include="source\Detours\JobGiver_GetFood\JobGiver_GetFood.cs" />
     <Compile Include="source\Detours\Toils_Ingest\TakeMealFromDispenser.cs" />
     <Compile Include="source\Detours\WorkGiver_InteractAnimal\HasFoodToInteractAnimal.cs" />
