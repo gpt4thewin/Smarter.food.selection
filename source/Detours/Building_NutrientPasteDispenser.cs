@@ -228,7 +228,7 @@ namespace WM.SmarterFoodSelection.Detours
 				compIngredients.RegisterIngredient(list[i].def);
 			}
 
-			thoughts = RimWorld.FoodUtility.ThoughtsFromIngesting(eater, dummyMeal);
+			thoughts = RimWorld.FoodUtility.ThoughtsFromIngesting(eater, dummyMeal, dummyMeal.def);
 
 			dummyMeal.Destroy();
 

@@ -12,7 +12,6 @@ namespace WM.SmarterFoodSelection.Detours.JobGiver_GetFood
 	}
 	public class JobGiver_GetFood : ThinkNode_JobGiver
 	{
-		//[DetourMethod(typeof(RimWorld.JobGiver_GetFood),"TryGiveJob")]
 		// RimWorld.JobGiver_GetFood
 		protected override Job TryGiveJob(Pawn pawn)
 		{
@@ -56,7 +55,10 @@ namespace WM.SmarterFoodSelection.Detours.JobGiver_GetFood
 						return job;
 					}
 				}
-				thing = RimWorld.FoodUtility.BestFoodSourceOnMap(pawn, pawn, desperate, FoodPreferability.MealLavish, false, false, false, false, false, false);
+
+				ThingDef foodDef;
+
+				thing = RimWorld.FoodUtility.BestFoodSourceOnMap(pawn, pawn, desperate, out foodDef, FoodPreferability.MealLavish, false, !pawn.IsTeetotaler(), false, false, false);
 				if (thing == null)
 				{
 					return null;

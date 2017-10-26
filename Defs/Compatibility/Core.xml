@@ -39,7 +39,7 @@
 -->
 <Defs>
     <WM.SmarterFoodSelection.CompabilityDef>
-<!--		<defname>SFS_Core</defname>-->
+<!--		<defName>SFS_Core</defName>-->
         <requiredMod>Core</requiredMod>
         <foods>
 			<li>

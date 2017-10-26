@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Defs>
     <WM.SmarterFoodSelection.CompabilityDef>
-		<defname>SFS_Rimsenal_Feral</defname>
+		<defName>SFS_Rimsenal_Feral</defName>
         <requiredMod>Rimsenal - Feral</requiredMod>
         <foods>
 			<li>
@@ -19,7 +19,7 @@
         </foods>
     </WM.SmarterFoodSelection.CompabilityDef>  
     <WM.SmarterFoodSelection.CompabilityDef>
-		<defname>SFS_Rimsenal_Federation</defname>
+		<defName>SFS_Rimsenal_Federation</defName>
         <requiredMod>Rimsenal - Federation</requiredMod>
         <foods>
 			<li>

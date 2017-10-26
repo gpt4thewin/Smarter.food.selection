@@ -82,7 +82,13 @@ namespace WM.SmarterFoodSelection
 
 			if (policy.optimalityOffsetMatters && food.def.ingestible != null)
 			{
-				obj.AddComp("Def", food.def.ingestible.optimalityOffset);
+				float optimalityOffset;
+
+				if (eater.NonHumanlikeOrWildMan())
+					optimalityOffset = food.def.ingestible.optimalityOffsetFeedingAnimals;
+				else 
+					optimalityOffset = food.def.ingestible.optimalityOffsetHumanlikes;
+				obj.AddComp("Def", food.def.ingestible.optimalityOffsetHumanlikes);
 			}
 
 			if (!quickScore)
@@ -95,7 +101,7 @@ namespace WM.SmarterFoodSelection
 					List<ThoughtDef> list;
 
 					if (!(food is RimWorld.Building_NutrientPasteDispenser))
-						list = RimWorld.FoodUtility.ThoughtsFromIngesting(eater, food);
+						list = RimWorld.FoodUtility.ThoughtsFromIngesting(eater, food, food.def);
 					else
 						list = ((RimWorld.Building_NutrientPasteDispenser)food).GetBestMealThoughtsFor(eater);
 

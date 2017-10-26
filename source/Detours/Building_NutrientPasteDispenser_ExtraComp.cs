@@ -98,7 +98,7 @@ namespace WM.SmarterFoodSelection.Detours
 		{
 			if (!Utils.DrawPowerFromNetwork((Verse.Building)this.parent, ForceDispensePowerCost * count, true))
 			{
-				Messages.Message("NPDNoEnergy".Translate(), MessageSound.RejectInput);
+				Messages.Message("NPDNoEnergy".Translate(), MessageTypeDefOf.RejectInput);
 				return false;
 			}
 

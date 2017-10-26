@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2A9D1D3B-2A57-4237-9DB8-9A4BA88C4A57}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>WM.SmarterFoodSelection</RootNamespace>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ReleaseVersion></ReleaseVersion>
+    <SynchReleaseVersion>false</SynchReleaseVersion>
+    <AssemblyName>WM Smarter Food Selection</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <Optimize>false</Optimize>
+    <OutputPath>Assemblies</OutputPath>
+    <DefineConstants>DEBUG</DefineConstants>
+    <WarningLevel>4</WarningLevel>
+    <CustomCommands>
+      <CustomCommands>
+        <Command>
+          <type>AfterBuild</type>
+          <command>deploy.cmd</command>
+          <externalConsole>True</externalConsole>
+        </Command>
+      </CustomCommands>
+    </CustomCommands>
+    <LangVersion>Default</LangVersion>
+    <NoStdLib>false</NoStdLib>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Optimize>true</Optimize>
+    <OutputPath>Assemblies</OutputPath>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>Default</LangVersion>
+    <CustomCommands>
+      <CustomCommands>
+        <Command>
+          <type>AfterBuild</type>
+          <command>deploy.cmd</command>
+          <externalConsole>True</externalConsole>
+        </Command>
+      </CustomCommands>
+    </CustomCommands>
+    <NoStdLib>false</NoStdLib>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug (no symbols)|AnyCPU' ">
+    <Optimize>false</Optimize>
+    <OutputPath>Assemblies</OutputPath>
+    <DefineConstants>DEBUG</DefineConstants>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>Default</LangVersion>
+    <CustomCommands>
+      <CustomCommands>
+        <Command>
+          <type>AfterBuild</type>
+          <command>"D:\jeux\RimWorld\bin\RimWorld_debug\Mods\WM Smarter Food Selection\deploy.cmd"</command>
+          <externalConsole>True</externalConsole>
+        </Command>
+      </CustomCommands>
+    </CustomCommands>
+    <NoStdLib>false</NoStdLib>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="Assembly-CSharp">
+      <HintPath>..\..\..\..\..\SteamLibrary\steamapps\common\RimWorld\RimWorldWin_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="0Harmony">
+      <HintPath>..\HugsLib\Assemblies\0Harmony.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="HugsLib">
+      <HintPath>..\..\..\..\..\SteamLibrary\steamapps\workshop\content\294100\1181070440\Assemblies\HugsLib.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>..\..\..\..\..\SteamLibrary\steamapps\common\RimWorld\RimWorldWin_Data\Managed\UnityEngine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="About\About.xml" />
+    <None Include="About\preview.png" />
+    <None Include="About\version.xml" />
+    <None Include="Languages\English\Keyed\Keys.xml" />
+    <None Include="Assemblies\WM Smarter Food Selection.dll" />
+    <None Include="Languages\French\Keyed\Keys.xml" />
+    <None Include="Patches\Buildings_Production.xml" />
+    <None Include="About\PublishedFileId.txt" />
+    <None Include="Defs\Items_Food.xml" />
+    <None Include="Defs\UpdateFeatures.xml" />
+    <None Include="Defs\Compatibility\Core.xml" />
+    <None Include="Defs\Compatibility\Dandelions.xml" />
+    <None Include="Defs\Compatibility\Rimsenal.xml" />
+    <None Include="Defs\Compatibility\StorageCrates.xml" />
+    <None Include="Defs\KeyBindingCategoryDefs\KeyBindingCategories.xml" />
+    <None Include="Defs\KeyBindingDefs\KeyBindings.xml" />
+    <None Include="Defs\Policies\ascetic.xml" />
+    <None Include="Defs\Policies\colonists.xml" />
+    <None Include="Defs\Policies\incapacitated.xml" />
+    <None Include="Defs\Policies\mealsonly.xml" />
+    <None Include="Defs\Policies\nofood.xml" />
+    <None Include="Defs\Policies\pets.xml" />
+    <None Include="Defs\Policies\prisoners.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Patches\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="source\CompatabilityDef.cs" />
+    <Compile Include="source\Config.cs" />
+    <Compile Include="source\DefDatabaseHelper.cs" />
+    <Compile Include="source\FoodCategory.cs" />
+    <Compile Include="source\FoodCategoryUtils.cs" />
+    <Compile Include="source\FoodDefRecord.cs" />
+    <Compile Include="source\ModControler.cs" />
+    <Compile Include="source\MyDefClass.cs" />
+    <Compile Include="source\PolicyUtils.cs" />
+    <Compile Include="source\Report.cs" />
+    <Compile Include="source\resources.cs" />
+    <Compile Include="source\Utils.cs" />
+    <Compile Include="source\Cache\CacheClass.cs" />
+    <Compile Include="source\Cache\FoodSearchCache.cs" />
+    <Compile Include="source\Detours\Access.cs" />
+    <Compile Include="source\Detours\Building_NutrientPasteDispenser.cs" />
+    <Compile Include="source\Detours\Building_NutrientPasteDispenser_ExtraComp.cs" />
+    <Compile Include="source\Detours\WorkGiver_Warden_DeliverFood.cs" />
+    <Compile Include="source\Detours\CaravanInventoryUtility\TryGetBestFood.cs" />
+    <Compile Include="source\Detours\FoodUtility\DebugFoodSearchFromMouse.cs" />
+    <Compile Include="source\Detours\FoodUtility\TryFindBestFoodSourceFor.cs" />
+    <Compile Include="source\Detours\InspectPaneUtility\DoTabs.cs" />
+    <Compile Include="source\Detours\JobGiver_GetFood\JobGiver_GetFood.cs" />
+    <Compile Include="source\Detours\Toils_Ingest\TakeMealFromDispenser.cs" />
+    <Compile Include="source\Detours\WorkGiver_InteractAnimal\HasFoodToInteractAnimal.cs" />
+    <Compile Include="source\Detours\WorkGiver_InteractAnimal\TakeFoodForAnimalInteractJob.cs" />
+    <Compile Include="source\Detours\WorkGiver_InteractAnimal\WorkGiver_InteractAnimal.cs" />
+    <Compile Include="source\FoodScore\FoodScoreUtils.cs" />
+    <Compile Include="source\FoodScore\FoodSourceRating.cs" />
+    <Compile Include="source\FoodScore\FoodUtils.cs" />
+    <Compile Include="source\PawnSetting\WorldDataStore_PawnPolicies.cs" />
+    <Compile Include="source\Policy\Diet.cs" />
+    <Compile Include="source\Policy\Diets.cs" />
+    <Compile Include="source\Policy\MaskAttribute.cs" />
+    <Compile Include="source\Policy\PawnMask.cs" />
+    <Compile Include="source\Policy\Policies.cs" />
+    <Compile Include="source\Policy\Policy.cs" />
+    <Compile Include="source\UI\ITab_Pawn_Food.cs" />
+    <Compile Include="source\UI\ITab_Pawn_Needs.cs" />
+    <Compile Include="source\UI\PawnPolicyCard.cs" />
+    <Compile Include="source\UI\WITab_Caravan_Needs.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>

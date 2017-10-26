@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using RimWorld;
 using Verse;
 
 namespace WM.SmarterFoodSelection
@@ -98,7 +99,7 @@ namespace WM.SmarterFoodSelection
 			Log.Message(string.Format("Compatibility report ({0} lines) :\n{1}", text.Count((arg) => arg == '\n'), text));
 
 			if (!silent)
-				Messages.Message("ReportPrintedInLogMessage".Translate(), MessageSound.Standard);
+				Messages.Message("ReportPrintedInLogMessage".Translate(), MessageTypeDefOf.NeutralEvent);
 		}
 	}
 	public enum ReportMode

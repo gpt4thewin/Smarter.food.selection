@@ -42,7 +42,7 @@
 -->
 <Defs>
     <WM.SmarterFoodSelection.CompabilityDef>
-		<defname>SFS_StorageCrates</defname>
+		<defName>SFS_StorageCrates</defName>
         <requiredMod>Storage Crates</requiredMod>
         <foods>
 			<li>
