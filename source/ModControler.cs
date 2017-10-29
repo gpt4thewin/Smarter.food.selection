@@ -236,10 +236,6 @@ namespace WM.SmarterFoodSelection
 			//processCannibalMealDef("MealSimple");
 			//processCannibalMealDef("MealFine");
 			//processCannibalMealDef("MealLavish");
-
-			//#if DEBUG
-			Report.PrintCompatibilityReport(ReportMode.DefName, true);
-			//#endif
 		}
 
 		private void processCannibalMealDef(string prefix)
