@@ -25,12 +25,12 @@ namespace WM.SmarterFoodSelection.Detours.CaravanInventoryUtility
 		static bool Internal(Caravan caravan, Pawn forPawn, out Thing food, out Pawn owner)
 		{
 			List<Thing> list = RimWorld.Planet.CaravanInventoryUtility.AllInventoryItems(caravan)
-									   .Where(arg => CaravanPawnsNeedsUtility.CanNowEatForNutrition(arg.def, forPawn)).ToList();
+									   .Where(arg => CaravanPawnsNeedsUtility.CanNowEatForNutrition(arg, forPawn)).ToList();
 			Thing thing = null;
 
 			Policy policy = forPawn.GetPolicyAssignedTo();
 			var foodsForPawn = FoodUtils.MakeRatedFoodListFromThingList(list, forPawn, forPawn, forPawn.GetPolicyAssignedTo())
-										  .Where(arg => RimWorld.Planet.CaravanPawnsNeedsUtility.CanNowEatForNutrition(arg.FoodSource.def, forPawn) &&
+										  .Where(arg => RimWorld.Planet.CaravanPawnsNeedsUtility.CanNowEatForNutrition(arg.FoodSource, forPawn) &&
 												 policy.PolicyAllows(forPawn, arg.FoodSource) );
 
 			var foodEntry = foodsForPawn.FirstOrDefault();
