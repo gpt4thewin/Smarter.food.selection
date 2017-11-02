@@ -1,10 +1,6 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Verse;
-using RimWorld;
-using WM.SmarterFoodSelection.Detours;
-using UnityEngine;
 
 namespace WM.SmarterFoodSelection
 {
@@ -18,6 +14,7 @@ namespace WM.SmarterFoodSelection
 				Value = value;
 				Hidden = hidden;
 			}
+
 			public Component(Component obj)
 			{
 				Name = obj.Name;
@@ -40,6 +37,7 @@ namespace WM.SmarterFoodSelection
 			ScoreComps = new List<Component>();
 			ScoreComps.Add(new Component("Base", 500f, true));
 		}
+
 		public FoodSourceRating(FoodSourceRating obj)
 		{
 			Score = 0f;
@@ -59,6 +57,7 @@ namespace WM.SmarterFoodSelection
 		}
 
 		public float Score { get; private set; }
+
 		public float ScoreForceSum
 		{
 			get
@@ -72,12 +71,14 @@ namespace WM.SmarterFoodSelection
 			ScoreComps.Add(new Component(name, value, hidden));
 			Score += value;
 		}
+
 		public void SetComp(string name, float value, bool hidden = false)
 		{
 			var target = GetComp(name);
 			target.Value = value;
 			target.Hidden = hidden;
 		}
+
 		public Component GetComp(string name)
 		{
 			return ScoreComps.Find((obj) => obj.Name == name);
@@ -106,15 +107,16 @@ namespace WM.SmarterFoodSelection
 
 				foreach (var comp in ScoreComps)
 				{
-					if (comp.Hidden || comp.Value == 0f)
+					if (comp.Hidden || System.Math.Abs(comp.Value) < float.Epsilon)
 						continue;
 
 					text += string.Format("\n{0} ({1:F0})", comp.Name, comp.Value);
 				}
-
 			}
 			if (component != null)
+			{
 				SetComp("Distance", backupDistanceValue);
+			}
 
 			return text;
 		}

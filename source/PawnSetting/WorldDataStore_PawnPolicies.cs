@@ -9,7 +9,6 @@ namespace WM.SmarterFoodSelection
 	public class WorldDataStore_PawnPolicies : UtilityWorldObject
 	{
 		static WorldDataStore_PawnPolicies SingleInstance;
-
 		Dictionary<Pawn, Policy> AssignedPolicies = new Dictionary<Pawn, Policy>();
 
 		public static int AssignedPoliciesCount
@@ -23,7 +22,6 @@ namespace WM.SmarterFoodSelection
 		public WorldDataStore_PawnPolicies()
 		{
 			SingleInstance = this;
-
 		}
 
 		// dummy fields ?
@@ -57,7 +55,6 @@ namespace WM.SmarterFoodSelection
 		//{
 		//}
 
-
 		internal static void AssignToAllPawnsOfRacesOnMap(Policy policy, ThingDef race)
 		{
 			Func<Pawn, bool> validator = (arg) => arg.def == race;
@@ -78,7 +75,7 @@ namespace WM.SmarterFoodSelection
 
 			foreach (var item in pawns)
 			{
-				WorldDataStore_PawnPolicies.SetPolicyForPawn(item, policy);
+				SetPolicyForPawn(item, policy);
 			}
 		}
 

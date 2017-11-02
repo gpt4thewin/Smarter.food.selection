@@ -85,7 +85,7 @@ namespace WM.SmarterFoodSelection
 		}
 
 
-		internal static FoodCategory GetFoodCategory(this Thing thing, bool silent = true)
+		internal static FoodCategory GetFoodCategory(this Thing thing)
 		{
 			FoodDefRecord record;
 
@@ -107,16 +107,17 @@ namespace WM.SmarterFoodSelection
 		{
 #if DEBUG
 			if (Config.debugFoodPrefConstant)
+			{
 				return FoodCategory.MealSimple;
+			}
 #endif
-
 			FoodDefRecord record;
 			FoodCategory category;
 
 			if (def == null)
-
-				//throw new ArgumentNullException(nameof(def));
-				throw new ArgumentNullException("def");
+			{
+				throw new ArgumentNullException(nameof(def));
+			}
 
 			if (FoodRecords.TryGetValue(def, out record))
 			{
@@ -171,51 +172,40 @@ namespace WM.SmarterFoodSelection
 				string defName = def.defName;
 
 				if (foodPref == FoodPreferability.MealFine)
-
 					return FoodCategory.MealFine;
 
 				if (foodPref == FoodPreferability.MealAwful)
-
 					return FoodCategory.MealAwful;
 
 				if (foodPref == FoodPreferability.MealSimple)
-
 					return FoodCategory.MealSimple;
 
 				if (foodPref == FoodPreferability.MealLavish)
-
 					return FoodCategory.MealLavish;
 
 				if ((foodType & FoodTypeFlags.Kibble) != 0)
-
 					return FoodCategory.Kibble;
 
 				if ((foodType & FoodTypeFlags.AnimalProduct) != 0)
 				{
 					if (def.GetCompProperties<CompProperties_Hatcher>() != null)
-
 						return FoodCategory.FertEggs;
-
 					//return WMFoodPref.Null;
 				}
 
 				if (def.ingestible.joyKind == JoyKindDefOf.Gluttonous && def.ingestible.joy >= 0.05f)
-
 					return FoodCategory.Luxury;
 
 				if ((foodType & FoodTypeFlags.Tree) != 0)
-
 					return FoodCategory.Tree;
 
-				if ((foodType & FoodTypeFlags.Plant) != 0)
-				{
+				if ((foodType & FoodTypeFlags.Plant) != 0){
 					if (def == ThingDefOf.Hay)
 
 						return FoodCategory.Hay;
 
 					//TODO: Make more reliable
 					if (defName == "PlantGrass" || defName == "PlantTallGrass")
-
 						return FoodCategory.Grass;
 
 					return FoodCategory.Plant;
@@ -231,42 +221,34 @@ namespace WM.SmarterFoodSelection
 					if (def.ingestible.sourceDef.race.Animal)
 					{
 						if (def.FirstThingCategory == ThingCategoryDefOf.CorpsesInsect)
-
 							return FoodCategory.InsectCorpse;
 
 						return FoodCategory.Corpse;
 					}
 
 					if (def.ingestible.sourceDef.race.IsMechanoid)
-
 						return FoodCategory.Ignore;
 				}
 
 				if (def.ingestible.tasteThought != null && def.ingestible.tasteThought.stages.All((ThoughtStage arg) => arg.baseMoodEffect < 0))
 				{
 					if (RimWorld.FoodUtility.IsHumanlikeMeat(def))
-
 						return FoodCategory.RawHuman;
 
 					if (def == ThingDef.Named("Megaspider_Meat"))
 						//if (def.ingestible.tasteThought == ThoughtDefOf.AteInsectMeatAsIngredient)
-
 						return FoodCategory.RawInsect;
-
 
 					return FoodCategory.RawBad;
 				}
 
 				if ((def.ingestible.tasteThought == null || def.ingestible.tasteThought.stages.All((ThoughtStage arg) => arg.baseMoodEffect >= 0)))
-
 					return FoodCategory.RawTasty;
 
 				if ((foodType & FoodTypeFlags.AnimalProduct) != 0)
-
 					return FoodCategory.AnimalProduct;
 
 				if (foodPref == FoodPreferability.NeverForNutrition || def.IsDrug)
-
 					return FoodCategory.Ignore;
 			}
 

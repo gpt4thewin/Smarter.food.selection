@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using RimWorld;
 using Verse;
 
 namespace WM.SmarterFoodSelection
@@ -164,7 +162,7 @@ namespace WM.SmarterFoodSelection
 			{
 				var list = new List<PawnMask>();
 
-				foreach (var policy in Policies.AllPolicies)
+				foreach (var policy in AllPolicies)
 				{
 					list.AddRange(policy.pawnMasks);
 				}

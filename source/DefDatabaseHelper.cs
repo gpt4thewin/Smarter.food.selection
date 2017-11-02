@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Verse;
 
@@ -14,6 +13,7 @@ namespace WM.SmarterFoodSelection
 				return DefDatabase<ThingDef>.AllDefs.Where((arg) => arg.ingestible != null || (arg.race != null)).ToList();
 			}
 		}
+
 		public static List<ThingDef> AllDefsIngestible
 		{
 			get
@@ -21,6 +21,7 @@ namespace WM.SmarterFoodSelection
 				return DefDatabase<ThingDef>.AllDefs.Where((arg) => arg.ingestible != null).ToList();
 			}
 		}
+
 		public static IEnumerable<ThingDef> AllPawnDefs
 		{
 			get

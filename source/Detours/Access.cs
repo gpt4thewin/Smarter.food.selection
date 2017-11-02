@@ -1,5 +1,4 @@
-﻿using System;
-using Verse;
+﻿using Verse;
 
 namespace WM.SmarterFoodSelection.Detours
 {
@@ -32,7 +31,6 @@ namespace WM.SmarterFoodSelection.Detours
 				new CurvePoint(100f, 800f),
 				true
 			}
-				};
-
+		};
 	}
 }

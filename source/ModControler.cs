@@ -117,7 +117,7 @@ namespace WM.SmarterFoodSelection
 
 		public override void OnGUI()
 		{
-			if (KeysBinding.ToggleFoodScore.KeyDownEvent)
+			if (KeyBindings.ToggleFoodScore.KeyDownEvent)
 			{
 				drawFoodSearchMode++;
 				if (Convert.ToInt32(drawFoodSearchMode) >= Enum.GetValues(typeof(DrawFoodSearchMode)).Length)
@@ -148,12 +148,13 @@ namespace WM.SmarterFoodSelection
 				if (Widgets.ButtonText(rect, "commandPrintReportButton".Translate()))
 				{
 					var floatOptions = new List<FloatMenuOption>();
+
 					foreach (var printMode in Enum.GetValues(typeof(ReportMode)))
 					{
 						floatOptions.Add(new FloatMenuOption(("commandPrintReportOption_" + printMode.ToString()).Translate(), () =>
-						  {
-							  Report.PrintCompatibilityReport((ReportMode)printMode);
-						  }));
+						{
+							Report.PrintCompatibilityReport((ReportMode)printMode);
+						}));
 					}
 					Find.WindowStack.Add(new FloatMenu(floatOptions));
 				}

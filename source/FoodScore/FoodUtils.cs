@@ -14,18 +14,11 @@ namespace WM.SmarterFoodSelection
 #if DEBUG
 			Log.Message("MakeRatedFoodListForPawn() eater=" + eater + " getter=" + getter + " canuseinventory=" + canUseInventory);
 #endif
-
 			Func<Thing, bool> FoodValidator = (arg => IsValidFoodSourceForPawn(arg, eater, getter, policy, allowForbidden));
-
 			var diet = policy.GetDietForPawn(eater);
 
-			//foreach (var item in policy.PerRacesDiet[eater.def].elements)
-			//{
-			//	FoodCategoryUtils.FoodRecords[item
-			//	var foodsOfCategory = ite
-			//}
-
 			// ------------------------------------------------------------------------------------------------
+
 			ThingRequestGroup thingRequest;
 
 			//TODO: detour ThingsLister
@@ -47,10 +40,8 @@ namespace WM.SmarterFoodSelection
 #if DEBUG
 				int num = searchSet.Count;
 #endif
-
 				var newsearchSet = searchSet.OrderBy((arg) => (arg.Position - getter.Position).LengthManhattan).ToList();
 				searchSet = newsearchSet.GetRange(0, Math.Min(newsearchSet.Count, Config.FoodSearchMaxItemsCount));
-
 #if DEBUG
 				Log.Message(string.Format("MakeRatedFoodListForPawn(): too many items, reduced from {0} to {1}", num, searchSet.Count));
 #endif
@@ -73,7 +64,6 @@ namespace WM.SmarterFoodSelection
 														  .Cast<Thing>()
 														  //.Select(arg => arg as Thing)
 														  .Where(FoodValidator);
-
 				searchSet.AddRange(allPawnsSpawned);
 			}
 
@@ -81,14 +71,12 @@ namespace WM.SmarterFoodSelection
 			{
 				var inventoryFood = getter.inventory.innerContainer.Where(arg => arg.def.IsIngestible).Where(FoodValidator);
 				searchSet.AddRange(inventoryFood);
-
 #if DEBUG
 				Log.Message(string.Format("MakeRatedFoodListForPawn() eater={0} getter={1} got {2}/{3} things from inventory", eater, getter, inventoryFood.Count(), getter.inventory.innerContainer.Count));
 #endif
 			}
 
 			foodList = MakeRatedFoodListFromThingList(searchSet, eater, getter, policy);
-
 #if DEBUG
 			var foodListInventory = foodList.Where(arg => getter.inventory.innerContainer.Contains(arg.FoodSource));
 
@@ -168,7 +156,7 @@ namespace WM.SmarterFoodSelection
 				{
 					if (((Pawn)food).RaceProps.Humanlike ||
 						food.Map.designationManager.AllDesignationsOn(food).Any(arg => arg.def == DesignationDefOf.Tame) ||
-						!FoodUtils.IsAcceptablePreyFor(eater, food as Pawn) ||
+						!IsAcceptablePreyFor(eater, food as Pawn) ||
 						!policy.PolicyAllows(FoodCategory.Hunt) ||
 						Utils.IsAnyoneCapturing(food.Map, food as Pawn) // redundant with humanlike ?
 					   )

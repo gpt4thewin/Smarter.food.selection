@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using Harmony;
-using RimWorld;
 using UnityEngine;
 using Verse;
-using Verse.AI;
 
 namespace WM.SmarterFoodSelection.Detours.FoodUtility
 {
@@ -89,9 +86,11 @@ namespace WM.SmarterFoodSelection.Detours.FoodUtility
 
 			var pawnSelection = Find.Selector.SelectedObjects.Where(arg => arg is Pawn).Cast<Pawn>();
 			PawnA = pawnSelection.FirstOrDefault();
-			if (pawnSelection.Count() == 2)
-				PawnB = pawnSelection.ElementAt(1);
 
+			if (pawnSelection.Count() == 2)
+			{
+				PawnB = pawnSelection.ElementAt(1);
+			}
 
 			if (PawnB != null && PawnA != null && (PawnA.Faction != PawnB.Faction || RimWorld.FoodUtility.ShouldBeFedBySomeone(PawnA) || RimWorld.FoodUtility.ShouldBeFedBySomeone(PawnB)))
 			{
@@ -110,7 +109,9 @@ namespace WM.SmarterFoodSelection.Detours.FoodUtility
 					eater = getter = PawnA;
 			}
 			else
+			{
 				eater = getter = PawnA;
+			}
 
 
 			// ------------------------------------------------------------------------------
@@ -125,9 +126,7 @@ namespace WM.SmarterFoodSelection.Detours.FoodUtility
 			}
 			Text.Anchor = TextAnchor.MiddleCenter;
 			Text.Font = GameFont.Tiny;
-
 			var policy = eater.GetPolicyAssignedTo();
-
 			var thingAtCursorCell = Find.VisibleMap.thingGrid.ThingsAt(a).FirstOrDefault(delegate (Thing t)
 			{
 				var category = t.GetFoodCategory();
@@ -135,7 +134,7 @@ namespace WM.SmarterFoodSelection.Detours.FoodUtility
 					return false;
 
 				return FoodUtils.IsValidFoodSourceForPawn(t, eater, getter, policy, false);
-			} );
+			});
 
 			ThingDef dum2;
 			// Generates cache

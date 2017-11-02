@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using Verse;
 
 namespace WM.SmarterFoodSelection
@@ -26,9 +25,8 @@ namespace WM.SmarterFoodSelection
 		//public static Texture2D insectmeat = ContentFinder<Texture2D>.Get("UI/MeatBig", true);
 		//public static Texture2D insectmeat_forbidden = ContentFinder<Texture2D>.Get("UI/MeatBig_forbidden", true);
 		//public static Texture2D forbidden = ContentFinder<Texture2D>.Get("UI/ForbiddenOverlay", true);
-
 	}
-	public static class KeysBinding
+	public static class KeyBindings
 	{
 		public static KeyBindingDef ToggleFoodScore = KeyBindingDef.Named("WM_SFS_ToggleFoodScore");
 	}

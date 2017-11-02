@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Harmony;
-using RimWorld;
 using Verse;
-using Verse.AI;
 
 namespace WM.SmarterFoodSelection.Detours.FoodUtility
 {
@@ -13,7 +10,7 @@ namespace WM.SmarterFoodSelection.Detours.FoodUtility
 	{
 		[HarmonyPrefix]
 		//public static bool Prefix(Pawn getter, Pawn eater, bool desperate, out Thing foodSource, out ThingDef foodDef, bool canRefillDispenser = true, bool canUseInventory = true, bool allowForbidden = false, bool allowCorpse = true, Policy forcedPolicy = null)
-		public static bool _Prefix(ref bool __state, Pawn getter, Pawn eater, bool desperate, bool canRefillDispenser, bool canUseInventory, bool allowForbidden, bool allowCorpse)
+		public static bool _Prefix(ref bool __state, Pawn getter, Pawn eater)
 		{
 #if DEBUG
 			//Log.Message("Prefix of TryFindBestFoodSourceFor() getter=" + getter + " eater=" + eater + " desperate=" + desperate + " canUseInventory=" + canUseInventory + " allowForbidden=" + allowForbidden);
@@ -55,7 +52,9 @@ namespace WM.SmarterFoodSelection.Detours.FoodUtility
 			}
 		}
 
+#pragma warning disable RECS0154 // Parameter is never used
 		internal static bool Internal(Pawn getter, Pawn eater, bool desperate, out Thing foodSource, out ThingDef foodDef, bool canRefillDispenser = true, bool canUseInventory = true, bool allowForbidden = false, bool allowCorpse = true, Policy forcedPolicy = null)
+#pragma warning restore RECS0154 // Parameter is never used
 		{
 			List<FoodSourceRating> FoodListForPawn;
 

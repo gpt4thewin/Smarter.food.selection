@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Verse;
 using RimWorld;
-using System.Linq;
-using Verse.Sound;
+using Verse;
 
 namespace WM.SmarterFoodSelection.Detours
 {

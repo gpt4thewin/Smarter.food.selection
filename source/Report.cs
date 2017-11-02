@@ -32,7 +32,9 @@ namespace WM.SmarterFoodSelection
 					{
 						text += string.Format("| [Mod : {0}]", modDefs.Key.Name);
 
+#pragma warning disable RECS0018 // Comparison of floating point numbers with equality operator
 						text += " " + String.Join(" ; ", modDefs.Select((arg) => arg.Key.ToReportString(mode) + (arg.Value.costFactor != 1f ? "(cost: " + arg.Value.costFactor.ToString("F2") + ")" : "") + (arg.Key.HasForcedFoodPref() ? " (forced)" : "")).ToArray()) + "\n";
+#pragma warning restore RECS0018 // Comparison of floating point numbers with equality operator
 					}
 					text += "|\n";
 				}

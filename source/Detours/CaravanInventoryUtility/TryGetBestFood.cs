@@ -4,7 +4,6 @@ using System.Linq;
 using Harmony;
 using RimWorld.Planet;
 using Verse;
-using WM.SmarterFoodSelection.Detours.FoodUtility;
 
 namespace WM.SmarterFoodSelection.Detours.CaravanInventoryUtility
 {

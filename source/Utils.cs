@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using RimWorld;
@@ -154,7 +153,7 @@ namespace WM.SmarterFoodSelection
 		// Verse.Corpse
 		public static BodyPartRecord GetBestBodyPartToEat(this Corpse self, Pawn ingester, float nutritionWanted)
 		{
-			return (BodyPartRecord)typeof(Corpse).GetMethod("GetBestBodyPartToEat", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).Invoke(self, new object[] { ingester, nutritionWanted });
+			return (BodyPartRecord)typeof(Corpse).GetMethod("GetBestBodyPartToEat", BindingFlags.NonPublic | BindingFlags.Instance).Invoke(self, new object[] { ingester, nutritionWanted });
 		}
 
 		public static float GetCurrentHunger(this Pawn pawn)

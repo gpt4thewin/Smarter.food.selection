@@ -1,6 +1,4 @@
-﻿using System;
-using Harmony;
-using RimWorld;
+﻿using RimWorld;
 using Verse;
 using Verse.AI;
 
@@ -16,6 +14,7 @@ namespace WM.SmarterFoodSelection.Detours.JobGiver_GetFood
 		protected override Job TryGiveJob(Pawn pawn)
 		{
 			bool flag;
+
 			if (pawn.RaceProps.Animal)
 			{
 				flag = true;
@@ -25,10 +24,12 @@ namespace WM.SmarterFoodSelection.Detours.JobGiver_GetFood
 				Hediff firstHediffOfDef = pawn.health.hediffSet.GetFirstHediffOfDef(HediffDefOf.Malnutrition);
 				flag = (firstHediffOfDef != null && firstHediffOfDef.Severity > 0.4f);
 			}
+
 			bool desperate = pawn.needs.food.CurCategory == HungerCategory.Starving;
 			bool allowCorpse = flag;
 			Thing thing;
 			ThingDef def;
+
 			if (!RimWorld.FoodUtility.TryFindBestFoodSourceFor(pawn, pawn, desperate, out thing, out def, true, true, false, allowCorpse))
 			{
 				return null;
@@ -50,6 +51,7 @@ namespace WM.SmarterFoodSelection.Detours.JobGiver_GetFood
 					ISlotGroupParent hopperSgp = building as ISlotGroupParent;
 					//TODO utiliser original?
 					Job job = RimWorld.WorkGiver_CookFillHopper.HopperFillFoodJob(pawn, hopperSgp);
+
 					if (job != null)
 					{
 						return job;

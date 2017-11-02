@@ -1,10 +1,6 @@
 ﻿using System;
-using Harmony;
 using RimWorld;
 using UnityEngine;
-using Verse;
-using System.Reflection;
-using System.Collections.Generic;
 
 namespace WM.SmarterFoodSelection.UI
 {

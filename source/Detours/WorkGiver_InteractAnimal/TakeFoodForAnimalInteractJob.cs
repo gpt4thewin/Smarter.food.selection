@@ -1,13 +1,9 @@
-using System;
 using Harmony;
-using RimWorld;
-using UnityEngine;
 using Verse;
 using Verse.AI;
 
-namespace WM.SmarterFoodSelection.Detours
+namespace WM.SmarterFoodSelection.Detours.WorkGiver_InteractAnimal
 {
-
 	[HarmonyPatch(typeof(RimWorld.WorkGiver_InteractAnimal), "TakeFoodForAnimalInteractJob")]
 	public static class TakeFoodForAnimalInteractJob
 	{
@@ -15,9 +11,9 @@ namespace WM.SmarterFoodSelection.Detours
 		{
 			return Config.ControlDisabledForPawn(pawn);
 		}
-		static void Postfix(RimWorld.WorkGiver_InteractAnimal __instance, ref Job __result, Pawn pawn, Pawn tamee)
+		static void Postfix(ref Job __result, Pawn pawn, Pawn tamee)
 		{
-			__result = WorkGiver_InteractAnimal.WorkGiver_InteractAnimal.TakeFoodForAnimalInteractJob(pawn, tamee);
+			__result = WorkGiver_InteractAnimal.TakeFoodForAnimalInteractJob(pawn, tamee);
 		}
 	}
 }

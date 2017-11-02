@@ -149,7 +149,7 @@ namespace WM.SmarterFoodSelection
 					float costFactorOffset = Math.Max(0, actualMealCost - (maxFoodLevel - curFoodLevel)) * -Config.CostFactor /* * policy.costFactorMultiplier*/;
 					//* Config.CostFactor * policy.costFactorMultiplier;
 
-					if (costFactorOffset != 0f)
+					if (Math.Abs(costFactorOffset) > float.Epsilon)
 						obj.AddComp("Hunger (min=" + actualMealCost.ToString("F2") + ")", costFactorOffset);
 				}
 

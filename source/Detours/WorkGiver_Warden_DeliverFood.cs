@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Harmony;
 using RimWorld;
 using Verse;
 
@@ -15,9 +14,11 @@ namespace WM.SmarterFoodSelection.Detours
 			{
 				return true;
 			}
+
 			float num = 0f;
 			float num2 = 0f;
 			Room room = RegionAndRoomQuery.GetRoom(prisoner);
+
 			if (room == null)
 			{
 				return false;
@@ -59,7 +60,7 @@ namespace WM.SmarterFoodSelection.Detours
 		{
 			if (foodSource.def.IsNutritionGivingIngestible && p.RaceProps.WillAutomaticallyEat(foodSource))
 			{
-				return foodSource.def.ingestible.nutrition * (float)foodSource.stackCount;
+				return foodSource.def.ingestible.nutrition * foodSource.stackCount;
 			}
 			if (p.RaceProps.ToolUser && p.health.capacities.CapableOf(PawnCapacityDefOf.Manipulation))
 			{
