@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+	<KeyBindingDef>
+		<category>WMSFS_KeyBindings</category>
+		<defName>WM_SFS_ToggleFoodScore</defName>
+		<label>Cycle food score display mode.</label>
+		<defaultKeyCodeA>Backslash</defaultKeyCodeA>
+	</KeyBindingDef>
+</Defs>
