@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Harmony;
@@ -66,7 +66,7 @@ namespace WM.SmarterFoodSelection.Detours.FoodUtility
 			}
 			catch (Exception ex)
 			{
-				ModCore.drawFoodSearchMode = ModCore.DrawFoodSearchMode.Off;
+				ModController.drawFoodSearchMode = ModController.DrawFoodSearchMode.Off;
 
 				throw new Exception("DebugFoodSearchFromMouse_OnGUI() threw exception." + ex.Message + "\n" + ex.StackTrace, ex);
 			}
@@ -173,7 +173,7 @@ namespace WM.SmarterFoodSelection.Detours.FoodUtility
 			//else
 			//	advancedInfoForAll = true;
 
-			bool advancedInfoForAll = ModCore.drawFoodSearchMode == ModCore.DrawFoodSearchMode.Advanced;
+			bool advancedInfoForAll = ModController.drawFoodSearchMode == ModController.DrawFoodSearchMode.Advanced;
 
 			// ----------------------- Recalculate food source rating distance factors ------------------------------
 
@@ -210,7 +210,7 @@ namespace WM.SmarterFoodSelection.Detours.FoodUtility
 					Color widgetColor;
 					if (current == bestScoreFromMouse || current.FoodSource == BestFoodSource || current.FoodSource == thingAtCursorCell)
 					{
-						if (ModCore.drawFoodSearchMode == ModCore.DrawFoodSearchMode.AdvancedForBest)
+						if (ModController.drawFoodSearchMode == ModController.DrawFoodSearchMode.AdvancedForBest)
 							advancedInfo = true;
 						if (current.FoodSource == thingAtCursorCell)
 							widgetColor = Color.green;
@@ -307,7 +307,7 @@ namespace WM.SmarterFoodSelection.Detours.FoodUtility
 			}
 			catch (Exception ex)
 			{
-				ModCore.drawFoodSearchMode = ModCore.DrawFoodSearchMode.Off;
+				ModController.drawFoodSearchMode = ModController.DrawFoodSearchMode.Off;
 				throw ex;
 			}
 		}

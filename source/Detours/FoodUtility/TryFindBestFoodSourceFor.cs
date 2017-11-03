@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Harmony;
 using Verse;
@@ -48,7 +48,7 @@ namespace WM.SmarterFoodSelection.Detours.FoodUtility
 			}
 			catch (Exception ex)
 			{
-				throw new Exception(string.Format("{0}: Exception when fetching. (getter={1} eater={2})\n{3}\n{4}", ModCore.modname, getter, eater, ex, ex.StackTrace), ex);
+				throw new Exception(string.Format("{0}: Exception when fetching. (getter={1} eater={2})\n{3}\n{4}", ModController.modname, getter, eater, ex, ex.StackTrace), ex);
 			}
 		}
 

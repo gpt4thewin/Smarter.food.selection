@@ -43,7 +43,7 @@ namespace WM.SmarterFoodSelection
 
 		private void RecordPatch()
 		{
-			ModCore.patches.Add(this);
+			ModController.patches.Add(this);
 		}
 
 		internal int TryApplyPatch()

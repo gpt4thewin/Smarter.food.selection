@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -210,7 +210,7 @@ namespace WM.SmarterFoodSelection
 		}
 		public static bool HasForcedFoodPref(this ThingDef def)
 		{
-			foreach (var current in ModCore.patches)
+			foreach (var current in ModController.patches)
 			{
 				if (current.Loaded)
 				{

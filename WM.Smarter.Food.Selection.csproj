@@ -135,7 +135,7 @@
     <Compile Include="source\FoodCategory.cs" />
     <Compile Include="source\FoodCategoryUtils.cs" />
     <Compile Include="source\FoodDefRecord.cs" />
-    <Compile Include="source\ModControler.cs" />
+    <Compile Include="source\ModController.cs" />
     <Compile Include="source\MyDefClass.cs" />
     <Compile Include="source\PolicyUtils.cs" />
     <Compile Include="source\Report.cs" />
