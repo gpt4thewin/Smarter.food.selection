@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- ============== Basic ============== -->
+
+  <colonists>殖民者</colonists>
+  <prisoners>囚犯</prisoners>
+
+  <!-- ============== Settings ============== -->
+
+  <ShowAdvancedOptions>显示高级设置</ShowAdvancedOptions>
+  <ShowAdvancedOptions_desc>显示高级设置。</ShowAdvancedOptions_desc>
+
+  <PetsSafeHuntMaxStrenghtRatio>宠物捕猎目标强度比上限</PetsSafeHuntMaxStrenghtRatio>
+  <PetsSafeHuntMaxStrenghtRatio_desc>你的宠物将不会捕杀强度比更高的猎物。\n以此来避免宠物在捕猎过程中受伤。\n游戏默认比例是0.5。</PetsSafeHuntMaxStrenghtRatio_desc>
+
+  <UseCorpsesForTaming>使用尸体训宠</UseCorpsesForTaming>
+  <UseCorpsesForTaming_desc>！！实验功能！！当驯养或训练动物时，殖民者会使用尸体。</UseCorpsesForTaming_desc>
+
+  <UseHumanlikeCorpsesForTaming>使用人类尸体训宠</UseHumanlikeCorpsesForTaming>
+  <UseHumanlikeCorpsesForTaming_desc>！！实验功能！！当驯养或训练动物时，殖民者会使用人类尸体。</UseHumanlikeCorpsesForTaming_desc>
+
+  <PrintReportCommand>打印兼容性报告</PrintReportCommand>
+  <PrintReportCommand_desc>导出一份该mod内所有策略内所包含的所有食品分类.\n用来检测与其他插件里添加新食物的兼容性情况。</PrintReportCommand_desc>
+  <commandPrintReportButton>选择报告模式</commandPrintReportButton>
+  <commandPrintReportOption_DefName>导出带有DEF名称的表格</commandPrintReportOption_DefName>
+  <commandPrintReportOption_Label>导出游戏内名称的表格</commandPrintReportOption_Label>
+  <ReportPrintedInLogMessage>日志中可用的兼容性报告。</ReportPrintedInLogMessage>
+
+  <CostFactor>Cost factor</CostFactor>
+  <CostFactor_desc>Food selection score malus for every point of nutrition wasted by the eater pawn.</CostFactor_desc>
+
+  <FoodSearchMaxItemsCount>Max. food search items</FoodSearchMaxItemsCount>
+  <FoodSearchMaxItemsCount_desc>Maximum number of food items searched by a pawn.\nLower values improve performances but reduces the food search radius of pawns.</FoodSearchMaxItemsCount_desc>
+
+  <SeparatedNutrientPaste>Dispensers makes specific cannibal meals.</SeparatedNutrientPaste>
+  <SeparatedNutrientPaste_desc>Nutrient paste dispensers will produce an alternative nutrient paste meal item if it contains human meat.\nUseful to avoid cannibal meals stack with non cannibal meals and mix their ingredients. But makes your savegame dependent of the mod.</SeparatedNutrientPaste_desc>
+
+  <ControlPets>启用对宠物的设置</ControlPets>
+  <ControlPets_desc>如果禁用，任何派别内驯服的动物都将自行食用他们自己喜欢的食物。</ControlPets_desc>
+  <ControlPrisoners>启用对囚犯的设置</ControlPrisoners>
+  <ControlPrisoners_desc>同理。</ControlPrisoners_desc>
+  <ControlColonists>启用对殖民者的设置</ControlColonists>
+  <ControlColonists_desc>同理。</ControlColonists_desc>
+  <ControlVisitors>启用对访问者的设置</ControlVisitors>
+  <ControlVisitors_desc>同理。</ControlVisitors_desc>
+
+  <NeedsTabUIHeight>UI界面高度</NeedsTabUIHeight>
+  <NeedsTabUIHeight_desc>UI的高度需要符合标签展开时的需要。太小的值可能会阻止UI正确显示。\n慎用。</NeedsTabUIHeight_desc>
+
+  <UseMealsForTaming>Use meals for handling</UseMealsForTaming>
+  <UseMealsForTaming_desc>!!! BROKEN ATM !!!. Use at your own risk. Allow meals for taming and training animals. Includes and prefer nutrient paste.</UseMealsForTaming_desc>
+
+  <!-- ============== Nutrient paste dispenser ============== -->
+
+  <DispenseXcount>分配 x{0}</DispenseXcount>
+  <DispenseXcount_desc>强制分配者制作 {0} 份伙食。</DispenseXcount_desc>
+
+  <StandardMode>标准模式</StandardMode>
+  <StandardMode_desc>一切照旧。正首先是常的食物，最后是虫肉和人肉。</StandardMode_desc>
+
+  <CannibalMode>食人模式</CannibalMode>
+  <CannibalMode_desc>优先食用人肉。</CannibalMode_desc>
+
+  <CannibalCleanMode>野人模式</CannibalCleanMode>
+  <CannibalCleanMode_desc>优先食用人肉，其次食用其他生食（不含虫肉）。</CannibalCleanMode_desc>
+
+  <AnimalMode>野兽模式</AnimalMode>
+  <AnimalMode_desc>优先食用人肉，然后是虫肉，最后是其他的生食。</AnimalMode_desc>
+
+  <CleanMode>洁癖模式</CleanMode>
+  <CleanMode_desc>拒绝人肉或者虫肉。</CleanMode_desc>
+
+  <DispenserModeWarning>仅影响手动分配</DispenserModeWarning>
+  <ManualDispenseCostWarning>手动分配将会花费 {0} x {1} = {2} Wd。</ManualDispenseCostWarning>
+
+  <CannibalMealLabel>{0}（人肉）</CannibalMealLabel>
+
+  <NPDNoEnergy>电网电力不足。</NPDNoEnergy>
+
+  <!-- ============== Pawn policy card ============== -->
+
+  <FoodITabLabel>伙食</FoodITabLabel>
+
+  <PawnPolicyCard_Title>显示/隐藏更多选项</PawnPolicyCard_Title>
+  <PawnPolicyCard_AssignToAll>应用到所有的[{0}]</PawnPolicyCard_AssignToAll>
+  <PawnPolicyCard_AssignToAllOnMap>应用到地图上所有的[{0}] </PawnPolicyCard_AssignToAllOnMap>
+  <PawnPolicyCard_ResetAllOnMap>重置地图上所有[{0}]的伙食安排</PawnPolicyCard_ResetAllOnMap>
+  <PawnPolicyCard_SetDefaultFor>重置{0}的伙食安排</PawnPolicyCard_SetDefaultFor>
+  <PawnPolicyCard_CurrentBestFood>目前最适宜食品：{0}</PawnPolicyCard_CurrentBestFood>
+  <PawnPolicyCard_Inventory>（库存）</PawnPolicyCard_Inventory>
+  <PawnPolicyCard_NoFoodFound>（没有合适食物）</PawnPolicyCard_NoFoodFound>
+  <PawnPolicyCard_Policy>伙食安排：</PawnPolicyCard_Policy>
+  <PawnPolicyCard_ResetPolicy>重置为默认</PawnPolicyCard_ResetPolicy>
+  <PawnPolicyCard_CannotSetPolicy>*无法选择安排*</PawnPolicyCard_CannotSetPolicy>
+  <PawnPolicyCard_CurrentPolicy>当前安排： </PawnPolicyCard_CurrentPolicy>
+
+  <!-- ============== Others ============== -->
+
+  <UnrestrictedPolicyLabel>*不受限制*</UnrestrictedPolicyLabel>
+
+  <!-- ============== Food categories ============== -->
+
+  <FoodCategory.Null>无</FoodCategory.Null>
+  <FoodCategory.Ignore>忽略</FoodCategory.Ignore>
+  <FoodCategory.HumanlikeCorpse>人类尸体</FoodCategory.HumanlikeCorpse>
+  <FoodCategory.InsectCorpse>虫类尸体</FoodCategory.InsectCorpse>
+  <FoodCategory.Corpse>尸体</FoodCategory.Corpse>
+  <FoodCategory.Hay>干草</FoodCategory.Hay>
+  <FoodCategory.Kibble>粗饲料</FoodCategory.Kibble>
+  <FoodCategory.RawBad>恶心的生食</FoodCategory.RawBad>
+  <FoodCategory.RawTasty>美味的生食</FoodCategory.RawTasty>
+  <FoodCategory.RawInsect>生虫肉</FoodCategory.RawInsect>
+  <FoodCategory.RawHuman>生人肉</FoodCategory.RawHuman>
+  <FoodCategory.FertEggs>卵</FoodCategory.FertEggs>
+  <FoodCategory.AnimalProduct>禽畜产品</FoodCategory.AnimalProduct>
+  <FoodCategory.MealAwful>恶心的食物</FoodCategory.MealAwful>
+  <FoodCategory.MealSimple>简单的食物</FoodCategory.MealSimple>
+  <FoodCategory.MealFine>精致的食物</FoodCategory.MealFine>
+  <FoodCategory.MealLavish>奢侈的食物</FoodCategory.MealLavish>
+  <FoodCategory.Plant>植物</FoodCategory.Plant>
+  <FoodCategory.Grass>青草</FoodCategory.Grass>
+  <FoodCategory.Luxury>珍馐</FoodCategory.Luxury>
+  <FoodCategory.Hunt>狩猎</FoodCategory.Hunt>
+  <FoodCategory.Tree>树</FoodCategory.Tree>
+
+  <!-- ============== Obsolete keys ============== -->
+
+  <IncapFeedMode>为无行为能力殖民者喂食模式</IncapFeedMode>
+  <enumSetting_Offline>殖民者喜爱 Vanilla like</enumSetting_Offline>
+  <enumSetting_PrisonersLike>囚犯喜爱 Prisoners like</enumSetting_PrisonersLike>
+  <enumSetting_AnimalsLike>动物喜爱 Animals like</enumSetting_AnimalsLike>
+  <enumSetting_AnimalsLikeExcludeCorpses>动物喜爱（无尸体） Animals like (no corpses)</enumSetting_AnimalsLikeExcludeCorpses>
+
+  <PrivilegedPrisoners>有特权的囚犯</PrivilegedPrisoners>
+  <PrivilegedPrisoners_desc>设置“聊天和招募”互动的囚犯将获得与殖民者相同的饮食，提高他们的情绪，从而使他们更容易招募。（在带分配器的房间里无效）。</PrivilegedPrisoners_desc>
+
+  <PrefNutrientPasteOverTasty>相比生食，更倾向于营养膏</PrefNutrientPasteOverTasty>
+  <PrefNutrientPasteOverTasty_desc>如果启用，相对于无负面效果的生食（浆果、牛奶），你的移民将喜欢吃营养膏，\n如果你想节约你的食物原料，食用更具成本效益的营养膏，这个设定将十分有效。</PrefNutrientPasteOverTasty_desc>
+
+  <PetsPreferHunt>殖民地的宠物更倾向于自行狩猎</PetsPreferHunt>
+  <PetsPreferHunt_desc>当没有受伤时，宠物会在前往你的储藏室获取食物之前，尝试在它们允许的区域内寻找猎物食用。</PetsPreferHunt_desc>
+
+</LanguageData>
