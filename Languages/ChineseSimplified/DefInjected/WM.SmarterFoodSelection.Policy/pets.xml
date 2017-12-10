@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <SFS_DefaultPetPolicy.label>动物伙食</SFS_DefaultPetPolicy.label>
+  <SFS_DefaultPetPolicy.description>更倾向于动物伙食。例如自行狩猎，人类尸体，青草干草粗饲料等。\n但是如果没有可用的动物食物，也会食用其他人的食物。
+		</SFS_DefaultPetPolicy.description>
+
+  <SFS_GrassHayKibble.label>干草/粗饲料</SFS_GrassHayKibble.label>
+  <SFS_GrassHayKibble.description>仅食用干草或者粗饲料。
+		</SFS_GrassHayKibble.description>
+
+  <SFS_PetPolicy_NoHunt.label>禁止捕猎</SFS_PetPolicy_NoHunt.label>
+
+  <SFS_PetPolicy_Limited.label>四种动物伙食</SFS_PetPolicy_Limited.label>
+  <SFS_PetPolicy_Limited.description>仅允许动物食用：青草，干草，粗饲料，生人肉/尸体。\n但也允许食用简单的食物和营养膏（它们比粗饲料更划算）。
+		</SFS_PetPolicy_Limited.description>
+
+  <SFS_DefaultPetPolicy_AllowTrees.label>允许吃树</SFS_DefaultPetPolicy_AllowTrees.label>
+  <SFS_DefaultPetPolicy_AllowTrees.description>同“动物伙食”的安排类似，但允许吃树，对饲养敲击兽来说十分实用。
+		</SFS_DefaultPetPolicy_AllowTrees.description>
+
+  <SFS_DefaultPetPolicy_NoHumanCorpses.label>禁止食用死人</SFS_DefaultPetPolicy_NoHumanCorpses.label>
+  <SFS_DefaultPetPolicy_NoHumanCorpses.description>同“动物伙食”的安排类似，但不允许吃死人尸体。
+		</SFS_DefaultPetPolicy_NoHumanCorpses.description>
+
+
+</LanguageData>
