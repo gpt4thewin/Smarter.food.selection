@@ -116,6 +116,17 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
+    <Content Include="Mods\WM Smarter Food Selection\Languages\ChineseSimplified\DefInjected\KeyBindingCategoryDef\KeyBindingCategories.xml" />
+    <Content Include="Mods\WM Smarter Food Selection\Languages\ChineseSimplified\DefInjected\KeyBindingDef\KeyBindings.xml" />
+    <Content Include="Mods\WM Smarter Food Selection\Languages\ChineseSimplified\DefInjected\ThingDef\Items_Food.xml" />
+    <Content Include="Mods\WM Smarter Food Selection\Languages\ChineseSimplified\DefInjected\WM.SmarterFoodSelection.Policy\ascetic.xml" />
+    <Content Include="Mods\WM Smarter Food Selection\Languages\ChineseSimplified\DefInjected\WM.SmarterFoodSelection.Policy\colonists.xml" />
+    <Content Include="Mods\WM Smarter Food Selection\Languages\ChineseSimplified\DefInjected\WM.SmarterFoodSelection.Policy\incapacitated.xml" />
+    <Content Include="Mods\WM Smarter Food Selection\Languages\ChineseSimplified\DefInjected\WM.SmarterFoodSelection.Policy\mealsonly.xml" />
+    <Content Include="Mods\WM Smarter Food Selection\Languages\ChineseSimplified\DefInjected\WM.SmarterFoodSelection.Policy\nofood.xml" />
+    <Content Include="Mods\WM Smarter Food Selection\Languages\ChineseSimplified\DefInjected\WM.SmarterFoodSelection.Policy\pets.xml" />
+    <Content Include="Mods\WM Smarter Food Selection\Languages\ChineseSimplified\DefInjected\WM.SmarterFoodSelection.Policy\prisoners.xml" />
+    <Content Include="Mods\WM Smarter Food Selection\Languages\ChineseSimplified\Keyed\Keys.xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="source\CompatabilityDef.cs" />
