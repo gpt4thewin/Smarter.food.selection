@@ -126,7 +126,9 @@ namespace WM.SmarterFoodSelection
 				else if (food.def.IsCorpse)
 				{
 					var corpse = food as Corpse;
-					foodNutrition = RimWorld.FoodUtility.GetBodyPartNutrition(corpse.InnerPawn, corpse.GetBestBodyPartToEat(eater, curFoodLevel));
+					var part = corpse.GetBestBodyPartToEat(eater, curFoodLevel);
+					if (part != null)
+						foodNutrition = RimWorld.FoodUtility.GetBodyPartNutrition(corpse.InnerPawn, part);
 				}
 				else
 					foodNutrition = food.def.ingestible.nutrition;
