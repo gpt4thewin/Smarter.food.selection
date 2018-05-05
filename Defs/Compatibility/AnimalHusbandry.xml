@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+    <WM.SmarterFoodSelection.CompabilityDef>
+<!--		<defname>SFS_YummyDandelions</defname>-->
+        <requiredMod>AnimalHusbandry</requiredMod>
+        <foods>
+			<li>
+				<def>AnimalRationV</def>
+				<pref>Kibble</pref>
+			</li>
+			<li>
+				<def>AnimalRationP</def>
+				<pref>Kibble</pref>
+			</li>
+			<li>
+				<def>PelletsV</def>
+				<pref>Grass</pref>
+			</li>
+			<li>
+				<def>PelletsP</def>
+				<pref>Kibble</pref>
+			</li>
+        </foods>
+    </WM.SmarterFoodSelection.CompabilityDef> 
+</Defs>
