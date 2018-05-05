@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <SFS_DefaultPrisonerPolicy.label>囚徒</SFS_DefaultPrisonerPolicy.label>
+  <SFS_DefaultPrisonerPolicy.description>默认囚徒政策。\n将优先食用较为低劣的餐点。也会关心食用餐点的感受，但不会关心太多。</SFS_DefaultPrisonerPolicy.description>
+
+
+</LanguageData>
