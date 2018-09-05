@@ -3,7 +3,7 @@
 	<KeyBindingCategoryDef>
 		<defName>WMSFS_KeyBindings</defName>
 		<label>WM Smarter Food Selection</label>
-		<description></description>
+		<description>Smarter Food Selection key binding</description>
 		<checkForConflicts>
 			<li>GameMapCamera</li>
 			<li>Game</li>

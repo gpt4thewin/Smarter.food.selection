@@ -9,14 +9,13 @@
 			<texPath>Things/MealNutrientPasteCannibal</texPath>
 			<graphicClass>Graphic_Single</graphicClass>
 		</graphicData>
-		<statBases>
-			<DeteriorationRate>20</DeteriorationRate>
-			<MarketValue>15</MarketValue>
-		</statBases>
+	  <statBases>
+	    <MarketValue>10</MarketValue>
+	    <Nutrition>0.9</Nutrition>
+	  </statBases>
 		<ingestible>
 			<preferability>MealAwful</preferability>
 			<tasteThought>AteAwfulMeal</tasteThought>
-			<nutrition>0.90</nutrition>
 			<ingestEffect>EatVegetarian</ingestEffect>
 			<ingestSound>Meal_Eat</ingestSound>
 		</ingestible>

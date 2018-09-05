@@ -6,8 +6,7 @@
 		<conditions>
 			<li>default:pet</li>
 		</conditions>
-		<description>Will prefer food for animals. Hunt &gt; Grass &gt; Human corpses &gt; hay &gt; kibble..\nBut will allow other foods if those are not available.
-		</description>
+		<description>Will prefer food for animals. Hunt &gt; Grass &gt; Human corpses &gt; hay &gt; kibble..\nBut will allow other foods if those are not available.</description>
 		<diet>
 				Hunt /
 				Grass /
@@ -32,8 +31,7 @@
 		<conditions>
 			<li>pet</li>
 		</conditions>
-		<description>Grass hay and kibble only.
-		</description>
+		<description>Grass hay and kibble only.</description>
 		<diet>
 				Grass /
 				Hay /		
@@ -66,8 +64,7 @@
 	<WM.SmarterFoodSelection.Policy>
 		<defName>SFS_PetPolicy_Limited</defName>
 		<label>Food4animals only</label>
-		<description>Only foods for animal: Grass, hay, kibble, raw human meat/corpse.\nBut also simple and nutrient paste meals (they are more cost efficient than kibble!).
-		</description>
+		<description>Only foods for animal: Grass, hay, kibble, raw human meat/corpse.\nBut also simple and nutrient paste meals (they are more cost efficient than kibble!).</description>
 		<conditions>
 			<li>pet</li>
 		</conditions>
@@ -88,8 +85,7 @@
 		<conditions>
 			<li>pet</li>
 		</conditions>
-		<description>Same as "animals" but allows trees. Useful for thrumbos
-		</description>
+		<description>Same as "animals" but allows trees. Useful for thrumbos</description>
 		<diet>
 				Hunt /
 				Grass /
@@ -115,8 +111,7 @@
 		<conditions>
 			<li>pet</li>
 		</conditions>
-		<description>Same as "Animals" default but will not eat humanlike corpses.
-		</description>
+		<description>Same as "Animals" default but will not eat humanlike corpses.</description>
 		<diet>
 				Hunt /
 				Grass /

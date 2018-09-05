@@ -67,7 +67,7 @@ namespace WM.SmarterFoodSelection
 					return Policies.Wild;
 			}
 
-			if (!eater.Faction.IsPlayer && !eater.Faction.RelationWith(Faction.OfPlayer).hostile && !eater.IsPrisonerOfColony)
+			if (!eater.Faction.IsPlayer && eater.Faction.RelationWith(Faction.OfPlayer).kind != FactionRelationKind.Hostile && !eater.IsPrisonerOfColony)
 			{
 				if (eater.RaceProps.Animal)
 					return Policies.FriendlyPets;

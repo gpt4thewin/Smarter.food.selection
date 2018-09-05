@@ -241,14 +241,14 @@ namespace WM.SmarterFoodSelection
 		{
 			if (thing is Building_NutrientPasteDispenser)
 			{
-				return ((Building_NutrientPasteDispenser)thing).DispensableDef.ingestible.nutrition;
+				return ((Building_NutrientPasteDispenser)thing).DispensableDef.ingestible.CachedNutrition;
 			}
 
 			if (thing.def.ingestible == null)
 				throw new Exception(thing + " is not food or food source");
 
-			return thing.def.ingestible.nutrition;
-		}
+			return thing.GetStatValue(StatDefOf.Nutrition);
+        }
 
 		public static bool CaseUnsensitiveCompare(this string a, string b)
 		{

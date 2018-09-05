@@ -72,7 +72,7 @@ namespace WM.SmarterFoodSelection
 
 		internal static void AssignToAllPawnsMatchingOnMap(Policy policy, Func<Pawn, bool> validator)
 		{
-			var map = Find.VisibleMap;
+			var map = Find.CurrentMap;
 
 			var pawns = map.mapPawns.AllPawnsSpawned.Where(validator);
 

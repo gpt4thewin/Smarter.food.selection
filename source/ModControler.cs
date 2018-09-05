@@ -380,7 +380,7 @@ namespace WM.SmarterFoodSelection
 				if (!recipeDef.products.All((arg) => arg.thingDef == singleProduct))
 					continue;
 
-				float nutritionOutput = recipeDef.products.Sum((arg) => arg.thingDef.ingestible.nutrition * arg.count);
+				float nutritionOutput = recipeDef.products.Sum((arg) => arg.thingDef.ingestible.CachedNutrition * arg.count);
 
 				if (nutritionOutput <= 0f)
 					continue;
@@ -402,7 +402,7 @@ namespace WM.SmarterFoodSelection
 				var dispensableDef = ThingDefOf.MealNutrientPaste;
 				if (FoodCategoryUtils.FoodRecords.TryGetValue(dispensableDef, out record))
 				{
-					float costFactor = 0.3f / dispensableDef.ingestible.nutrition;
+					float costFactor = 0.3f / dispensableDef.ingestible.CachedNutrition;
 					record.costFactor = Math.Min(record.costFactor, costFactor);
 				}
 			}

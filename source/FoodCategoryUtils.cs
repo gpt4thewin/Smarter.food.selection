@@ -162,7 +162,7 @@ namespace WM.SmarterFoodSelection
 
 			if (def.ingestible != null)
 			{
-				if (def.ingestible.nutrition <= 0f || def.IsDrug)
+				if (def.ingestible.CachedNutrition <= 0f || def.IsDrug)
 					return FoodCategory.Ignore;
 
 				FoodPreferability foodPref = def.ingestible.preferability;
@@ -248,7 +248,7 @@ namespace WM.SmarterFoodSelection
 
 						return FoodCategory.RawHuman;
 
-					if (def == ThingDef.Named("Megaspider_Meat"))
+					if (def == ThingDef.Named("Meat_Megaspider"))
 						//if (def.ingestible.tasteThought == ThoughtDefOf.AteInsectMeatAsIngredient)
 
 						return FoodCategory.RawInsect;

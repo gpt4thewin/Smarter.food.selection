@@ -42,8 +42,8 @@ namespace WM.SmarterFoodSelection.Detours.WorkGiver_InteractAnimal
 				{
 					for (int j = 0; j < thing.stackCount; j++)
 					{
-						num3 += thing.def.ingestible.nutrition;
-						if (num3 >= num2)
+					    num3 += thing.GetStatValue(StatDefOf.Nutrition, true);
+                        if (num3 >= num2)
 						{
 							num++;
 							num3 = 0f;

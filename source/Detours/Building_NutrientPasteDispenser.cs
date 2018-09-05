@@ -111,7 +111,7 @@ namespace WM.SmarterFoodSelection.Detours
 
 			for (int i = 0; num < NutritionCostPerDispense; i++)
 			{
-				var nutrition = ingredients[i].def.ingestible.nutrition;
+				var nutrition = ingredients[i].GetStatValue(StatDefOf.Nutrition);
 
 				float num2 = Mathf.Min(ingredients[i].stackCount * nutrition, NutritionCostPerDispense);
 				num += num2;
@@ -181,7 +181,7 @@ namespace WM.SmarterFoodSelection.Detours
 			
 			var list = GetAllHoppersThings(self);
 
-			return  Mathf.Floor(list.Sum((arg) => arg.stackCount) / NutritionCostPerDispense) * ThingDefOf.MealNutrientPaste.ingestible.nutrition;
+			return  Mathf.Floor(list.Sum((arg) => arg.stackCount) / NutritionCostPerDispense) * ThingDefOf.MealNutrientPaste.ingestible.CachedNutrition;
 		}
 
 		static List<Thing> GetAllHoppersThings(this RimWorld.Building_NutrientPasteDispenser self)
@@ -223,7 +223,7 @@ namespace WM.SmarterFoodSelection.Detours
 
 			for (int i = 0; num < NutritionCostPerDispense; i++)
 			{
-				float num2 = Mathf.Min(list[i].stackCount * list[i].def.ingestible.nutrition, NutritionCostPerDispense);
+				float num2 = Mathf.Min(list[i].stackCount * list[i].GetStatValue(StatDefOf.Nutrition), NutritionCostPerDispense);
 				num += num2;
 				compIngredients.RegisterIngredient(list[i].def);
 			}

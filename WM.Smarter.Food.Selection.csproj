@@ -9,7 +9,8 @@
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ReleaseVersion></ReleaseVersion>
+    <ReleaseVersion>
+    </ReleaseVersion>
     <SynchReleaseVersion>false</SynchReleaseVersion>
     <AssemblyName>WM Smarter Food Selection</AssemblyName>
   </PropertyGroup>
@@ -65,21 +66,21 @@
     <NoStdLib>false</NoStdLib>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
     <Reference Include="Assembly-CSharp">
-      <HintPath>..\..\..\..\..\SteamLibrary\steamapps\common\RimWorld\RimWorldWin_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <HintPath>..\..\..\SteamLibrary\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="System" />
     <Reference Include="0Harmony">
-      <HintPath>..\HugsLib\Assemblies\0Harmony.dll</HintPath>
+      <HintPath>..\..\..\SteamLibrary\steamapps\workshop\content\294100\818773962\Assemblies\0Harmony.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="HugsLib">
-      <HintPath>..\..\..\..\..\SteamLibrary\steamapps\workshop\content\294100\1181070440\Assemblies\HugsLib.dll</HintPath>
+      <HintPath>..\..\..\SteamLibrary\steamapps\workshop\content\294100\818773962\Assemblies\HugsLib.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine">
-      <HintPath>..\..\..\..\..\SteamLibrary\steamapps\common\RimWorld\RimWorldWin_Data\Managed\UnityEngine.dll</HintPath>
+      <HintPath>..\..\..\SteamLibrary\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
@@ -88,11 +89,6 @@
     <None Include="Mods\WM Smarter Food Selection\About\preview.png" />
     <None Include="Mods\WM Smarter Food Selection\About\PublishedFileId.txt" />
     <None Include="Mods\WM Smarter Food Selection\About\version.xml" />
-    <None Include="Mods\WM Smarter Food Selection\Assemblies\WM Smarter Food Selection.dll" />
-    <None Include="Mods\WM Smarter Food Selection\Defs\Compatibility\Core.xml" />
-    <None Include="Mods\WM Smarter Food Selection\Defs\Compatibility\Dandelions.xml" />
-    <None Include="Mods\WM Smarter Food Selection\Defs\Compatibility\Rimsenal.xml" />
-    <None Include="Mods\WM Smarter Food Selection\Defs\Compatibility\StorageCrates.xml" />
     <None Include="Mods\WM Smarter Food Selection\Defs\Items_Food.xml" />
     <None Include="Mods\WM Smarter Food Selection\Defs\KeyBindingCategoryDefs\KeyBindingCategories.xml" />
     <None Include="Mods\WM Smarter Food Selection\Defs\KeyBindingDefs\KeyBindings.xml" />
@@ -119,16 +115,9 @@
     <None Include="Mods\WM Smarter Food Selection\Patches\Buildings_Production.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Mods\" />
-    <Folder Include="Mods\WM Smarter Food Selection\" />
-    <Folder Include="Mods\WM Smarter Food Selection\About\" />
-    <Folder Include="Mods\WM Smarter Food Selection\Assemblies\" />
-    <Folder Include="Mods\WM Smarter Food Selection\Defs\" />
-    <Folder Include="Mods\WM Smarter Food Selection\Languages\" />
-    <Folder Include="Mods\WM Smarter Food Selection\Patches\" />
+    <Content Include=".gitignore" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssemblyInfo.cs" />
     <Compile Include="source\CompatabilityDef.cs" />
     <Compile Include="source\Config.cs" />
     <Compile Include="source\DefDatabaseHelper.cs" />
@@ -170,6 +159,9 @@
     <Compile Include="source\UI\PawnPolicyCard.cs" />
     <Compile Include="source\UI\WITab_Caravan_Needs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Mods\WM Smarter Food Selection\Assemblies\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

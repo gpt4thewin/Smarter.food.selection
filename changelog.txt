@@ -1,0 +1,15 @@
+1.1d
+
+* New: Reworked Nutrient paste dispenser. 
+	* New: Can now force the dispenser to make meals manually. Useful when preparing for a travel or electricity shortage.
+	* New: The NPD will now make the best possible meal with the available food. Cannibal pawns will get human meat and it will always avoid insect meat.
+	* New: Pawns will now choose the NPD depending on the best meal it can provide.
+* New item: Nutrient paste meals (cannibal). Exactly the same, but will not stack with their counterpart and therefore prevents from mixing ingredients. Also has a different texture. (Optional)
+
+* Vanilla fix: Error when warden wants to bring food in a prisoners room with a nutrient paste dispenser.
+* New: Warden will bring food to prisoners in a room with a NPD if it is empty or disabled.
+
+* New: Incapacitated colonists can now be fed like animals as well as prisoners. (see options).
+
+* Most options will now show only if "show advanced option" is checked.
+* New: Added language file.

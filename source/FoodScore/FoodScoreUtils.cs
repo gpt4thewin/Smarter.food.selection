@@ -122,21 +122,21 @@ namespace WM.SmarterFoodSelection
 				var maxFoodLevel = eater.needs.food.MaxLevel;
 
 				if (food.def.IsFoodDispenser)
-					foodNutrition = ThingDefOf.MealNutrientPaste.ingestible.nutrition;
+					foodNutrition = ThingDefOf.MealNutrientPaste.ingestible.CachedNutrition;
 				else if (food.def.IsCorpse)
 				{
 					var corpse = food as Corpse;
-					foodNutrition = RimWorld.FoodUtility.GetBodyPartNutrition(corpse.InnerPawn, corpse.GetBestBodyPartToEat(eater, curFoodLevel));
+					foodNutrition = RimWorld.FoodUtility.GetBodyPartNutrition(corpse, corpse.GetBestBodyPartToEat(eater, curFoodLevel));
 				}
 				else
-					foodNutrition = food.def.ingestible.nutrition;
+					foodNutrition = food.def.ingestible.CachedNutrition;
 
 				if (foodNutrition >= 0.1f)
 				{
 					//TODO: ajust; add record for the NPD
 
 					if (food is RimWorld.Building_NutrientPasteDispenser)
-						costRatio = (food.def.building.nutritionCostPerDispense * 0.05f) / ThingDefOf.MealNutrientPaste.ingestible.nutrition;
+						costRatio = (food.def.building.nutritionCostPerDispense * 0.05f) / ThingDefOf.MealNutrientPaste.ingestible.CachedNutrition;
 					else
 						costRatio = (obj.DefRecord.costFactor);
 

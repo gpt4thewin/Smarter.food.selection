@@ -125,7 +125,7 @@ namespace WM.SmarterFoodSelection
 				else if (pawn.IsColonist || pawn.Faction.IsPlayer)
 					factionCategory = PawnMaskFaction.Colonist;
 				else if ((pawn.HostFaction != null && pawn.HostFaction.IsPlayer) ||
-						 (pawn.Faction != null && !pawn.Faction.RelationWith(Faction.OfPlayer).hostile))
+						 (pawn.Faction != null && pawn.Faction.RelationWith(Faction.OfPlayer).kind != FactionRelationKind.Hostile))
 					factionCategory = PawnMaskFaction.Friendly;
 				else if (pawn.Faction == null)
 					factionCategory = PawnMaskFaction.Wild;

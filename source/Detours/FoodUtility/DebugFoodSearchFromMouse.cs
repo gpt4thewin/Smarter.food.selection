@@ -119,7 +119,7 @@ namespace WM.SmarterFoodSelection.Detours.FoodUtility
 			{
 				return;
 			}
-			if (eater.Map != Find.VisibleMap)
+			if (eater.Map != Find.CurrentMap)
 			{
 				return;
 			}
@@ -128,7 +128,7 @@ namespace WM.SmarterFoodSelection.Detours.FoodUtility
 
 			var policy = eater.GetPolicyAssignedTo();
 
-			var thingAtCursorCell = Find.VisibleMap.thingGrid.ThingsAt(a).FirstOrDefault(delegate (Thing t)
+			var thingAtCursorCell = Find.CurrentMap.thingGrid.ThingsAt(a).FirstOrDefault(delegate (Thing t)
 			{
 				var category = t.GetFoodCategory();
 				if (category == FoodCategory.Null)
@@ -248,10 +248,10 @@ namespace WM.SmarterFoodSelection.Detours.FoodUtility
 			//TODO: cursor widget not drawn when no food found 
 
 			string pawninfo;
-			pawninfo = string.Format("{0}", getter.NameStringShort);
+			pawninfo = string.Format("{0}", getter.Name.ToStringShort);
 			if (getter != eater)
 			{
-				pawninfo += string.Format(" (gives to) {0}", eater.NameStringShort);
+				pawninfo += string.Format(" (gives to) {0}", eater.Name.ToStringShort);
 			}
 
 			//pawninfo += string.Format(" ---> {4} ({6:F0}){5}\nFood need: {1:F1} / {2:F1}\nPolicy: {3}",
@@ -320,7 +320,7 @@ namespace WM.SmarterFoodSelection.Detours.FoodUtility
 			{
 				return;
 			}
-			if (pawn.Map != Find.VisibleMap)
+			if (pawn.Map != Find.CurrentMap)
 			{
 				return;
 			}

@@ -59,7 +59,7 @@ namespace WM.SmarterFoodSelection.Detours
 		{
 			if (foodSource.def.IsNutritionGivingIngestible && p.RaceProps.WillAutomaticallyEat(foodSource))
 			{
-				return foodSource.def.ingestible.nutrition * (float)foodSource.stackCount;
+				return foodSource.def.ingestible.CachedNutrition * (float)foodSource.stackCount;
 			}
 			if (p.RaceProps.ToolUser && p.health.capacities.CapableOf(PawnCapacityDefOf.Manipulation))
 			{

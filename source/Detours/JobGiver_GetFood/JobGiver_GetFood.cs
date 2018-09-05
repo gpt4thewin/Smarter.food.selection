@@ -65,9 +65,11 @@ namespace WM.SmarterFoodSelection.Detours.JobGiver_GetFood
 				}
 				def = thing.def;
 			}
-			return new Job(JobDefOf.Ingest, thing)
+
+		    float nutrition = RimWorld.FoodUtility.GetNutrition(thing, def);
+            return new Job(JobDefOf.Ingest, thing)
 			{
-				count = RimWorld.FoodUtility.WillIngestStackCountOf(pawn, def)
+				count = RimWorld.FoodUtility.WillIngestStackCountOf(pawn, def, nutrition)
 			};
 		}
 	}
