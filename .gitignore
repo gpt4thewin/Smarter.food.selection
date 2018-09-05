@@ -1,0 +1,7 @@
+﻿.vs/
+ArtSources/
+deploy.cmd
+obj/
+releases/
+*.bak
+Mods/WM Smarter Food Selection/Assemblies/
