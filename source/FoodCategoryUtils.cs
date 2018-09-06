@@ -168,8 +168,6 @@ namespace WM.SmarterFoodSelection
 				FoodPreferability foodPref = def.ingestible.preferability;
 				FoodTypeFlags foodType = def.ingestible.foodType;
 
-				string defName = def.defName;
-
 				if (foodPref == FoodPreferability.MealFine)
 
 					return FoodCategory.MealFine;
@@ -213,12 +211,11 @@ namespace WM.SmarterFoodSelection
 
 						return FoodCategory.Hay;
 
-					//TODO: Make more reliable
-					if (defName == "PlantGrass" || defName == "PlantTallGrass")
+				    if (def == ThingDef.Named("Plant_TallGrass") ||
+				        def == ThingDef.Named("Plant_Grass"))
+				        return FoodCategory.Grass;
 
-						return FoodCategory.Grass;
-
-					return FoodCategory.Plant;
+                    return FoodCategory.Plant;
 				}
 
 				if (def.IsCorpse)

@@ -60,5 +60,15 @@
       The mod might be unstable.
     </content>
   </HugsLib.UpdateFeatureDef>
+
+  <HugsLib.UpdateFeatureDef ParentName="WMSFS_UpdateFeatureBase">
+    <defName>WMSFS_2_3_0_1</defName>
+    <assemblyVersion>2.3.0.1</assemblyVersion>
+    <content>
+      &lt;size=20&gt;Herbivore animals bug fix&lt;/size&gt;|
+      Fixed herbivore animals never eating grass.|
+      Enjoy !
+    </content>
+  </HugsLib.UpdateFeatureDef>
 	
 </Defs>
