@@ -120,23 +120,32 @@ namespace WM.SmarterFoodSelection
 
 			try
 			{
-				if (pawn.IsPrisonerOfColony && pawn.Faction != Faction.OfPlayer)
-					factionCategory = PawnMaskFaction.Prisoner;
-				else if (pawn.IsColonist || pawn.Faction.IsPlayer)
-					factionCategory = PawnMaskFaction.Colonist;
-				else if ((pawn.HostFaction != null && pawn.HostFaction.IsPlayer) ||
-						 (pawn.Faction != null && pawn.Faction.RelationWith(Faction.OfPlayer).kind != FactionRelationKind.Hostile))
-					factionCategory = PawnMaskFaction.Friendly;
-				else if (pawn.Faction == null)
-					factionCategory = PawnMaskFaction.Wild;
-				else if (pawn.Faction.HostileTo(Faction.OfPlayer))
-					factionCategory = PawnMaskFaction.Hostile;
-				else
-					throw new Exception("Unknown faction category");
+                if (pawn.IsPrisonerOfColony && pawn.Faction != Faction.OfPlayer)
+                    factionCategory = PawnMaskFaction.Prisoner;
+                else if (pawn.Faction == null &&
+                     (pawn.KindLabel == "space refugee" ||
+                     ((pawn.KindLabel == "wild man" || pawn.KindLabel == "wild woman") &&
+                         pawn.mindState.lastJobTag == Verse.AI.JobTag.TuckedIntoBed)))
+                    factionCategory = PawnMaskFaction.Friendly;
+                else if (pawn.IsColonist || pawn.Faction.IsPlayer)
+                    factionCategory = PawnMaskFaction.Colonist;
+                else if ((pawn.HostFaction != null && pawn.HostFaction.IsPlayer) ||
+                         (pawn.Faction != null && pawn.Faction.RelationWith(Faction.OfPlayer).kind != FactionRelationKind.Hostile))
+                    factionCategory = PawnMaskFaction.Friendly;
+                else if (pawn.Faction == null)
+                    factionCategory = PawnMaskFaction.Wild;
+                else if (pawn.Faction.HostileTo(Faction.OfPlayer))
+                    factionCategory = PawnMaskFaction.Hostile;
+                else
+                    throw new Exception("Unknown faction category");
 			}
 			catch (Exception ex)
 			{
+#if DEBUG
+                    Log.Message("faction check 2 " + pawn); //didnt triger
+#endif
 				throw new Exception("Could not determine pawn faction category of " + pawn, ex);
+
 			}
 
 			if (!this.factionCategory.Matches(factionCategory))

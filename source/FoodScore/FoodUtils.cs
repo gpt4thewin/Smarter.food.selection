@@ -12,7 +12,7 @@ namespace WM.SmarterFoodSelection
 		internal static bool MakeRatedFoodListForPawn(Map map, Pawn eater, Pawn getter, Policy policy, out List<FoodSourceRating> foodList, bool canUseInventory, bool allowForbidden)
 		{
 #if DEBUG
-			Log.Message("MakeRatedFoodListForPawn() eater=" + eater + " getter=" + getter + " canuseinventory=" + canUseInventory);
+			//Log.Message("MakeRatedFoodListForPawn() eater=" + eater + " getter=" + getter + " canuseinventory=" + canUseInventory);
 #endif
 
 			Func<Thing, bool> FoodValidator = (arg => IsValidFoodSourceForPawn(arg, eater, getter, policy, allowForbidden));

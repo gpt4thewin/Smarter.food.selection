@@ -123,6 +123,7 @@ namespace WM.SmarterFoodSelection
 				new Diet.DietElement() {foodCategory = FoodCategory.MealLavish},
 				new Diet.DietElement() {foodCategory = FoodCategory.MealFine},
 				new Diet.DietElement() {foodCategory = FoodCategory.MealSimple},
+                new Diet.DietElement() {foodCategory = FoodCategory.MealSurvival},
 				new Diet.DietElement() {foodCategory = FoodCategory.MealAwful},
 				new Diet.DietElement() {foodCategory = FoodCategory.RawTasty},
 				new Diet.DietElement() {foodCategory = FoodCategory.Kibble},

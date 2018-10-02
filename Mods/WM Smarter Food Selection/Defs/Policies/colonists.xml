@@ -12,6 +12,6 @@
 			<li>default:colonist</li>
 			<li>prisoner/appealedprisoner</li>
 		</conditions>
-		<diet>MealLavish=MealFine=MealSimple=MealAwful/RawTasty=200/Kibble/RawBad=RawInsect=RawHuman/Corpse=InsectCorpse/HumanlikeCorpse</diet>
+		<diet>MealLavish=MealFine=MealSimple=MealAwful/MealSurvival/RawTasty=200/Kibble/RawBad=RawInsect=RawHuman/Corpse=InsectCorpse/HumanlikeCorpse</diet>
 	</WM.SmarterFoodSelection.Policy>
 </Defs>

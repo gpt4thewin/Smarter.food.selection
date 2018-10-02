@@ -87,13 +87,13 @@ namespace WM.SmarterFoodSelection.Detours.FoodUtility
 			else
 				foodSource = null;
 
-			if (foodSource == null)
+			if (foodSource == null)  // ** If no food source is found set food Definition to null and return
 			{
 				foodDef = null;
 				return false;
 			}
 
-			foodDef = RimWorld.FoodUtility.GetFinalIngestibleDef(foodSource);
+			foodDef = RimWorld.FoodUtility.GetFinalIngestibleDef(foodSource); // ** Set food definition of food source and return
 			return true;
 
 			//bool flag = getter.RaceProps.ToolUser && getter.health.capacities.CapableOf(PawnCapacityDefOf.Manipulation);

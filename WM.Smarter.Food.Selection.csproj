@@ -67,25 +67,27 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Assembly-CSharp">
-      <HintPath>..\..\..\SteamLibrary\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="0Harmony">
-      <HintPath>..\..\..\SteamLibrary\steamapps\workshop\content\294100\818773962\Assemblies\0Harmony.dll</HintPath>
+      <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\workshop\content\294100\818773962\Assemblies\0Harmony.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="HugsLib">
-      <HintPath>..\..\..\SteamLibrary\steamapps\workshop\content\294100\818773962\Assemblies\HugsLib.dll</HintPath>
+      <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\workshop\content\294100\818773962\Assemblies\HugsLib.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine">
-      <HintPath>..\..\..\SteamLibrary\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.dll</HintPath>
+      <HintPath>..\..\..\..\Program Files (x86)\Steam\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Mods\WM Smarter Food Selection\About\About.xml" />
+    <None Include="Mods\WM Smarter Food Selection\About\About.xml">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Mods\WM Smarter Food Selection\About\preview.png" />
     <None Include="Mods\WM Smarter Food Selection\About\PublishedFileId.txt" />
     <None Include="Mods\WM Smarter Food Selection\About\version.xml" />
@@ -116,17 +118,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
-    <Content Include="Mods\WM Smarter Food Selection\Languages\ChineseSimplified\DefInjected\KeyBindingCategoryDef\KeyBindingCategories.xml" />
-    <Content Include="Mods\WM Smarter Food Selection\Languages\ChineseSimplified\DefInjected\KeyBindingDef\KeyBindings.xml" />
-    <Content Include="Mods\WM Smarter Food Selection\Languages\ChineseSimplified\DefInjected\ThingDef\Items_Food.xml" />
-    <Content Include="Mods\WM Smarter Food Selection\Languages\ChineseSimplified\DefInjected\WM.SmarterFoodSelection.Policy\ascetic.xml" />
-    <Content Include="Mods\WM Smarter Food Selection\Languages\ChineseSimplified\DefInjected\WM.SmarterFoodSelection.Policy\colonists.xml" />
-    <Content Include="Mods\WM Smarter Food Selection\Languages\ChineseSimplified\DefInjected\WM.SmarterFoodSelection.Policy\incapacitated.xml" />
-    <Content Include="Mods\WM Smarter Food Selection\Languages\ChineseSimplified\DefInjected\WM.SmarterFoodSelection.Policy\mealsonly.xml" />
-    <Content Include="Mods\WM Smarter Food Selection\Languages\ChineseSimplified\DefInjected\WM.SmarterFoodSelection.Policy\nofood.xml" />
-    <Content Include="Mods\WM Smarter Food Selection\Languages\ChineseSimplified\DefInjected\WM.SmarterFoodSelection.Policy\pets.xml" />
-    <Content Include="Mods\WM Smarter Food Selection\Languages\ChineseSimplified\DefInjected\WM.SmarterFoodSelection.Policy\prisoners.xml" />
-    <Content Include="Mods\WM Smarter Food Selection\Languages\ChineseSimplified\Keyed\Keys.xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="source\CompatabilityDef.cs" />

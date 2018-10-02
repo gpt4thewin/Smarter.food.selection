@@ -186,6 +186,7 @@ namespace WM.SmarterFoodSelection
 		internal static bool TryGetEntryForPawn(Pawn getter, Pawn eater, out PawnEntry foodSourceEntry, bool allowForbidden)
 		{
 			var pawnPair = new PawnPair(eater, getter);
+
 			if (AllByPawnPair.TryGetValue(pawnPair, out foodSourceEntry))
 				if (!foodSourceEntry.Expired() &&
 					(foodSourceEntry.BestFood == null || // Accepts null
