@@ -182,7 +182,7 @@ namespace WM.SmarterFoodSelection
 
                 if (foodPref == FoodPreferability.MealSimple)
                 {
-                    if (def.defName == "Pemmican" || def.defName == "MealSurvivalPack")
+                    if (def == ThingDefOf.MealSurvivalPack || def == ThingDefOf.Pemmican)
                         return FoodCategory.MealSurvival;
 
                     return FoodCategory.MealSimple;
