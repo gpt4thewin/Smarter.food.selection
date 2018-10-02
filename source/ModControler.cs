@@ -257,25 +257,26 @@ namespace WM.SmarterFoodSelection
 		{
 			var modsList = new List<ModContentPack>();
 
-			// ----------- Injecting tabs -----------
+            //-----------Injecting tabs-----------
 
-			//{
-			//	var caravanDef = DefDatabase<WorldObjectDef>.GetNamed("Caravan");
-			//	var newTabType = typeof(UI.WITab_Caravan_Needs);
-			//	var oldTabType = typeof(ITab_Pawn_Needs);
-			//	if (caravanDef.inspectorTabs.Remove(oldTabType))
-			//	{
-			//		caravanDef.inspectorTabsResolved.Remove(InspectTabManager.GetSharedInstance(oldTabType));
-			//caravanDef.inspectorTabs.Add(newTabType);
-			//caravanDef.inspectorTabsResolved.Add(InspectTabManager.GetSharedInstance(newTabType));
-			//	}
-			//	else
-			//	{
-			//		//TODO: disaster error message
-			//	}
-			//}
+            //{
+            //    var caravanDef = DefDatabase<WorldObjectDef>.GetNamed("Caravan");
+            //    var newTabType = typeof(UI.WITab_Caravan_Needs);
+            //    var oldTabType = typeof(ITab_Pawn_Needs);
+            //    if (caravanDef.inspectorTabs.Remove(oldTabType))
+            //    {
+            //        caravanDef.inspectorTabsResolved.Remove(InspectTabManager.GetSharedInstance(oldTabType));
+            //        caravanDef.inspectorTabs.Add(newTabType);
+            //        caravanDef.inspectorTabsResolved.Add(InspectTabManager.GetSharedInstance(newTabType));
+            //    }
+            //    else
+            //    {
+            //        //TODO: disaster error message
+            //    }
+            //}
 
-			foreach (var current in DefDatabase<ThingDef>.AllDefs.Where((ThingDef arg) => arg.race != null))
+
+            foreach (var current in DefDatabase<ThingDef>.AllDefs.Where((ThingDef arg) => arg.race != null))
 			{
 				try
 				{
@@ -408,32 +409,32 @@ namespace WM.SmarterFoodSelection
 			}
 
 
-			//foreach (ThingDef dispenser in DefDatabase<ThingDef>.AllDefs.Where(arg => arg.IsFoodDispenser))
+        //    foreach (ThingDef dispenser in DefDatabase<ThingDef>.AllDefs.Where(arg => arg.IsFoodDispenser))
 
-			//ThingDef meal = null;
-			//float foodCost = 0;
+        //        ThingDef meal = null;
+        //    float foodCost = 0;
 
-			//if (dispenser.thingClass == typeof(Building_NutrientPasteDispenser))
-			//{
-			//	var dummy = new Building_NutrientPasteDispenser();
-			//	meal = dummy.DispensableDef;
-			//	foodCost = (dummy.def.building.foodCostPerDispense * 0.05f);
-			//}
+        //    if (dispenser.thingClass == typeof(Building_NutrientPasteDispenser))
+        //    {
+        //        var dummy = new Building_NutrientPasteDispenser();
+        //        meal = dummy.DispensableDef;
+        //        foodCost = (dummy.def.building.foodCostPerDispense * 0.05f);
+        //    }
 
-			//if (meal != null)
-			//{
-			//	float costFactor = foodCost / meal.ingestible.nutrition;
-			//	FoodDefRecord record;
-			//	if (FoodCategoryUtils.FoodRecords.TryGetValue(meal, out record))
-			//	{
-			//		record.costFactor = Math.Min(record.costFactor, costFactor);
-			//	}
-			//}
-			//}
+        //    if (meal != null)
+        //    {
+        //        float costFactor = foodCost / meal.ingestible.nutrition;
+        //        FoodDefRecord record;
+        //        if (FoodCategoryUtils.FoodRecords.TryGetValue(meal, out record))
+        //        {
+        //            record.costFactor = Math.Min(record.costFactor, costFactor);
+        //        }
+        //    }
+        //}
 
-			// ----------- Reporting -----------
+        // ----------- Reporting -----------
 
-			var loadedPaches = patches.Where((arg) => arg.Loaded);
+        var loadedPaches = patches.Where((arg) => arg.Loaded);
 
 			Logger.Message(string.Format("Loaded - {0} food categorized - {1} pawn diets - {2} compatibility patches ({3} fixes) - {4} policies.", FoodCategoryUtils.TotalFoodPrefsCount, FoodCategoryUtils.TotalAnimalsDietsCount, loadedPaches.Count(), loadedPaches.Sum((arg) => arg.DefsCount), Policies.AllPolicies.Count()));
 

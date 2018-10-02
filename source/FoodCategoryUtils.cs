@@ -152,16 +152,19 @@ namespace WM.SmarterFoodSelection
 
 		private static FoodCategory _DetermineFoodCategory(ThingDef def)
 		{
+            // List Nutrient Paste Dispenser as an Awful meal source
 			if (def == ThingDefOf.NutrientPasteDispenser)
 			{
 				return FoodCategory.MealAwful;
 			}
 
+            // List all foods with a race as huntable
 			if (def.race != null)
 				return FoodCategory.Hunt;
 
 			if (def.ingestible != null)
 			{
+                //if food has no nutritional value or is a drug ignore it
 				if (def.ingestible.CachedNutrition <= 0f || def.IsDrug)
 					return FoodCategory.Ignore;
 
@@ -169,50 +172,48 @@ namespace WM.SmarterFoodSelection
 				FoodTypeFlags foodType = def.ingestible.foodType;
 
 				if (foodPref == FoodPreferability.MealFine)
-
 					return FoodCategory.MealFine;
 
 				if (foodPref == FoodPreferability.MealAwful)
-
 					return FoodCategory.MealAwful;
 
-				if (foodPref == FoodPreferability.MealSimple)
+				//if (foodPref == FoodPreferability.MealSimple)
+				//	return FoodCategory.MealSimple;
 
-					return FoodCategory.MealSimple;
+                if (foodPref == FoodPreferability.MealSimple)
+                {
+                    if (def.defName == "Pemmican" || def.defName == "MealSurvivalPack")
+                        return FoodCategory.MealSurvival;
 
-				if (foodPref == FoodPreferability.MealLavish)
+                    return FoodCategory.MealSimple;
+                }
 
+                if (foodPref == FoodPreferability.MealLavish)
 					return FoodCategory.MealLavish;
 
 				if ((foodType & FoodTypeFlags.Kibble) != 0)
-
 					return FoodCategory.Kibble;
 
 				if ((foodType & FoodTypeFlags.AnimalProduct) != 0)
 				{
 					if (def.GetCompProperties<CompProperties_Hatcher>() != null)
-
 						return FoodCategory.FertEggs;
 
 					//return WMFoodPref.Null;
 				}
 
 				if (def.ingestible.joyKind == JoyKindDefOf.Gluttonous && def.ingestible.joy >= 0.05f)
-
 					return FoodCategory.Luxury;
 
 				if ((foodType & FoodTypeFlags.Tree) != 0)
-
 					return FoodCategory.Tree;
 
 				if ((foodType & FoodTypeFlags.Plant) != 0)
 				{
 					if (def == ThingDefOf.Hay)
-
 						return FoodCategory.Hay;
 
-				    if (def == ThingDef.Named("Plant_TallGrass") ||
-				        def == ThingDef.Named("Plant_Grass"))
+				    if (def == ThingDef.Named("Plant_TallGrass") || def == ThingDef.Named("Plant_Grass"))
 				        return FoodCategory.Grass;
 
                     return FoodCategory.Plant;
@@ -221,49 +222,40 @@ namespace WM.SmarterFoodSelection
 				if (def.IsCorpse)
 				{
 					if (RimWorld.FoodUtility.IsHumanlikeMeat(def))
-
 						return FoodCategory.HumanlikeCorpse;
 
 					//TODO: Make more reliable
 					if (def.ingestible.sourceDef.race.Animal)
 					{
 						if (def.FirstThingCategory == ThingCategoryDefOf.CorpsesInsect)
-
 							return FoodCategory.InsectCorpse;
 
 						return FoodCategory.Corpse;
 					}
 
 					if (def.ingestible.sourceDef.race.IsMechanoid)
-
 						return FoodCategory.Ignore;
 				}
 
 				if (def.ingestible.tasteThought != null && def.ingestible.tasteThought.stages.All((ThoughtStage arg) => arg.baseMoodEffect < 0))
 				{
 					if (RimWorld.FoodUtility.IsHumanlikeMeat(def))
-
 						return FoodCategory.RawHuman;
 
 					if (def == ThingDef.Named("Meat_Megaspider"))
 						//if (def.ingestible.tasteThought == ThoughtDefOf.AteInsectMeatAsIngredient)
-
 						return FoodCategory.RawInsect;
-
 
 					return FoodCategory.RawBad;
 				}
 
 				if ((def.ingestible.tasteThought == null || def.ingestible.tasteThought.stages.All((ThoughtStage arg) => arg.baseMoodEffect >= 0)))
-
 					return FoodCategory.RawTasty;
 
 				if ((foodType & FoodTypeFlags.AnimalProduct) != 0)
-
 					return FoodCategory.AnimalProduct;
 
 				if (foodPref == FoodPreferability.NeverForNutrition || def.IsDrug)
-
 					return FoodCategory.Ignore;
 			}
 

@@ -114,6 +114,7 @@
 	<FoodCategory.FertEggs>FertEggs</FoodCategory.FertEggs>
 	<FoodCategory.AnimalProduct>AnimalProduct</FoodCategory.AnimalProduct>
 	<FoodCategory.MealAwful>MealAwful</FoodCategory.MealAwful>
+  <FoodCategory.MealSurvival>MealSurvival</FoodCategory.MealSurvival>
 	<FoodCategory.MealSimple>MealSimple</FoodCategory.MealSimple>
 	<FoodCategory.MealFine>MealFine</FoodCategory.MealFine>
 	<FoodCategory.MealLavish>MealLavish</FoodCategory.MealLavish>

@@ -53,7 +53,8 @@ namespace WM.SmarterFoodSelection
 				obj.AddComp("Distance", distanceFactor);
 			}
 
-			if (inInventory && getter == eater && food.def.ingestible.preferability >= FoodPreferability.MealAwful)
+			if (inInventory && getter == eater && food.def.ingestible.preferability >= FoodPreferability.MealAwful 
+                && (eater.IsColonistPlayerControlled && (food.GetFoodCategory() != FoodCategory.MealSurvival))) //added to prevent survival meals from being eaten out of inventory
 			{
 				obj.AddComp("Inventory", 500f);
 			}

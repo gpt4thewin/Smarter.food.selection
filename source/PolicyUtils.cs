@@ -17,7 +17,7 @@ namespace WM.SmarterFoodSelection
 			if (getter == null)
 				getter = eater;
 
-			Policy policy = GetHardcodedPolicy(eater, getter);
+            Policy policy = GetHardcodedPolicy(eater, getter);
 
 			if (policy != null)
 				return policy;
@@ -38,11 +38,15 @@ namespace WM.SmarterFoodSelection
 			if (pawn.needs == null || !pawn.RaceProps.EatsFood || pawn.isWildAnimal() || pawn.isInsectFaction())
 				return false;
 
-			//if (pawn.Faction != Faction.OfPlayer && pawn.HostFaction != Faction.OfPlayer)
-			//	return false;
+            //if (pawn.Faction != Faction.OfPlayer && pawn.HostFaction != Faction.OfPlayer)
+            //	return false;
 
-			//null checked in isWildAnimal()
-			if (pawn.Faction != null)
+            //after pawn.isWildAnimal() the only null case should be space refugee
+            if (pawn.Faction == null)
+            {
+                return true;
+            }
+            if (pawn.Faction != null)
 			{
 				if (pawn.HostFaction == Faction.OfPlayer)
 					return true;
@@ -67,7 +71,17 @@ namespace WM.SmarterFoodSelection
 					return Policies.Wild;
 			}
 
-			if (!eater.Faction.IsPlayer && eater.Faction.RelationWith(Faction.OfPlayer).kind != FactionRelationKind.Hostile && !eater.IsPrisonerOfColony)
+            // Should only occur if eater is unfactioned space refugee or WildMan | prevents error with eater.Faction.IsPlayer in next if statement
+            if (eater.Faction == null)
+            {
+                if (eater.KindLabel == "space refugee" ||
+                    ((eater.KindLabel == "wild man" || eater.KindLabel == "wild woman") &&
+                        eater.mindState.lastJobTag == Verse.AI.JobTag.TuckedIntoBed))
+                    return Policies.Friendly;
+                else
+                    return null;
+            }
+            if (!eater.Faction.IsPlayer && eater.Faction.RelationWith(Faction.OfPlayer).kind != FactionRelationKind.Hostile && !eater.IsPrisonerOfColony)
 			{
 				if (eater.RaceProps.Animal)
 					return Policies.FriendlyPets;

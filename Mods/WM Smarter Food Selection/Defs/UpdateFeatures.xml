@@ -5,36 +5,48 @@
 		<modIdentifier>Smarter_Food_Selection</modIdentifier>
 		<linkUrl>https://ludeon.com/forums/index.php?topic=30708.0</linkUrl>
 	</HugsLib.UpdateFeatureDef>
-	<HugsLib.UpdateFeatureDef ParentName="WMSFS_UpdateFeatureBase">
-		<defName>WMSFS_2_0_a_hotfix_3</defName>
-		<assemblyVersion>2.0.13</assemblyVersion>
-		<content>&lt;size=16&gt;Hotfix&lt;/size&gt;|Fixed bug with colonists and visitors not eating their food in inventory\nVisitors won't steal your food anymore !|Can now make visitors use their vanilla behavior in settings.|Fixed insects affected by a food policy and trying to fetch other foods than their jelly.|Added scheduled food search cache clearing. This might improve performances a bit.</content>
-	</HugsLib.UpdateFeatureDef>
-	
-	<HugsLib.UpdateFeatureDef ParentName="WMSFS_UpdateFeatureBase">
-		<defName>WMSFS_2_0_a_hotfix_4</defName>
-		<assemblyVersion>2.0.14</assemblyVersion>
-		<content>
-&lt;size=20&gt;Hotfix&lt;/size&gt;|
-&lt;b&gt;&lt;size=16&gt;&lt;color=orange&gt;UI Change&lt;/color&gt;&lt;/size&gt;&lt;/b&gt;|
-* New inspect tab. UI is no more shown inside the needs tab.|
-&lt;b&gt;&lt;size=16&gt;Bugs fixes&lt;/size&gt;&lt;/b&gt;|
-* Error messages (yellow) after selling stuff to traders.|
-* Pets still hunting prisoners (oops).
-* Pets will not hunt humans at all anymore (even hostile ones).
-		</content>
-	</HugsLib.UpdateFeatureDef>
-	
-	<HugsLib.UpdateFeatureDef ParentName="WMSFS_UpdateFeatureBase">
-		<defName>WMSFS_2_1</defName>
-		<assemblyVersion>2.1.0</assemblyVersion>
-		<content>
-&lt;size=20&gt;Updated to A17&lt;/size&gt;|
-&lt;b&gt;&lt;size=16&gt;Minor changes&lt;/size&gt;&lt;/b&gt;|
-* Forcing paste dispense will now show a message if available energy is insufficient.
-		</content>
-	</HugsLib.UpdateFeatureDef>
 
+newest
+  <HugsLib.UpdateFeatureDef ParentName="WMSFS_UpdateFeatureBase">
+    <defName>WMSFS_2_3_0_2</defName>
+    <assemblyVersion>2.3.0.2</assemblyVersion>
+    <content>
+      &lt;size=20&gt;Survival Foods Rework&lt;/size&gt;|
+      Changed how Pemmican and Packaged Survival Meals were categorized:|
+      -They now have their own category "MealSurvival"
+      -They should now be consumed after more perishable meal options (including nutrient 
+      paste)
+      -Colonists will still pick them up into their inventory in-line with vanilla behavior, but 
+      they will choose other options come meal time if available
+      -Pets should now mostly ignore them opting for raw foods first|
+      Bug Fix:|
+      -Rescued Space Refugees / Wild Men were not being asigned a policy and would be fed corpses or not at all.
+      They now default to "Friendly" policy
+      -Fixed compatability with RimFridge. Colonists will now use wall fridges.
+    </content>
+  </HugsLib.UpdateFeatureDef>
+
+  <HugsLib.UpdateFeatureDef ParentName="WMSFS_UpdateFeatureBase">
+    <defName>WMSFS_2_3_0_1</defName>
+    <assemblyVersion>2.3.0.1</assemblyVersion>
+    <content>
+      &lt;size=20&gt;Herbivore animals bug fix&lt;/size&gt;|
+      Fixed herbivore animals never eating grass.|
+      Enjoy !
+    </content>
+  </HugsLib.UpdateFeatureDef>
+
+  <HugsLib.UpdateFeatureDef ParentName="WMSFS_UpdateFeatureBase">
+    <defName>WMSFS_2_3</defName>
+    <assemblyVersion>2.3</assemblyVersion>
+    <content>
+      &lt;size=20&gt;B19 update&lt;/size&gt;|
+      Smarter Food Selection now for B19.|
+      Please note that this mod is unmaintained and that this is a minimum update for B19.|
+      The mod might be unstable.
+    </content>
+  </HugsLib.UpdateFeatureDef>
+	
   <HugsLib.UpdateFeatureDef ParentName="WMSFS_UpdateFeatureBase">
     <defName>WMSFS_2_1_1</defName>
     <assemblyVersion>2.1.1</assemblyVersion>
@@ -51,24 +63,33 @@
   </HugsLib.UpdateFeatureDef>
 
   <HugsLib.UpdateFeatureDef ParentName="WMSFS_UpdateFeatureBase">
-    <defName>WMSFS_2_3</defName>
-    <assemblyVersion>2.3</assemblyVersion>
-    <content>
-      &lt;size=20&gt;B19 update&lt;/size&gt;|
-      Smarter Food Selection now for B19.|
-      Please note that this mod is unmaintained and that this is a minimum update for B19.|
-      The mod might be unstable.
-    </content>
-  </HugsLib.UpdateFeatureDef>
-
-  <HugsLib.UpdateFeatureDef ParentName="WMSFS_UpdateFeatureBase">
-    <defName>WMSFS_2_3_0_1</defName>
-    <assemblyVersion>2.3.0.1</assemblyVersion>
-    <content>
-      &lt;size=20&gt;Herbivore animals bug fix&lt;/size&gt;|
-      Fixed herbivore animals never eating grass.|
-      Enjoy !
-    </content>
-  </HugsLib.UpdateFeatureDef>
+		<defName>WMSFS_2_1</defName>
+		<assemblyVersion>2.1.0</assemblyVersion>
+		<content>
+      &lt;size=20&gt;Updated to A17&lt;/size&gt;|
+      &lt;b&gt;&lt;size=16&gt;Minor changes&lt;/size&gt;&lt;/b&gt;|
+      * Forcing paste dispense will now show a message if available energy is insufficient.
+		</content>
+	</HugsLib.UpdateFeatureDef>
 	
+  <HugsLib.UpdateFeatureDef ParentName="WMSFS_UpdateFeatureBase">
+	<defName>WMSFS_2_0_a_hotfix_4</defName>
+	<assemblyVersion>2.0.14</assemblyVersion>
+	<content>
+    &lt;size=20&gt;Hotfix&lt;/size&gt;|
+    &lt;b&gt;&lt;size=16&gt;&lt;color=orange&gt;UI Change&lt;/color&gt;&lt;/size&gt;&lt;/b&gt;|
+    * New inspect tab. UI is no more shown inside the needs tab.|
+    &lt;b&gt;&lt;size=16&gt;Bugs fixes&lt;/size&gt;&lt;/b&gt;|
+    * Error messages (yellow) after selling stuff to traders.|
+    * Pets still hunting prisoners (oops).
+    * Pets will not hunt humans at all anymore (even hostile ones).
+		</content>
+	</HugsLib.UpdateFeatureDef>
+
+	<HugsLib.UpdateFeatureDef ParentName="WMSFS_UpdateFeatureBase">
+		<defName>WMSFS_2_0_a_hotfix_3</defName>
+		<assemblyVersion>2.0.13</assemblyVersion>
+		<content>&lt;size=16&gt;Hotfix&lt;/size&gt;|Fixed bug with colonists and visitors not eating their food in inventory\nVisitors won't steal your food anymore !|Can now make visitors use their vanilla behavior in settings.|Fixed insects affected by a food policy and trying to fetch other foods than their jelly.|Added scheduled food search cache clearing. This might improve performances a bit.</content>
+	</HugsLib.UpdateFeatureDef>
+  
 </Defs>
