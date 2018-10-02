@@ -1,30 +1,56 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-	<WM.SmarterFoodSelection.Policy>
-		<defName>SFS_DefaultPetPolicy</defName>
-		<label>Animals</label>
-		<conditions>
-			<li>default:pet</li>
-		</conditions>
-		<description>Will prefer food for animals. Hunt &gt; Grass &gt; Human corpses &gt; hay &gt; kibble..\nBut will allow other foods if those are not available.</description>
-		<diet>
-				Hunt /
-				Grass /
-				HumanlikeCorpse /
-				Hay /		
-				Kibble =
-				MealAwful /
-				MealSimple /
-				RawHuman /
-				RawInsect /
-				RawBad /
-				RawTasty /
-				InsectCorpse /
-				Corpse /
-				MealFine /
-				MealLavish 
-		</diet>
-	</WM.SmarterFoodSelection.Policy>
+  <WM.SmarterFoodSelection.Policy>
+    <defName>SFS_DefaultPetPolicy</defName>
+    <label>Animals</label>
+    <conditions>
+      <li>default:pet</li>
+    </conditions>
+    <description>Will prefer food for animals. Hunt &gt; Grass &gt; Human corpses &gt; hay &gt; kibble..\nBut will allow other foods if those are not available.</description>
+    <diet>
+      Hunt /
+      Grass /
+      HumanlikeCorpse /
+      Hay /
+      Kibble =
+      MealAwful /
+      MealSimple /
+      RawHuman /
+      RawInsect /
+      RawBad /
+      RawTasty /
+      InsectCorpse /
+      Corpse /
+      MealFine /
+      MealLavish
+    </diet>
+  </WM.SmarterFoodSelection.Policy>
+  <WM.SmarterFoodSelection.Policy>
+    <defName>SFS_DefaultPetPolicy_PlusMealSurvival</defName>
+    <label>Animals + survival meals</label>
+    <conditions>
+      <li>default:pet</li>
+    </conditions>
+    <description>Will prefer food for animals. Hunt &gt; Grass &gt; Human corpses &gt; hay &gt; kibble..\nBut will allow other foods if those are not available.</description>
+    <diet>
+      Hunt /
+      Grass /
+      HumanlikeCorpse /
+      Hay /
+      Kibble =
+      MealAwful /
+      MealSimple /
+      RawHuman /
+      RawInsect /
+      RawBad /
+      RawTasty /
+      InsectCorpse /
+      Corpse /
+      MealFine /
+      MealLavish /
+      MealSurvival
+    </diet>
+  </WM.SmarterFoodSelection.Policy>
 	<WM.SmarterFoodSelection.Policy>
 		<defName>SFS_GrassHayKibble</defName>
 		<label>Hay, kibble</label>

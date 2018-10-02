@@ -37,6 +37,6 @@
 		<conditions>
 			<li>default:human/incapacitated</li>
 		</conditions>
-		<diet>MealAwful/MealSimple/MealFine/Kibble/RawHuman/RawInsect/RawBad/InsectCorpse/RawTasty/MealLavish</diet>
+		<diet>MealAwful/MealSimple/MealFine/Kibble/RawHuman/RawInsect/RawBad/InsectCorpse/RawTasty/MealLavish/MealSurvival</diet>
 	</WM.SmarterFoodSelection.Policy>
 </Defs>

@@ -1,28 +1,54 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <Defs>
-	<WM.SmarterFoodSelection.Policy>
-		<defName>SFS_DefaultPrisonerPolicy</defName>
-		<label>Prisoner</label>
-		<description>Default prisoner policy.\nWill prefer the worst meals first. Will also care about the thoughts given by meals but not very much.</description>
-		<moodEffectMatters>true</moodEffectMatters>
-		<moodEffectFactor>0.3</moodEffectFactor>
-		<costFactorMultiplier>2</costFactorMultiplier>
-		<conditions>
-			<li>default:prisoner</li>
-			<li>default:prisoner/appealedprisoner</li>
-		</conditions>
-		<diet>		
-				MealAwful /
-				MealSimple /
-				MealFine /
-				RawTasty /	
-				Kibble /
-				RawBad /
-				RawInsect /
-				MealLavish /
-				Corpse /
-				InsectCorpse /
-				HumanlikeCorpse
-		</diet>
-	</WM.SmarterFoodSelection.Policy>
+  <WM.SmarterFoodSelection.Policy>
+    <defName>SFS_DefaultPrisonerPolicy</defName>
+    <label>Prisoner</label>
+    <description>Default prisoner policy.\nWill prefer the worst meals first. Will also care about the thoughts given by meals but not very much.</description>
+    <moodEffectMatters>true</moodEffectMatters>
+    <moodEffectFactor>0.3</moodEffectFactor>
+    <costFactorMultiplier>2</costFactorMultiplier>
+    <conditions>
+      <li>default:prisoner</li>
+      <li>default:prisoner/appealedprisoner</li>
+    </conditions>
+    <diet>
+      MealAwful /
+      MealSimple /
+      MealFine /
+      RawTasty /
+      Kibble /
+      RawBad /
+      RawInsect /
+      MealLavish /
+      Corpse /
+      InsectCorpse /
+      HumanlikeCorpse
+    </diet>
+  </WM.SmarterFoodSelection.Policy>
+  <WM.SmarterFoodSelection.Policy>
+    <defName>SFS_DefaultPrisonerPolicy_PlusMealSurvival</defName>
+    <label>Prisoner (+survival)</label>
+    <description>This policy is like its similar one but also allows survival meals and pemmican (after fine meal, before raw, tasty food)</description>
+    <moodEffectMatters>true</moodEffectMatters>
+    <moodEffectFactor>0.3</moodEffectFactor>
+    <costFactorMultiplier>2</costFactorMultiplier>
+    <conditions>
+      <li>default:prisoner</li>
+      <li>default:prisoner/appealedprisoner</li>
+    </conditions>
+    <diet>
+      MealAwful /
+      MealSimple /
+      MealFine /
+      MealSurvival /
+      RawTasty /
+      Kibble /
+      RawBad /
+      RawInsect /
+      MealLavish /
+      Corpse /
+      InsectCorpse /
+      HumanlikeCorpse
+    </diet>
+  </WM.SmarterFoodSelection.Policy>
 </Defs>

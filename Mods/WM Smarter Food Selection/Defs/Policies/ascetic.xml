@@ -8,6 +8,6 @@
 			<li>default:ascetic</li>
 			<li>human/incapacitated</li>
 		</conditions>
-		<diet>MealAwful/MealSimple/Kibble/MealFine/RawTasty/RawBad/MealLavish/RawInsect/RawHuman/Corpse/InsectCorpse/HumanlikeCorpse</diet>
+		<diet>MealAwful/MealSimple/Kibble/MealFine/RawTasty/RawBad/MealLavish/MealSurvival/RawInsect/RawHuman/Corpse/InsectCorpse/HumanlikeCorpse</diet>
 	</WM.SmarterFoodSelection.Policy>
 </Defs>

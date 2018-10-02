@@ -15,7 +15,8 @@ New food category survival meals:|
 -They will now be consumed after more perishable meal options (including nutrient paste) using standard policies.
 -Includes survival meals and pemmican.
 -Colonists will still pick them up into their inventory in-line with vanilla behavior, but they will choose other options come meal time if available.
--Pets should now mostly ignore them opting for raw foods first.|
+-Pets should now mostly ignore them opting for raw foods first.
+-Most policies have the lowest priority on survival meals.|
 &lt;b&gt;&lt;size=16&gt;&lt;color=orange&gt;Bug fix&lt;/color&gt;&lt;/size&gt;&lt;/b&gt;|
 -Rescued Space Refugees / Wild Men were not being assigned a policy and would only be fed with corpses.|
 &lt;b&gt;&lt;size=16&gt;&lt;color=orange&gt;Compatibility&lt;/color&gt;&lt;/size&gt;&lt;/b&gt;|
