@@ -7,6 +7,14 @@
 	</HugsLib.UpdateFeatureDef>
 
   <HugsLib.UpdateFeatureDef ParentName="WMSFS_UpdateFeatureBase">
+    <defName>WMSFS_2_3_0_3</defName>
+    <assemblyVersion>2.3.0.3</assemblyVersion>
+    <content>
+      &lt;b&gt;&lt;size=16&gt;&lt;color=orange&gt;Silage and VGP&lt;/color&gt;&lt;/size&gt;&lt;/b&gt;|
+      Animals will now eat silage from Vegetable Garden.|
+    </content>
+  </HugsLib.UpdateFeatureDef>
+  <HugsLib.UpdateFeatureDef ParentName="WMSFS_UpdateFeatureBase">
     <defName>WMSFS_2_3_0_2</defName>
     <assemblyVersion>2.3.0.2</assemblyVersion>
     <content>

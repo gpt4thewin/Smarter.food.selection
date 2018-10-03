@@ -118,6 +118,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
+    <Content Include="Mods\WM Smarter Food Selection\Defs\ModCompatibility\VegetablesGarden.xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="source\CompatabilityDef.cs" />
