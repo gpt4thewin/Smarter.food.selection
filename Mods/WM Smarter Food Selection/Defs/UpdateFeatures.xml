@@ -13,6 +13,7 @@
       &lt;b&gt;&lt;size=16&gt;&lt;color=orange&gt;Rimworld 1.0&lt;/color&gt;&lt;/size&gt;&lt;/b&gt;|
       Minimum update for 1.0 compatability|
       **New food restriction feature NOT supported by this mod**|
+      -New policy : Meals only + raw. Eats the raw food before package survival meals and pemmican. Usefull for caravans.|
     </content>
   </HugsLib.UpdateFeatureDef>
   <HugsLib.UpdateFeatureDef ParentName="WMSFS_UpdateFeatureBase">

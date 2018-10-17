@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <WM.SmarterFoodSelection.Policy>
+    <defName>SFS_MealsOnly_PlusRaw</defName>
+    <label>Meals + forage</label>
+    <description>Similar to the "meals only" policy but use use raw forageable food before non perishable food (survival meals, pemmican). Well suited for caravan traveling. Assign this policy BEFORE the caravan leaves the map.</description>
+    <moodEffectMatters>true</moodEffectMatters>
+    <conditions>
+      <li>human</li>
+    </conditions>
+    <diet>MealLavish=MealFine=MealSimple=MealAwful/RawTasty/MealSurvival</diet>
+  </WM.SmarterFoodSelection.Policy>
+  <WM.SmarterFoodSelection.Policy>
+    <defName>SFS_MealsOnly_Worst_PlusRaw</defName>
+    <label>Meals (Worst)  + forage</label>
+    <description>Similar to the "meals only worst 1st" policy but use raw forageable food before non perishable food (survival meals, pemmican). Well suited for caravan traveling. Assign this policy BEFORE the caravan leaves the map.</description>
+    <moodEffectMatters>false</moodEffectMatters>
+    <conditions>
+      <li>human</li>
+    </conditions>
+    <diet>MealAwful/MealSimple/MealFine/MealLavish/RawTasty/MealSurvival</diet>
+  </WM.SmarterFoodSelection.Policy>
+</Defs>
