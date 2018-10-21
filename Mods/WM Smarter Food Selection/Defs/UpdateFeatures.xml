@@ -7,12 +7,22 @@
 	</HugsLib.UpdateFeatureDef>
 
   <HugsLib.UpdateFeatureDef ParentName="WMSFS_UpdateFeatureBase">
+    <defName>WMSFS_2_3_0_5</defName>
+    <assemblyVersion>2.3.0.5</assemblyVersion>
+    <content>
+&lt;b&gt;&lt;size=16&gt;&lt;color=orange&gt;Hotfix&lt;/color&gt;&lt;/size&gt;&lt;/b&gt;|
+Fixed mod breaking bug.|
+Animals would eat anything.|
+    </content>
+  </HugsLib.UpdateFeatureDef>
+  <HugsLib.UpdateFeatureDef ParentName="WMSFS_UpdateFeatureBase">
     <defName>WMSFS_2_3_0_4</defName>
     <assemblyVersion>2.3.0.4</assemblyVersion>
     <content>
-      &lt;b&gt;&lt;size=16&gt;&lt;color=orange&gt;Rimworld 1.0&lt;/color&gt;&lt;/size&gt;&lt;/b&gt;|
-      Minimum update for 1.0 compatability|
-      **New food restriction feature NOT supported by this mod**|
+&lt;b&gt;&lt;size=16&gt;&lt;color=orange&gt;Rimworld 1.0&lt;/color&gt;&lt;/size&gt;&lt;/b&gt;|
+Minimum update for 1.0 compatability|
+**New food restriction feature NOT supported by this mod**|
+-New policy : Meals only + raw. Eats the raw food before package survival meals and pemmican. Usefull for caravans.|
     </content>
   </HugsLib.UpdateFeatureDef>
   <HugsLib.UpdateFeatureDef ParentName="WMSFS_UpdateFeatureBase">

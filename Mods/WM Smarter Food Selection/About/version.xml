@@ -4,7 +4,7 @@
 	but no minimum version will be required -->
 	
 	<!-- Optional. This specifies the version of your mod for the library. Otherwise, the version of your mod's assembly will be used. -->
-	<overrideVersion>2.3.0.4</overrideVersion>
+	<overrideVersion>2.3.0.5</overrideVersion>
 	<!-- Optional. This is read by the build.js script for the purpose of release publishing. Not used if you don't use the script. -->
 	<gitHubRepository>UnlimitedHugs/RimworldHugsLibChecker</gitHubRepository>
 </VersionData>

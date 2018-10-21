@@ -249,7 +249,7 @@ namespace WM.SmarterFoodSelection
 			}
 			catch (Exception ex)
 			{
-				Log.Warning("Could not dynamicaly name meal def label from " + prefix + ": " + ex + " " + ex.StackTrace);
+				Log.Warning("Could not dynamicaly name meal def label from " + prefix + ": " + ex);
 			}
 		}
 
