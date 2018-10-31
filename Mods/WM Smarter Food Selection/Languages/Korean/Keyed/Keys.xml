@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+
+	<!-- ============== Basic ============== -->
+	
+	<colonists>정착민</colonists>
+	<prisoners>죄수</prisoners>
+
+	<!-- ============== Settings ============== -->
+
+	<ShowAdvancedOptions>고급 설정 보기</ShowAdvancedOptions>
+	<ShowAdvancedOptions_desc>고급 설정을 봅니다.</ShowAdvancedOptions_desc>
+
+	<PetsSafeHuntMaxStrenghtRatio>애완 동물이 사냥시 최대 힘 비율</PetsSafeHuntMaxStrenghtRatio>
+	<PetsSafeHuntMaxStrenghtRatio_desc>애완 동물은 이 보다 높은 힘 비율을 가진 먹이를 사냥하지 않습니다.\n부상당하지 않도록 하는데 유용합니다.\n바닐라의 기본 비율은 0.5입니다.</PetsSafeHuntMaxStrenghtRatio_desc>
+	
+	<UseCorpsesForTaming>시체를 사용한 핸들링</UseCorpsesForTaming>
+	<UseCorpsesForTaming_desc>!! 실험적 !! 정착민들은 시체를 이용해 동물을 길들이거나 조련합니다.</UseCorpsesForTaming_desc>
+	
+	<UseHumanlikeCorpsesForTaming>인간형 시체를 이용한 핸들링</UseHumanlikeCorpsesForTaming>
+	<UseHumanlikeCorpsesForTaming_desc>!! 실험적 !! 정착민들은 인간형 시체를 사용해 동물을 길들이거나 조련합니다.</UseHumanlikeCorpsesForTaming_desc>
+
+	<PrintReportCommand>호환성 보고서 출력</PrintReportCommand>
+	<PrintReportCommand_desc>모든 정책에 대한 식성들과 모드로 인해 만들어진 모든 음식 분류에 대한 보고서를 출력합니다.\n다른 모드로 인해 추가된 음식과 제대로 작동하는지 점검할 때 유용합니다.</PrintReportCommand_desc>
+	<commandPrintReportButton>보고서 모드 선택</commandPrintReportButton>
+	<commandPrintReportOption_DefName>Def 이름 보고서</commandPrintReportOption_DefName>
+	<commandPrintReportOption_Label>인게임 이름 보고서</commandPrintReportOption_Label>
+	<ReportPrintedInLogMessage>로그를 통해 호환성 보고서를 확인 가능합니다.</ReportPrintedInLogMessage>
+
+	<CostFactor>비용 인자</CostFactor>
+	<CostFactor_desc>먹는 림에 의해 낭비된 영양분에 따라 음식 선정 점수에 징계를 내립니다.</CostFactor_desc>
+
+	<FoodSearchMaxItemsCount>최대 음식 검색 수</FoodSearchMaxItemsCount>
+	<FoodSearchMaxItemsCount_desc>림에 의해 검색되는 식품의 최대 개수\n낮은 값은 성능을 향상 시키지만 림의 음식 검색 반경이 감소됩니다.</FoodSearchMaxItemsCount_desc>
+	
+	<SeparatedNutrientPaste>배급기가 특별한 식인식을 만듭니다.</SeparatedNutrientPaste>
+	<SeparatedNutrientPaste_desc>영향 페이스트 배급기는 재료에 인육이 포함되어 있는 경우 대체 영양분 페이스트를 생산합니다.\n식인 식 스택과 일반식이 섞이지 않도록 하는데 유용합니다. 그러나 세이브 파일을 모드에 종속되게 합니다.</SeparatedNutrientPaste_desc>
+
+	<ControlPets>애완 동물에 대한 제어 활성</ControlPets>
+	<ControlPets_desc>비활성화 되어 있으면 어느 세력에 속해있는 동물을 길들일 때, 바닐라 정책을 따릅니다.</ControlPets_desc>
+	<ControlPrisoners>죄수에 대한 관리 활성</ControlPrisoners>
+	<ControlPrisoners_desc>비활성화 되어 있으면 정착민들은 죄수를 정상적으로 먹입니다.</ControlPrisoners_desc>
+	<ControlColonists>정착민에 대한 관리 활성</ControlColonists>
+	<ControlColonists_desc>정착민들에 대한 관리를 활성화합니다.</ControlColonists_desc>
+	<ControlVisitors>방문자에 대한 제어 활성</ControlVisitors>
+	<ControlVisitors_desc>비활성화 되어 있으면 방문객들은 바닐라 정책을 따릅니다.</ControlVisitors_desc>
+
+	<NeedsTabUIHeight>욕구 탭의 UI 높이.</NeedsTabUIHeight>
+	<NeedsTabUIHeight_desc>UI가 분할될 때 욕구 탭의 UI 높이. 값이 너무 작으면 UI가 정상적으로 표시되지 않을 수 있습니다.\n주의해서 사용하세요.</NeedsTabUIHeight_desc>
+
+	<UseMealsForTaming>식량을 사용한 핸들링</UseMealsForTaming>
+	<UseMealsForTaming_desc>!!! BROKEN ATM !!!. 위험을 감수할 수 있는 경우에만 사용하세요. 식량을 사용해서 동물을 길들이거나 조련합니다. 영향 페이스트가 포함되며 선호됩니다.</UseMealsForTaming_desc>
+	
+	<!-- ============== Nutrient paste dispenser ============== -->
+	
+	<DispenseXcount>배급 x{0}</DispenseXcount>
+	<DispenseXcount_desc>배급기에 {0}개의 식량을 강제로 만들도록 합니다.</DispenseXcount_desc>
+
+	<StandardMode>표준 모드</StandardMode>
+	<StandardMode_desc>아무거나. 일반적인 음식, 마지막으로 곤충 고기와 인육.</StandardMode_desc>
+	
+	<CannibalMode>식인 모드</CannibalMode>
+	<CannibalMode_desc>인육을 선호합니다.</CannibalMode_desc>
+
+	<CannibalCleanMode>식인 클린 모드</CannibalCleanMode>
+	<CannibalCleanMode_desc>다른 생식 보다 인육이 선호됩니다. (곤충 고기는 사용하지 않음).</CannibalCleanMode_desc>
+	
+	<AnimalMode>동물 모드</AnimalMode>
+	<AnimalMode_desc>다른 생식 보다 곤충 고기, 곤충 고기 보다 인육을 선호합니다.</AnimalMode_desc>
+	
+	<CleanMode>클린 모드</CleanMode>
+	<CleanMode_desc>인육과 곤축 거부.</CleanMode_desc>
+
+	<DispenserModeWarning>수동 배급에만 적용됩니다.</DispenserModeWarning>
+	<ManualDispenseCostWarning>수동 배급은 {0} x {1} = {2} Wd가 소요됩니다..</ManualDispenseCostWarning>
+
+	<CannibalMealLabel>{0} (식인)</CannibalMealLabel>
+
+	<NPDNoEnergy>전력망에 충분한 에너지가 저장되어 있지 않습니다.</NPDNoEnergy>
+
+	<!-- ============== Pawn policy card ============== -->
+
+	<FoodITabLabel>음식</FoodITabLabel>
+
+	<PawnPolicyCard_Title>더 많은 설정 보기/숨기기</PawnPolicyCard_Title>
+	<PawnPolicyCard_AssignToAll>전체 [{0}] 할당</PawnPolicyCard_AssignToAll>
+	<PawnPolicyCard_AssignToAllOnMap>지도에 있는 전체 [{0}]에게 할당</PawnPolicyCard_AssignToAllOnMap>
+	<PawnPolicyCard_ResetAllOnMap>지도에 있는 전체 [{0}] 정책 초기화</PawnPolicyCard_ResetAllOnMap>
+	<PawnPolicyCard_SetDefaultFor>기본으로 설정 {0}</PawnPolicyCard_SetDefaultFor>
+	<PawnPolicyCard_CurrentBestFood>현재 최적 음식: {0}</PawnPolicyCard_CurrentBestFood>
+	<PawnPolicyCard_Inventory>(인벤토리)</PawnPolicyCard_Inventory>
+	<PawnPolicyCard_NoFoodFound>(음식 없음)</PawnPolicyCard_NoFoodFound>
+	<PawnPolicyCard_Policy>음식 정책:</PawnPolicyCard_Policy>
+	<PawnPolicyCard_ResetPolicy>기본값으로 초기화</PawnPolicyCard_ResetPolicy>
+	<PawnPolicyCard_CannotSetPolicy>* 정책을 선택할 수 없음 *</PawnPolicyCard_CannotSetPolicy>
+	<PawnPolicyCard_CurrentPolicy>현재 정책: </PawnPolicyCard_CurrentPolicy>
+	
+	<!-- ============== Others ============== -->
+
+	<UnrestrictedPolicyLabel>* 제한 없음 *</UnrestrictedPolicyLabel>
+
+	<!-- ============== Food categories ============== -->
+	
+	<FoodCategory.Null>Null</FoodCategory.Null>
+	<FoodCategory.Ignore>무시됨</FoodCategory.Ignore>
+	<FoodCategory.HumanlikeCorpse>인간형 시체</FoodCategory.HumanlikeCorpse>
+	<FoodCategory.InsectCorpse>곤충 시체</FoodCategory.InsectCorpse>
+	<FoodCategory.Corpse>시체</FoodCategory.Corpse>
+	<FoodCategory.Hay>건초</FoodCategory.Hay>
+	<FoodCategory.Kibble>사료</FoodCategory.Kibble>
+	<FoodCategory.RawBad>가공할 수 없는 생식</FoodCategory.RawBad>
+	<FoodCategory.RawTasty>맛좋은 생식</FoodCategory.RawTasty>
+	<FoodCategory.RawInsect>가공되지 않은 곤충</FoodCategory.RawInsect>
+	<FoodCategory.RawHuman>가공되지 않은 인간</FoodCategory.RawHuman>
+	<FoodCategory.FertEggs>수정란</FoodCategory.FertEggs>
+	<FoodCategory.AnimalProduct>동물성 제품</FoodCategory.AnimalProduct>
+	<FoodCategory.MealAwful>영양죽</FoodCategory.MealAwful>
+  <FoodCategory.MealSurvival>보존 식량</FoodCategory.MealSurvival>
+	<FoodCategory.MealSimple>간단한 식사</FoodCategory.MealSimple>
+	<FoodCategory.MealFine>좋은 식사</FoodCategory.MealFine>
+	<FoodCategory.MealLavish>호화로운 식사</FoodCategory.MealLavish>
+	<FoodCategory.Plant>작물</FoodCategory.Plant>
+	<FoodCategory.Grass>풀</FoodCategory.Grass>
+	<FoodCategory.Luxury>호화로운</FoodCategory.Luxury>
+	<FoodCategory.Hunt>사냥</FoodCategory.Hunt>
+	<FoodCategory.Tree>나무</FoodCategory.Tree>
+
+	<!-- ============== Obsolete keys ============== -->
+
+	<IncapFeedMode>Incapacitated colonists feed mode</IncapFeedMode>
+	<enumSetting_Offline>Vanilla like</enumSetting_Offline>
+	<enumSetting_PrisonersLike>Prisoners like</enumSetting_PrisonersLike>
+	<enumSetting_AnimalsLike>Animals like</enumSetting_AnimalsLike>
+	<enumSetting_AnimalsLikeExcludeCorpses>Animals like (no corpses)</enumSetting_AnimalsLikeExcludeCorpses>
+
+	<PrivilegedPrisoners>Privileged prisoners</PrivilegedPrisoners>
+	<PrivilegedPrisoners_desc>Prisoners set to "chat and recruit" interaction will get the same meals as colonists, boosting their mood and therefore making them easier to recruit. (This is ignored if they are in a room with a dispenser).</PrivilegedPrisoners_desc>
+
+	<PrefNutrientPasteOverTasty>Prefer nutrient paste over raw tasty food</PrefNutrientPasteOverTasty>
+	<PrefNutrientPasteOverTasty_desc>If enabled, your colonists will prefer eating nutrient paste over raw tasty food (berries, milk).\nUseful if you want to save your raw food to make more cost efficient paste meals.</PrefNutrientPasteOverTasty_desc>
+	
+	<PetsPreferHunt>Colony's pets prefer hunt</PetsPreferHunt>
+	<PetsPreferHunt_desc>When not injured, pets will always try to find a prey within their allowed area before fetching any food from your storage.</PetsPreferHunt_desc>
+
+</LanguageData>
