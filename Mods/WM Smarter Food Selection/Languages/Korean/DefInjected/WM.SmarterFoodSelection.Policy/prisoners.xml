@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <SFS_DefaultPrisonerPolicy.label>죄수</SFS_DefaultPrisonerPolicy.label>
+  <SFS_DefaultPrisonerPolicy.description>기본 죄수 정책입니다.\n최악의 식사가 선호됩니다.Will also care about the thoughts given by meals but not very much.</SFS_DefaultPrisonerPolicy.description>
+
+  <SFS_DefaultPrisonerPolicy_PlusMealSurvival.label>죄수 + 보존 식량</SFS_DefaultPrisonerPolicy_PlusMealSurvival.label>
+  <SFS_DefaultPrisonerPolicy_PlusMealSurvival>이 정책은 "죄수"와 비슷하지만 보존 식량과 페미컨이 허용됩니다. (after fine meal, before raw, tasty food)</SFS_DefaultPrisonerPolicy_PlusMealSurvival>
+
+</LanguageData>

@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <SFS_DefaultPetPolicy.label>동물</SFS_DefaultPetPolicy.label>
+  <SFS_DefaultPetPolicy.description>동물이 선호하는 음식입니다. 사냥 &gt; 풀 &gt; 사람 시체 &gt; 건초 &gt; 사료...\n그러나 이들 중 어느 것도 사용할 수없는 경우 다른 유형의 식품도 허용됩니다.</SFS_DefaultPetPolicy.description>
+
+  <SFS_DefaultPetPolicy_PlusMealSurvival.label>동물 + 보존 식량</SFS_DefaultPetPolicy_PlusMealSurvival.label>
+  <SFS_DefaultPetPolicy_PlusMealSurvival.description>동물이 선호하는 음식입니다. 사냥 &gt; 풀 &gt; 사람 시체 &gt; 건초 &gt; 사료 &gt; 보존 식량...\n그러나 이들 중 어느 것도 사용할 수없는 경우 다른 유형의 식품도 허용됩니다.</SFS_DefaultPetPolicy_PlusMealSurvival.description>
+
+  <SFS_GrassHayKibble.label>건초 및 사료</SFS_GrassHayKibble.label>
+  <SFS_GrassHayKibble.description>건초와 사료만 허용합니다.</SFS_GrassHayKibble.description>
+
+  <SFS_PetPolicy_NoHunt.label>사냥 금지</SFS_PetPolicy_NoHunt.label>
+
+  <SFS_PetPolicy_Limited.label>동물 전용 식량</SFS_PetPolicy_Limited.label>
+  <SFS_PetPolicy_Limited.description>동물 전용 식량：풀，건초，사료，인육/시체\n간단한 영양 페이스트또한 가능합니다. (사료보다 더 저렴합니다!)</SFS_PetPolicy_Limited.description>
+
+  <SFS_DefaultPetPolicy_AllowTrees.label>나무 허용</SFS_DefaultPetPolicy_AllowTrees.label>
+  <SFS_DefaultPetPolicy_AllowTrees.description>"동물"과 같지만 나무가 허용됩니다. 트럼보에게 유용합니다.</SFS_DefaultPetPolicy_AllowTrees.description>
+
+  <SFS_DefaultPetPolicy_NoHumanCorpses.label>인간 시체 금지</SFS_DefaultPetPolicy_NoHumanCorpses.label>
+  <SFS_DefaultPetPolicy_NoHumanCorpses.description>기본적으로 "동물"과 같지만 인간형 시체를 금지합니다.</SFS_DefaultPetPolicy_NoHumanCorpses.description>
+
+
+</LanguageData>

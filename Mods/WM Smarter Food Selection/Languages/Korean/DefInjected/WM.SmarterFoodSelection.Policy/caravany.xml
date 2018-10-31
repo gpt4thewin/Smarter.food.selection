@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <SFS_MealsOnly_PlusRaw.label>식사만 + 포리지</SFS_MealsOnly_PlusRaw.label>
+  <SFS_MealsOnly_PlusRaw.description>"식사만" 정책과 유사하지만 부패 않는 음식(보존 식량, 페미칸)보다 먼저 날식용 식품을 사용합니다. 상단 여행에 매우 적합합니다. 상단이 지도를 떠나기 전에 이 정책을 할당하십시오.</SFS_MealsOnly_PlusRaw.description>
+
+  <SFS_MealsOnly_Worst_PlusRaw.label>식사만 (나쁜 식사 우선) + 포리지</SFS_MealsOnly_Worst_PlusRaw.label>
+  <SFS_MealsOnly_Worst_PlusRaw.description>"식사만 (나쁜 식사 우선)" 정책과 유사하지만 부패하지 않는 음식(보존 식량, 페미칸)보다 날식용 식품을 사용합니다. 상단 여행에 매우 적합합니다. 상단이 지도를 떠나기 전에 이 정책을 할당하십시오.</SFS_MealsOnly_Worst_PlusRaw.description>
+
+
+</LanguageData>
