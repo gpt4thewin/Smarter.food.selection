@@ -30,43 +30,44 @@ namespace WM.SmarterFoodSelection
 			return hash;
 		}
 
-		//TODO: optimize function
-		internal static FoodSourceRating FoodScoreFor(Policy policy, Pawn eater, Pawn getter, Thing food, bool noDistanceFactor = false, bool quickScore = false)
-		{
-			var obj = new FoodSourceRating();
+        //TODO: optimize function
+        internal static FoodSourceRating FoodScoreFor(Policy policy, Pawn eater, Pawn getter, Thing food, bool noDistanceFactor = false, bool quickScore = false)
+        {
+            var obj = new FoodSourceRating();
 
-			obj.FoodSource = food;
-			obj.DefRecord = food.GetFoodDefRecord();
+            obj.FoodSource = food;
+            obj.DefRecord = food.GetFoodDefRecord();
 
-			// ------ Distance factor ------ 
+            // ------ Distance factor ------ 
 
-			bool inInventory = (getter.inventory != null && getter.inventory.innerContainer.Contains(food));
+            bool inInventory = (getter.inventory != null && getter.inventory.innerContainer.Contains(food));
 
-			if (!noDistanceFactor)
-			{
-				float distanceFactor;
-				if (inInventory)
-					distanceFactor = 0f;
-				else
-					distanceFactor = -((food.Position - eater.Position).LengthManhattan) * policy.distanceFactor;
+            if (!noDistanceFactor)
+            {
+                float distanceFactor;
+                if (inInventory)
+                    distanceFactor = 0f;
+                else
+                    distanceFactor = -((food.Position - eater.Position).LengthManhattan) * policy.distanceFactor;
 
-				obj.AddComp("Distance", distanceFactor);
-			}
+                obj.AddComp("Distance", distanceFactor);
+            }
 
-			if (inInventory && getter == eater && food.def.ingestible.preferability >= FoodPreferability.MealAwful 
-                && (eater.IsColonistPlayerControlled && (food.GetFoodCategory() != FoodCategory.MealSurvival))) //added to prevent survival meals from being eaten out of inventory
-			{
-				obj.AddComp("Inventory", 500f);
-			}
+            if (inInventory && getter == eater && food.def.ingestible.preferability >= FoodPreferability.MealAwful
+                && (!eater.IsColonist || (eater.IsColonistPlayerControlled && (food.GetFoodCategory() != FoodCategory.MealSurvival))) //added to prevent survival meals from being eaten out of inventory
+) 
+            {
+                obj.AddComp("Inventory", 500f);
+            }
+            
+            // ------------- Policy food category factor -------------
 
-			// ------------- Policy food category factor -------------
+            //if (!policy.unrestricted)
+            //	obj.AddComp(food.DetermineFoodCategory().ToString(), policy.GetFoodScoreOffset(eater, food));
 
-				//if (!policy.unrestricted)
-				//	obj.AddComp(food.DetermineFoodCategory().ToString(), policy.GetFoodScoreOffset(eater, food));
+            // ------------- Prey score factor -------------
 
-				// ------------- Prey score factor -------------
-
-				const float PREY_FACTOR_MULTIPLIER = 5f; //Because the vanilla prey factor is fairly weak.
+            const float PREY_FACTOR_MULTIPLIER = 5f; //Because the vanilla prey factor is fairly weak.
 
 			{
 				if (food is Pawn)
