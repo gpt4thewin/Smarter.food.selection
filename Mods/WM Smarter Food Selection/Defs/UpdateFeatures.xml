@@ -11,6 +11,7 @@
     <content>
 &lt;b&gt;&lt;size=16&gt;&lt;color=orange&gt;Hotfix&lt;/color&gt;&lt;/size&gt;&lt;/b&gt;|
 Fixed bug causing visitors not to eat from their inventory|
+Fixed bug causing caravans with pawns set to "*Unrestricted*" to starve|
     </content>
   </HugsLib.UpdateFeatureDef>
   <HugsLib.UpdateFeatureDef ParentName="WMSFS_UpdateFeatureBase">

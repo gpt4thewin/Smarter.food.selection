@@ -8,22 +8,24 @@ using WM.SmarterFoodSelection.Detours.FoodUtility;
 
 namespace WM.SmarterFoodSelection.Detours.CaravanInventoryUtility
 {
-   
-	[HarmonyPatch(typeof(RimWorld.Planet.CaravanInventoryUtility), "TryGetBestFood")]
-	public class TryGetBestFood
-	{
-		public static void Postfix(ref bool __result,Caravan caravan, Pawn forPawn, out Thing food, out Pawn owner)
+
+    [HarmonyPatch(typeof(RimWorld.Planet.CaravanInventoryUtility), "TryGetBestFood")]
+    public class TryGetBestFood
+    {
+        [HarmonyPostfix]
+        public static void Postfix(ref bool __result, Caravan caravan, Pawn forPawn, ref Thing food, ref Pawn owner)
 		{
 			try
 			{
-				__result = Internal(caravan, forPawn, out food, out owner);
+                if (forPawn.GetPolicyAssignedTo().unrestricted) return;
+				else __result = Internal(caravan, forPawn, ref food, ref owner);
 			}
 			catch (Exception ex)
 			{
 				throw new Exception("Error when trying to find best food in caravan. eater=" + forPawn, ex);
 			}
 		}
-		static bool Internal(Caravan caravan, Pawn forPawn, out Thing food, out Pawn owner)
+		static bool Internal(Caravan caravan, Pawn forPawn, ref Thing food, ref Pawn owner)
 		{
 			List<Thing> list = RimWorld.Planet.CaravanInventoryUtility.AllInventoryItems(caravan)
 									   .Where(arg => CaravanPawnsNeedsUtility.CanEatForNutritionNow(arg, forPawn)).ToList();
