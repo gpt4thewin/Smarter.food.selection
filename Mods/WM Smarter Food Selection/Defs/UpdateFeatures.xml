@@ -5,7 +5,15 @@
 		<modIdentifier>Smarter_Food_Selection</modIdentifier>
 		<linkUrl>https://ludeon.com/forums/index.php?topic=30708.0</linkUrl>
 	</HugsLib.UpdateFeatureDef>
-
+  <HugsLib.UpdateFeatureDef ParentName="WMSFS_UpdateFeatureBase">
+    <defName>WMSFS_2_3_0_6</defName>
+    <assemblyVersion>2.3.0.6</assemblyVersion>
+    <content>
+&lt;b&gt;&lt;size=16&gt;&lt;color=orange&gt;Hotfix&lt;/color&gt;&lt;/size&gt;&lt;/b&gt;|
+Fixed bug causing visitors not to eat from their inventory|
+Fixed bug causing caravans with pawns set to "*Unrestricted*" to starve|
+    </content>
+  </HugsLib.UpdateFeatureDef>
   <HugsLib.UpdateFeatureDef ParentName="WMSFS_UpdateFeatureBase">
     <defName>WMSFS_2_3_0_5</defName>
     <assemblyVersion>2.3.0.5</assemblyVersion>
