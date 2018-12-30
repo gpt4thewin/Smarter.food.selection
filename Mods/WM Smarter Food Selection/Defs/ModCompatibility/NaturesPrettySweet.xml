@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<Defs>
+  <WM.SmarterFoodSelection.CompabilityDef>
+    <defName>SFS_NPS_Patch</defName>
+    <requiredMod>Nature's Pretty Sweet</requiredMod>
+    <foods>
+      <li>
+        <def>TKKN_PlantMoss</def>
+        <pref>Hay</pref>
+      </li>
+    </foods>
+  </WM.SmarterFoodSelection.CompabilityDef>
+</Defs>
