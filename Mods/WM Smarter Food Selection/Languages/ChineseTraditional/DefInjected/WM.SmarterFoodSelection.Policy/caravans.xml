@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <SFS_MealsOnly_PlusRaw.label>餐點 + 乾糧</SFS_MealsOnly_PlusRaw.label>
+  <SFS_MealsOnly_PlusRaw.description>類似於"僅限餐點"，但會優先使用生鮮食材再吃不易腐壞的食物(生存食品包、乾肉餅)。非常適用於商隊旅行。在商隊離開地圖前指派此政策。</SFS_MealsOnly_PlusRaw.description>
+
+  <SFS_MealsOnly_Worst_PlusRaw.label>劣餐優先 + 乾糧</SFS_MealsOnly_Worst_PlusRaw.label>
+  <SFS_MealsOnly_Worst_PlusRaw.description>類似於"僅限餐點(劣餐優先)"，但會優先使用生鮮食材再吃不易腐壞的食物(生存食品包、乾肉餅)。非常適用於商隊旅行。在商隊離開地圖前指派此政策。</SFS_MealsOnly_Worst_PlusRaw.description>
+
+
+</LanguageData>

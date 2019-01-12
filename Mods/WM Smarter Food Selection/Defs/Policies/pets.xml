@@ -87,7 +87,21 @@
 				MealLavish 
 		</diet>
 	</WM.SmarterFoodSelection.Policy>
-	<WM.SmarterFoodSelection.Policy>
+  <WM.SmarterFoodSelection.Policy>
+    <defName>SFS_PetPolicy_HuntOnly</defName>
+    <label>Hunt Only</label>
+    <description>Forces carnivores to hunt or scavenge for their food.</description>
+    <conditions>
+      <li>pet</li>
+    </conditions>
+    <diet>
+      Hunt /
+      Grass /
+      Hay /
+      Corpse
+    </diet>
+  </WM.SmarterFoodSelection.Policy>
+  <WM.SmarterFoodSelection.Policy>
 		<defName>SFS_PetPolicy_Limited</defName>
 		<label>Food4animals only</label>
 		<description>Only foods for animal: Grass, hay, kibble, raw human meat/corpse.\nBut also simple and nutrient paste meals (they are more cost efficient than kibble!).</description>

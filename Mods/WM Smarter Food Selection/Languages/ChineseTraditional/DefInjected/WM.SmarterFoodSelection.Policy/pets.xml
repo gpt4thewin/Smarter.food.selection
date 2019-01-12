@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <SFS_DefaultPetPolicy.label>動物</SFS_DefaultPetPolicy.label>
+  <SFS_DefaultPetPolicy.description>優先食用動物性食物。 獵物 &gt; 草 &gt; 人類屍體 &gt; 乾草 &gt; 粗飼料..\n但如果這些都沒有，也會允許其他種類的食物。
+		</SFS_DefaultPetPolicy.description>
+
+  <SFS_DefaultPetPolicy_PlusMealSurvival.label>動物 + 生存食品</SFS_DefaultPetPolicy_PlusMealSurvival.label>
+  <SFS_DefaultPetPolicy_PlusMealSurvival.description>優先食用動物性食物。 獵物 &gt; 草 &gt; 人類屍體 &gt; 乾草 &gt; 粗飼料..\n如果都沒有食物，會吃生存食品。
+		</SFS_DefaultPetPolicy_PlusMealSurvival.description>
+
+  <SFS_GrassHayKibble.label>乾草與粗飼料</SFS_GrassHayKibble.label>
+  <SFS_GrassHayKibble.description>只允許乾草與粗飼料。
+		</SFS_GrassHayKibble.description>
+
+  <SFS_PetPolicy_NoHunt.label>禁止狩獵</SFS_PetPolicy_NoHunt.label>
+
+  <SFS_PetPolicy_Limited.label>僅限動物食物</SFS_PetPolicy_Limited.label>
+  <SFS_PetPolicy_Limited.description>僅限動物食物：草，乾草，粗飼料，生人肉/屍體。\n也允許簡單餐點和營養糊餐點（這些的成本效益比粗飼料還要高！）。
+		</SFS_PetPolicy_Limited.description>
+
+  <SFS_DefaultPetPolicy_AllowTrees.label>允許吃樹</SFS_DefaultPetPolicy_AllowTrees.label>
+  <SFS_DefaultPetPolicy_AllowTrees.description>和“動物”相同，但允許吃樹。對敲擊獸好用。
+		</SFS_DefaultPetPolicy_AllowTrees.description>
+
+  <SFS_DefaultPetPolicy_NoHumanCorpses.label>禁止人類屍體</SFS_DefaultPetPolicy_NoHumanCorpses.label>
+  <SFS_DefaultPetPolicy_NoHumanCorpses.description>和“動物”相同，但禁止食用人類屍體。
+		</SFS_DefaultPetPolicy_NoHumanCorpses.description>
+
+
+</LanguageData>

@@ -208,18 +208,24 @@ namespace WM.SmarterFoodSelection
 				if ((foodType & FoodTypeFlags.Tree) != 0)
 					return FoodCategory.Tree;
 
-				if ((foodType & FoodTypeFlags.Plant) != 0)
-				{
-					if (def == ThingDefOf.Hay)
-						return FoodCategory.Hay;
+                if ((foodType & FoodTypeFlags.Plant) != 0)
+                {
+                    if (def == ThingDefOf.Hay)
+                        return FoodCategory.Hay;
 
-				    if (def == ThingDef.Named("Plant_TallGrass") || def == ThingDef.Named("Plant_Grass"))
-				        return FoodCategory.Grass;
+                    if (def == ThingDefOf.Plant_Grass)
+                        return FoodCategory.Grass;
 
-                    return FoodCategory.Plant;
-				}
+                    if (def.plant != null && !def.plant.sowTags.NullOrEmpty())
+                        return FoodCategory.Plant;
 
-				if (def.IsCorpse)
+                    if (foodPref == FoodPreferability.DesperateOnly)
+                        return FoodCategory.Ignore;
+
+                    return FoodCategory.Grass;
+                }
+
+                if (def.IsCorpse)
 				{
 					if (RimWorld.FoodUtility.IsHumanlikeMeat(def))
 						return FoodCategory.HumanlikeCorpse;
