@@ -12,7 +12,7 @@ Make your all pawns (colonists, animals, prisoners) smart about food selection.
 Allows you to set a food policy for your pawns.
 Comes with many improvements.
 
-#### Features
+### Features
 
 * Food policies
   * Prisoners / Ascetic: Prioritize bad meals
