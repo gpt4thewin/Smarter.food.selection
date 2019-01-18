@@ -2,7 +2,9 @@
 <ModMetaData>
 	<name>WM Smarter food selection</name>
 	<author>Wishmaster, Vathand</author>
-  <targetVersion>1.0.2057</targetVersion>
+  <supportedVersions>
+    <li>1.0</li>
+  </supportedVersions>
 	<description>
 &lt;size=18&gt;&lt;color=orange&gt;&lt;b&gt;Requires HugsLib.&lt;/b&gt;&lt;/color&gt;&lt;/size&gt;
 
@@ -27,7 +29,7 @@ Version 2.3.0.7
 
 * UnlimitedHugs for HugsLib and for assistance.
 * Vathand for bug fixes.
-* Aephiex for Chinese translation.
+* Aephiex &amp; btx7812 for Chinese translation.
 * LazyRichard for Korean translation.
   </description>
 	<url>https://ludeon.com/forums/index.php?topic=30708.0</url>

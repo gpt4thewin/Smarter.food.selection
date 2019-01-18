@@ -6,6 +6,19 @@
 		<linkUrl>https://ludeon.com/forums/index.php?topic=30708.0</linkUrl>
 	</HugsLib.UpdateFeatureDef>
   <HugsLib.UpdateFeatureDef ParentName="WMSFS_UpdateFeatureBase">
+    <defName>WMSFS_2_3_0_8</defName>
+    <assemblyVersion>2.3.0.8</assemblyVersion>
+    <content>
+&lt;b&gt;&lt;size=16&gt;&lt;color=orange&gt;New feature&lt;/color&gt;&lt;/size&gt;&lt;/b&gt;|
+Per request added a "Hunt Only" option for pets.|
+Grass and Hay are included in the diet to help prevent accidental starvation of herbivores|
+&lt;b&gt;&lt;size=16&gt;&lt;color=orange&gt;Bug fix&lt;/color&gt;&lt;/size&gt;&lt;/b&gt;|
+Changed how plants are categorized.|
+Animals should not eat all non-sowable plants (as opposed to just grass)|
+Add Chinese Traditional translation|
+    </content>
+  </HugsLib.UpdateFeatureDef>
+  <HugsLib.UpdateFeatureDef ParentName="WMSFS_UpdateFeatureBase">
     <defName>WMSFS_2_3_0_7</defName>
     <assemblyVersion>2.3.0.7</assemblyVersion>
     <content>
