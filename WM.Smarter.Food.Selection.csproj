@@ -1,18 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{2A9D1D3B-2A57-4237-9DB8-9A4BA88C4A57}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>WM.SmarterFoodSelection</RootNamespace>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ReleaseVersion>
     </ReleaseVersion>
     <SynchReleaseVersion>false</SynchReleaseVersion>
     <AssemblyName>WM Smarter Food Selection</AssemblyName>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,6 +32,7 @@
     </CustomCommands>
     <LangVersion>Default</LangVersion>
     <NoStdLib>false</NoStdLib>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <Optimize>true</Optimize>
@@ -47,6 +49,7 @@
       </CustomCommands>
     </CustomCommands>
     <NoStdLib>false</NoStdLib>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug (no symbols)|AnyCPU' ">
     <Optimize>false</Optimize>
@@ -65,22 +68,37 @@
     </CustomCommands>
     <NoStdLib>false</NoStdLib>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug %28no symbols%29|AnyCPU'">
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="0Harmony, Version=1.2.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\SteamLibrary\steamapps\workshop\content\294100\818773962\Assemblies\0Harmony.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="0Harmony, Version=2.0.0.8, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Lib.Harmony.2.0.0.8\lib\net472\0Harmony.dll</HintPath>
     </Reference>
     <Reference Include="Assembly-CSharp">
       <HintPath>..\..\..\SteamLibrary\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="System" />
     <Reference Include="HugsLib">
-      <HintPath>..\..\..\SteamLibrary\steamapps\workshop\content\294100\818773962\Assemblies\HugsLib.dll</HintPath>
+      <HintPath>packages\UnlimitedHugs.Rimworld.HugsLib.6.2.0\lib\net472\HugsLib.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation" />
     <Reference Include="UnityEngine">
       <HintPath>..\..\..\SteamLibrary\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>..\..\..\SteamLibrary\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.IMGUIModule">
+      <HintPath>..\..\..\SteamLibrary\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.TextRenderingModule">
+      <HintPath>..\..\..\SteamLibrary\steamapps\common\RimWorld\RimWorldWin64_Data\Managed\UnityEngine.TextRenderingModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
@@ -91,7 +109,6 @@
     <None Include="Mods\WM Smarter Food Selection\About\preview.png" />
     <None Include="Mods\WM Smarter Food Selection\About\PublishedFileId.txt" />
     <None Include="Mods\WM Smarter Food Selection\About\version.xml" />
-    <None Include="Mods\WM Smarter Food Selection\Defs\Items_Food.xml" />
     <None Include="Mods\WM Smarter Food Selection\Defs\KeyBindingCategoryDefs\KeyBindingCategories.xml" />
     <None Include="Mods\WM Smarter Food Selection\Defs\KeyBindingDefs\KeyBindings.xml" />
     <None Include="Mods\WM Smarter Food Selection\Defs\Policies\ascetic.xml" />
@@ -106,7 +123,6 @@
     <None Include="Mods\WM Smarter Food Selection\Languages\French\Keyed\Keys.xml" />
     <None Include="Mods\WM Smarter Food Selection\Textures\Things\FineCannibal.png" />
     <None Include="Mods\WM Smarter Food Selection\Textures\Things\LavishCannibal.png" />
-    <None Include="Mods\WM Smarter Food Selection\Textures\Things\MealNutrientPasteCannibal.png" />
     <None Include="Mods\WM Smarter Food Selection\Textures\Things\SimpleCannibal.png" />
     <None Include="Mods\WM Smarter Food Selection\Textures\UI\Cycle.png" />
     <None Include="Mods\WM Smarter Food Selection\Textures\UI\NutrientPaste.png" />
@@ -115,6 +131,7 @@
     <None Include="Mods\WM Smarter Food Selection\Textures\UI\NutrientPasteCornInsectHuman.png" />
     <None Include="Mods\WM Smarter Food Selection\Textures\UI\NutrientPasteHumanInsectCorn.png" />
     <None Include="Mods\WM Smarter Food Selection\Patches\Buildings_Production.xml" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
@@ -144,6 +161,10 @@
     <Content Include="Mods\WM Smarter Food Selection\Languages\Korean\DefInjected\WM.SmarterFoodSelection.Policy\pets.xml" />
     <Content Include="Mods\WM Smarter Food Selection\Languages\Korean\DefInjected\WM.SmarterFoodSelection.Policy\prisoners.xml" />
     <Content Include="Mods\WM Smarter Food Selection\Languages\Korean\Keyed\Keys.xml" />
+    <Content Include="Mods\WM Smarter Food Selection\LoadFolders.xml" />
+    <Content Include="Mods\WM Smarter Food Selection\v1.0\Defs\Items_Food.xml" />
+    <Content Include="Mods\WM Smarter Food Selection\v1.1\Defs\Items_Food.xml" />
+    <Content Include="Mods\WM Smarter Food Selection\Textures\Things\NutrientPasteCannibal.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="source\CompatabilityDef.cs" />

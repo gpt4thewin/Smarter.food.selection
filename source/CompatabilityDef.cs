@@ -55,7 +55,7 @@ namespace WM.SmarterFoodSelection
 
 				int loadedElements = 0;
 
-				if (LoadedModManager.RunningMods.Any((ModContentPack arg) => arg.Identifier == requiredMod || arg.Name == requiredMod))
+				if (LoadedModManager.RunningMods.Any((ModContentPack arg) => arg.PackageId == requiredMod || arg.Name == requiredMod))
 				{
 					loaded = true;
 					foreach (ComptabilityElement current in foods)

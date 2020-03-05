@@ -2,7 +2,20 @@
 <ModMetaData>
 	<name>WM Smarter food selection</name>
 	<author>Wishmaster, Vathand</author>
-  <targetversion>1.0.2096</targetversion>
+  <supportedVersions>
+    <li>1.1</li>
+  </supportedVersions>
+  <loadAfter>
+    <li>UnlimitedHugs.HugsLib</li>
+  </loadAfter>
+  <modDependencies>
+    <li>
+      <packageId>UnlimitedHugs.HugsLib</packageId>
+      <displayName>HugsLib</displayName>
+      <steamWorkshopUrl>steam://url/CommunityFilePage/818773962</steamWorkshopUrl>
+    </li>
+  </modDependencies>
+  <packageId>Wishmaster.SmarterFoodSelection</packageId>
 	<description>
 &lt;size=18&gt;&lt;color=orange&gt;&lt;b&gt;Requires HugsLib.&lt;/b&gt;&lt;/color&gt;&lt;/size&gt;
 

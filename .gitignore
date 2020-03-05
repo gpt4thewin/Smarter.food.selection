@@ -5,3 +5,4 @@ obj/
 releases/
 *.bak
 Mods/WM Smarter Food Selection/Assemblies/
+packages/*
