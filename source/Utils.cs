@@ -149,7 +149,7 @@ namespace WM.SmarterFoodSelection
 
 		public static bool IsAnyoneCapturing(Map map, Pawn pawn)
 		{
-			return map.mapPawns.FreeColonists.Any(arg => arg.CurJob.targetA == pawn && arg.CurJob.def == JobDefOf.Capture);
+			return map.mapPawns.FreeColonists.Any(arg => arg.CurJob != null && arg.CurJob.targetA == pawn && arg.CurJob.def == JobDefOf.Capture);
 		}
 
 		// Verse.Corpse
