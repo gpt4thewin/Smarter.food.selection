@@ -4,6 +4,7 @@
 	<author>Wishmaster, Vathand</author>
   <supportedVersions>
     <li>1.1</li>
+    <li>1.2</li>
   </supportedVersions>
   <loadAfter>
     <li>UnlimitedHugs.HugsLib</li>
@@ -17,6 +18,10 @@
   </modDependencies>
   <packageId>Wishmaster.SmarterFoodSelection</packageId>
 	<description>
+&lt;size=20&gt;&lt;color=red&gt;&lt;b&gt;Discontinued mod&lt;/b&gt;&lt;/color&gt;&lt;/size&gt;
+
+This mod is not being maintained anymore and still works but is buggy.
+
 &lt;size=18&gt;&lt;color=orange&gt;&lt;b&gt;Requires HugsLib.&lt;/b&gt;&lt;/color&gt;&lt;/size&gt;
 
 &lt;b&gt;Allows you to restrict the foods of your pawns (prisoners, animals, ascetic, cannibal).&lt;/b&gt;
@@ -34,7 +39,7 @@ The NPD will prioritize human meat for cannibals, and human meat then insect mea
 
 More information on the web link.
 
-Version 2.3.0.8
+Version 2.3.0.9
 
 &lt;size=18&gt;&lt;color=orange&gt;&lt;b&gt;Credits&lt;/b&gt;&lt;/color&gt; &lt;/size&gt;
 
@@ -42,6 +47,7 @@ Version 2.3.0.8
 * Vathand for bug fixes.
 * Aephiex &amp; btx7812 for Chinese translation.
 * LazyRichard for Korean translation.
+* Zorgomol for bug fix
   </description>
 	<url>https://ludeon.com/forums/index.php?topic=30708.0</url>
 </ModMetaData>
